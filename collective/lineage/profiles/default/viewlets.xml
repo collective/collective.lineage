@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<object>
+  <order manager="plone.portalheader" skinname="*">
+      <viewlet name="collective.lineage.switcher" insert-after="plone.site_actions" />
+  </order>
+</object>

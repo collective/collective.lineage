@@ -1,0 +1,92 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:five="http://namespaces.zope.org/five"
+    i18n_domain="collective.lineage">
+
+  <include package="plone.app.contentmenu" />
+
+  <!-- GenericSetup profile -->
+  <genericsetup:registerProfile
+    name="default"
+    title="Lineages"
+    directory="profiles/default"
+    description="Support for lineages"
+    provides="Products.GenericSetup.interfaces.EXTENSION"
+    />
+
+  <!--  Content type -->
+    
+    <permission
+        id="collective.lineage.AddChildFolder"
+        title="collective.lineage: Add Child Folder"
+        />
+        
+    <five:registerClass
+        class=".content.ChildFolder"
+        meta_type="Child Folder"
+        permission="collective.lineage.AddChildFolder"
+        addview="collective.lineage.AddChildFolder"
+        />
+        
+    <utility
+        component=".content.factory"
+        name="collective.lineage.ChildFolder"
+        />                
+    
+    <class class=".content.ChildFolder">
+        <require
+            permission="zope2.View"
+            interface=".interfaces.IChildFolder"
+            />
+        <require
+            permission="cmf.ModifyPortalContent"
+            set_schema=".interfaces.IChildFolder"
+            />
+    </class>
+    
+    <!-- Event handlers -->
+    <subscriber
+      for=".interfaces.IChildFolder 
+         zope.app.container.interfaces.IObjectAddedEvent"
+      handler=".content.enable_site"
+      />
+    
+    <!-- Browser components -->
+    
+    <browser:page
+        for="zope.app.container.interfaces.IAdding"
+        name="collective.lineage.ChildFolder"
+        class=".browser.ChildFolderAddForm"
+        permission="collective.lineage.AddChildFolder"
+        />
+   
+    <browser:page
+        for=".interfaces.IChildFolder"
+        name="edit"
+        class=".browser.ChildFolderEditForm"
+        permission="cmf.ModifyPortalContent"
+        />
+        
+    <browser:addMenuItem
+        title="Child folder"
+        factory="collective.lineagefolder.ChildFolder"
+        view="collective.lineage.ChildFolder"
+        permission="collective.lineage.AddChildFolder"
+        />
+        
+    <browser:viewlet
+        name="collective.lineage.switcher"
+        manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
+        class=".browser.LineageSwitcherViewlet"
+        permission="zope2.View" 
+        layer=".interfaces.ILineageBrowserLayer"
+        />
+
+  <!-- Support portlet assignments -->
+  <class class=".content.ChildFolder">
+        <implements interface="plone.portlets.interfaces.ILocalPortletAssignable" />
+    </class>
+
+</configure>
