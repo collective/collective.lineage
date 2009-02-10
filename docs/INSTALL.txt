@@ -1,89 +1,40 @@
-collective.lineage Installation
-==========================
-
-
-Here is an example buildout.cfg. Please note the plip234 branches. You *will* need these for Lineage to work until Plone 3.3 releases. 
-
-
-[buildout]
-parts =
-  zope2
-  instance
-  zopepy
-	plip234-branches
-find-links =
-  http://chef:eet1OhFoo@skillet.sixfeetup.com/simple
-
-[plip234-branches]
-recipe = infrae.subversion
-location = plip234-branches
-as_eggs = true
-urls =
-	http://svn.plone.org/svn/plone/Plone/branches/calvinhp-inavigationroot-fixes Plone
-	http://svn.plone.org/svn/plone/plone.app.layout/branches/calvinhp-inavigationroot-fixes plone.app.layout
-	http://svn.plone.org/svn/plone/plone.app.portlets/branches/calvinhp-inavigationroot-fixes plone.app.portlets
-
-[zope2]
-recipe = plone.recipe.zope2install
-url = http://www.zope.org/Products/Zope/2.10.6/Zope-2.10.6-final.tgz
-fake-zope-eggs = true
-additional-fake-eggs =
-  ZConfig
-  pytz
-
-[instance]
-recipe = plone.recipe.zope2instance
-zope2-location = ${zope2:location}
-user = admin:admin
-debug-mode = on
-verbose-security = on
-# If you want Zope to know about any additional eggs or register extra
-# ZCML slugs for any packages, please list them here.  Please note that
-# any development eggs you listed in develop-eggs above should get
-# automatically pulled in by `buildout.eggtractor`, though.
-# Examples:
-#   eggs = Plone my.package
-#   zcml = my.package
-eggs =
-	Plone
-	collective.lineage
-zcml =
-	collective.lineage
-
-[zopepy]
-recipe = zc.recipe.egg
-eggs = ${instance:eggs}
-interpreter = zopepy
-extra-paths = ${zope2:location}/lib/python
-scripts = zopepy
-
-
-
-
-
+Installation Instructions
+=========================
 
 If you are using zc.buildout and the plone.recipe.zope2instance
-recipe to manage your project, you can do this:
+recipe to manage your project, you can add ``collective.lineage``
+to your instance part::
 
- * Add ``collective.lineage`` to the list of eggs to install, e.g.:
- 
-    [buildout]
+    [instance]
     ...
     eggs =
-        ...
-        collective.lineage
-        
-  * Tell the plone.recipe.zope2instance recipe to install a ZCML slug:
-  
-    [instance]
-    recipe = plone.recipe.zope2instance
-    ...
+      Plone
+      collective.lineage
     zcml =
-        collective.lineage
-        
-  * Re-run buildout, e.g. with:
-  
+      collective.lineage
+
+Currently this code depends on `PLIP 234`_ which should become a part
+of Plone 3.3.  If you want to use it now you can add the branches
+of the eggs for the plip::
+
+    [buildout]
+    parts =
+      ...
+      plip234-branches
+    
+    [plip234-branches]
+    recipe = infrae.subversion
+    location = plip234-branches
+    as_eggs = true
+    urls =
+      http://svn.plone.org/svn/plone/Plone/branches/calvinhp-inavigationroot-fixes Plone
+      http://svn.plone.org/svn/plone/plone.app.layout/branches/calvinhp-inavigationroot-fixes plone.app.layout
+      http://svn.plone.org/svn/plone/plone.app.portlets/branches/calvinhp-inavigationroot-fixes plone.app.portlets
+
+Now you can re-run your buildout to get the all the dependencies::
+
     $ ./bin/buildout
-        
-You can skip the ZCML slug if you are going to explicitly include the package
-from another package's configure.zcml file
+
+Once your buildout is finished you can start up your instance and install Lineage via the Add/Remove
+
+.. _PLIP 234: http://plone.org/products/plone/roadmap/234

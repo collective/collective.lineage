@@ -1,8 +1,12 @@
 Changelog
 =========
 
-0.1 - Unreleased
-----------------
+0.1 - (2009-02-10)
+------------------
 
-* Initial release
+* Initial public release
 
+Special Thanks
+==============
+
+Six Feet Up would especially like to thank Martin Aspeli for his inspiration and the Duke Clinical Research Institute group for project funding.

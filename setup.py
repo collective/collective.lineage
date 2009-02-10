@@ -1,11 +1,32 @@
+import os
 from setuptools import setup, find_packages
 
 version = '0.1'
 
+def read(*rnames):
+    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
+
+# line breaks are needed after each block so that reST doesn't get mad 
+long_description = """
+%s
+
+%s
+
+%s
+
+%s
+
+Download
+========
+""" % (read('README.txt'), 
+       read('collective', 'lineage', 'README.txt'),
+       read('docs', 'INSTALL.txt'),
+       read('docs', 'HISTORY.txt'))
+
 setup(name='collective.lineage',
       version=version,
       description="Support for sub-site folders in Plone",
-      long_description=open("README.txt").read(),
+      long_description=long_description,
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         "Framework :: Plone",
