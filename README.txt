@@ -3,6 +3,17 @@ Introduction
 
 Lineage for Plone is a microsite product that allows subfolders in Plone to look and feel like separate Plone sites.
 
+
+Dependencies
+=============
+Before you install this product you absolutely must make sure to modify your buildout to include the plip234 branches. 
+Please see the INSTALL.txt for specific directions and an example buildout. 
+
+
+
+
+Usage
+=========
 After you've bootstrapped your buildout, installed all the dependencies, and installed Lineage via Site Setup -> Add on Products, you are ready to go. 
 
 Add a Child Site
