@@ -1,22 +1,68 @@
 collective.lineage Installation
 ==========================
 
-To install collective.lineage into the global Python environment (or a workingenv),
-using a traditional Zope 2 instance, you can do this:
 
- * When you're reading this you have probably already run 
-   ``easy_install collective.lineage``. Find out how to install setuptools
-   (and EasyInstall) here:
-   http://peak.telecommunity.com/DevCenter/EasyInstall
-
- * Create a file called ``collective.lineage-configure.zcml`` in the
-   ``/path/to/instance/etc/package-includes`` directory.  The file
-   should only contain this::
-
-       <include package="collective.lineage" />
+Here is an example buildout.cfg. Please note the plip234 branches. You *will* need these for Lineage to work until Plone 3.3 releases. 
 
 
-Alternatively, if you are using zc.buildout and the plone.recipe.zope2instance
+[buildout]
+parts =
+  zope2
+  instance
+  zopepy
+	plip234-branches
+find-links =
+  http://chef:eet1OhFoo@skillet.sixfeetup.com/simple
+
+[plip234-branches]
+recipe = infrae.subversion
+location = plip234-branches
+as_eggs = true
+urls =
+	http://svn.plone.org/svn/plone/Plone/branches/calvinhp-inavigationroot-fixes Plone
+	http://svn.plone.org/svn/plone/plone.app.layout/branches/calvinhp-inavigationroot-fixes plone.app.layout
+	http://svn.plone.org/svn/plone/plone.app.portlets/branches/calvinhp-inavigationroot-fixes plone.app.portlets
+
+[zope2]
+recipe = plone.recipe.zope2install
+url = http://www.zope.org/Products/Zope/2.10.6/Zope-2.10.6-final.tgz
+fake-zope-eggs = true
+additional-fake-eggs =
+  ZConfig
+  pytz
+
+[instance]
+recipe = plone.recipe.zope2instance
+zope2-location = ${zope2:location}
+user = admin:admin
+debug-mode = on
+verbose-security = on
+# If you want Zope to know about any additional eggs or register extra
+# ZCML slugs for any packages, please list them here.  Please note that
+# any development eggs you listed in develop-eggs above should get
+# automatically pulled in by `buildout.eggtractor`, though.
+# Examples:
+#   eggs = Plone my.package
+#   zcml = my.package
+eggs =
+	Plone
+	collective.lineage
+zcml =
+	collective.lineage
+
+[zopepy]
+recipe = zc.recipe.egg
+eggs = ${instance:eggs}
+interpreter = zopepy
+extra-paths = ${zope2:location}/lib/python
+scripts = zopepy
+
+
+
+
+
+
+If you are using zc.buildout and the plone.recipe.zope2instance
 recipe to manage your project, you can do this:
 
  * Add ``collective.lineage`` to the list of eggs to install, e.g.:
@@ -40,4 +86,4 @@ recipe to manage your project, you can do this:
     $ ./bin/buildout
         
 You can skip the ZCML slug if you are going to explicitly include the package
-from another package's configure.zcml file.
+from another package's configure.zcml file
