@@ -35,6 +35,6 @@ Now you can re-run your buildout to get the all the dependencies::
 
     $ ./bin/buildout
 
-Once your buildout is finished you can start up your instance and install Lineage via the Add/Remove
+Once your buildout is finished you can start up your instance and install Lineage via the ``Add-on Products`` configlet in site setup.
 
 .. _PLIP 234: http://plone.org/products/plone/roadmap/234
