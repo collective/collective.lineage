@@ -25,7 +25,7 @@ Download
 
 setup(name='collective.lineage',
       version=version,
-      description="Support for sub-site folders in Plone",
+      description="The microsite creation product for Plone",
       long_description=long_description,
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
