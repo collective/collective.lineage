@@ -1,8 +1,10 @@
 <?xml version="1.0"?>
 <rolemap>
   <permissions>
-    <permission name="collective.lineage: Add Child Folder" acquire="False">
+    <!--
+    <permission name="collective.lineage: Create Child Site" acquire="False">
       <role name="Manager" />
     </permission>
+  -->
   </permissions>
 </rolemap>

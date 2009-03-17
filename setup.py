@@ -16,8 +16,6 @@ long_description = """
 
 %s
 
-Download
-========
 """ % (read('README.txt'), 
        read('collective', 'lineage', 'README.txt'),
        read('docs', 'INSTALL.txt'),
@@ -25,7 +23,7 @@ Download
 
 setup(name='collective.lineage',
       version=version,
-      description="The microsite creation product for Plone",
+      description="The sub site creation product for Plone",
       long_description=long_description,
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
@@ -45,6 +43,9 @@ setup(name='collective.lineage',
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
+          'p4a.z2utils',
+          'p4a.common',
+          'p4a.subtyper',
       ],
       entry_points="""
       # -*- Entry points: -*-

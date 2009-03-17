@@ -8,8 +8,7 @@ from plone.app.content.interfaces import INameFromTitle
 from plone.app.content.container import Container
 from plone.app.layout.navigation.interfaces import INavigationRoot
 
-from collective.lineage.interfaces import IChildFolder
-from collective.lineage.interfaces import ISearchRoot
+from collective.lineage.interfaces import IChildSite
 from collective.lineage import MessageFactory as _
 
 from OFS.OrderSupport import OrderSupport
@@ -18,9 +17,8 @@ from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
 from five.localsitemanager import make_objectmanager_site
 
 class ChildFolder(OrderSupport, BrowserDefaultMixin, Container):
-    implements(IChildFolder,    # content type schema
+    implements(IChildSite,
                INavigationRoot,     # make this a navigation root
-               ISearchRoot,         # also make it a search root - see patches.py
                IPloneSiteRoot,      # pretend to be the Plone site root so that we can get views that are registered for this
                INameFromTitle,      # title-to-id renaming
                IPossibleSite,       # support local component registries - see enable_site() below.

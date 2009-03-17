@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <object name="Child Folder"
    meta_type="Factory-based Type Information with dynamic views"
-   i18n:domain="rug.contenttypes" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+   i18n:domain="collective.lineage" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
   <property name="title" i18n:translate="">Child Folder</property>
   <property name="description" i18n:translate="">A folder that can be published as a separate site</property>
   <property name="content_meta_type">Child Folder</property>
