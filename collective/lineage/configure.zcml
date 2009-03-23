@@ -16,7 +16,7 @@
       name="default"
       title="Lineage"
       directory="profiles/default"
-      description="The sub site creation package"
+      description="The microsite creation package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
