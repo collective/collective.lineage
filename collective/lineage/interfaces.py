@@ -24,3 +24,13 @@ class IChildSite(INavigationRoot, IPloneSiteRoot, IPossibleSite):
       support local component registries
     """
 
+
+class IChildSiteCreatedEvent(Interface):
+    """An event that is fired after a child site is created
+    """
+
+
+class IChildSiteRemovedEvent(Interface):
+    """An event that is fired after a child site is removed
+    """
+
