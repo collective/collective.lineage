@@ -12,9 +12,10 @@ def install(portal):
     print >>out, "Installed collective.lineage"
     return out.getvalue()
 
-def uninstall(portal):
+def uninstall(portal, reinstall=False):
     """Run the GS profile to install this package"""
     out = StringIO()
-    runProfile(portal, 'profile-collective.lineage:uninstall')
-    print >>out, "Uninstalled collective.lineage"
+    if not reinstall:
+        runProfile(portal, 'profile-collective.lineage:uninstall')
+        print >>out, "Uninstalled collective.lineage"
     return out.getvalue()
