@@ -1,3 +1,11 @@
+import zope.interface
+import zope.component
+import zope.app.annotation.attribute
+from p4a.subtyper import interfaces
+from p4a.subtyper import default
+from p4a.subtyper import engine
+import Products.Archetypes.interfaces
+
 from zope.app.component.interfaces import ISite
 from zope.event import notify
 from zope.app.publication.interfaces import BeforeTraverseEvent
@@ -21,66 +29,34 @@ def setup_package():
 setup_package()
 ptc.setupPloneSite(products=['collective.lineage'])
 
+
 class IntegrationTests(ptc.PloneTestCase):
-    
-    def test_add_childfolder(self):
-        self.setRoles(['Manager'])
-        self.portal.invokeFactory('Child Folder', 'site1')
-        self.failUnless('site1' in self.portal.objectIds())
+
+    def afterSetUp(self):
+        roles = ('Member', 'Contributor')
+        self.portal.portal_membership.addMember('contributor',
+                                                'secret',
+                                                roles, [])
+
+    def test_folder_is_activatable(self):
+        zope.component.provideAdapter(zope.app.annotation.attribute.AttributeAnnotations)
+        zope.component.provideAdapter(default.folderish_possible_descriptors)
+        class SimpleFolder(object):
+            zope.interface.implements(Products.Archetypes.interfaces.IBaseFolder)
+            portal_type = 'Folder'
+        zope.interface.classImplements(SimpleFolder, zope.app.annotation.interfaces.IAttributeAnnotatable)
+        
+        adapted = interfaces.IPossibleDescriptors(SimpleFolder())
+        self.failUnless(u'collective.lineage.childsite' in dict(adapted.possible).keys())
     
     def test_component_registry(self):
-        self.setRoles(['Manager'])
-        self.portal.invokeFactory('Child Folder', 'site1')
+        self.login('contributor')
+        self.portal.invokeFactory('Folder', 'site1')
+        zope.component.provideUtility(engine.Subtyper())
+        subtyper = zope.component.getUtility(interfaces.ISubtyper)
+        subtyper.change_type(self.portal.site1, u'collective.lineage.childsite')
         self.failUnless(ISite.providedBy(self.portal.site1))
-        
-        # Simulate traversal
-        notify(BeforeTraverseEvent(self.portal.site1, self.portal.REQUEST))
-        self.assertEqual(getSite().getPhysicalPath(), self.portal.site1.getPhysicalPath())
-    
-    def test_search_root(self):
-        self.setRoles(['Manager'])
-        self.portal.invokeFactory('Child Folder', 'site1')
-        
-        self.portal.invokeFactory('Document', 'd1')
-        self.portal.site1.invokeFactory('Document', 'd2')
 
-        catalog = getToolByName(self.portal, 'portal_catalog')
-
-        lazy = catalog(portal_type='Document')
-        results = [x.getId for x in lazy]
-        self.failUnless('d1' in results)
-        self.failUnless('d2' in results)
-
-        # Simulate traversal
-        notify(BeforeTraverseEvent(self.portal.site1, self.portal.REQUEST))
-        
-        lazy = catalog(portal_type='Document')
-        results = [x.getId for x in lazy]
-        self.failIf('d1' in results)
-        self.failUnless('d2' in results)
-    
-    def test_search_root_with_explicit_path(self):
-        self.setRoles(['Manager'])
-        self.portal.invokeFactory('Child Folder', 'site1')
-        
-        self.portal.invokeFactory('Document', 'd1')
-        self.portal.site1.invokeFactory('Document', 'd2')
-
-        catalog = getToolByName(self.portal, 'portal_catalog')
-
-        lazy = catalog(portal_type='Document', path='/'.join(self.portal.getPhysicalPath()))
-        results = [x.getId for x in lazy]
-        self.failUnless('d1' in results)
-        self.failUnless('d2' in results)
-
-        # Simulate traversal
-        notify(BeforeTraverseEvent(self.portal.site1, self.portal.REQUEST))
-        
-        lazy = catalog(portal_type='Document', path='/'.join(self.portal.getPhysicalPath()))
-        results = [x.getId for x in lazy]
-        self.failUnless('d1' in results)
-        self.failUnless('d2' in results)
-        
 def test_suite():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(IntegrationTests))
