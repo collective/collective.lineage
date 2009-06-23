@@ -4,6 +4,9 @@ Changelog
 0.3 - (XXXX-XX-XX)
 ------------------
 
+- Set up for i18n translations
+  [claytron]
+
 - Moving over to an 'activation' based system instead of having a
   'Child Folder' type.  Now a folder will have the option for a
   subtype named 'Child Site'.

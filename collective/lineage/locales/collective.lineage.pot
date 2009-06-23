@@ -1,0 +1,46 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2009-06-23 15:00+0000\n"
+"PO-Revision-Date: 2009-06-23 15:00+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: en\n"
+"Language-Name: English\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: collective.lineage\n"
+
+#: ./collective/lineage/descriptors.py:12
+msgid "A child site"
+msgstr ""
+
+#. Default: "A folder that can be published as a separate site"
+#: ./collective/lineage/profiles/default/types/Child_Folder.xml
+msgid "A folder that can be published as a separate site"
+msgstr ""
+
+#. Default: "Child Folder"
+#: ./collective/lineage/profiles/default/types/Child_Folder.xml
+msgid "Child Folder"
+msgstr ""
+
+#: ./collective/lineage/descriptors.py:11
+msgid "Child Site"
+msgstr ""
+
+#: ./collective/lineage/content.py:32
+msgid "Create a new lineage folder"
+msgstr ""
+
+#. Default: "Jump to child site"
+#: ./collective/lineage/switcher.pt:6
+msgid "Jump to child site"
+msgstr ""
+

@@ -1,7 +1,7 @@
 Things that need to be done before a 0.3 release
 
 - update README to reflect 'activation' changes
-- write tests!
+- write more tests!
 - create migration profile
   - figure out proper way to deprecate the content type
   - migrate ChildFolders to basic folders that are marked
@@ -15,6 +15,5 @@ Things that need to be done before a 0.3 release
 complimentary products:
 
 - wrote exportimport for p4a.subtyper, working on gaining commit access
-- support child site properties (another package needs to be created for this)
-- support theming (currently the claytron branch of themetweaker.themeswitcher)
-  - one bug left on that branch, browser views are trumping skin switching
+- support child site properties, wrote collective.proxyproperties and lineage.proxyprops to support this
+- support theming (currently the claytron branch of themetweaker.themeswitcher, needs to be merged down to trunk)
