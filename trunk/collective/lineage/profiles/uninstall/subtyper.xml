@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<subtyper>
+ <subtype descriptor="collective.lineage.childsite" path="*" remove="true"/>
+</subtyper>

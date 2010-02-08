@@ -1,0 +1,40 @@
+Installation Instructions
+=========================
+
+If you are using zc.buildout and the plone.recipe.zope2instance
+recipe to manage your project, you can add ``collective.lineage``
+to your instance part::
+
+    [instance]
+    ...
+    eggs =
+      Plone
+      collective.lineage
+    zcml =
+      collective.lineage
+
+Currently this code depends on `PLIP 234`_ which should become a part
+of Plone 3.3.  If you want to use it now you can add the branches
+of the eggs for the plip::
+
+    [buildout]
+    parts =
+      ...
+      plip234-branches
+    
+    [plip234-branches]
+    recipe = infrae.subversion
+    location = plip234-branches
+    as_eggs = true
+    urls =
+      http://svn.plone.org/svn/plone/Plone/branches/calvinhp-inavigationroot-fixes Plone
+      http://svn.plone.org/svn/plone/plone.app.layout/branches/calvinhp-inavigationroot-fixes plone.app.layout
+      http://svn.plone.org/svn/plone/plone.app.portlets/branches/calvinhp-inavigationroot-fixes plone.app.portlets
+
+Now you can re-run your buildout to get the all the dependencies::
+
+    $ ./bin/buildout
+
+Once your buildout is finished you can start up your instance and install Lineage via the ``Add-on Products`` configlet in site setup.
+
+.. _PLIP 234: http://plone.org/products/plone/roadmap/234
