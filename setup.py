@@ -6,7 +6,7 @@ version = '0.2dev'
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
-# line breaks are needed after each block so that reST doesn't get mad 
+# line breaks are needed after each block so that reST doesn't get mad
 long_description = """
 %s
 
@@ -16,7 +16,7 @@ long_description = """
 
 %s
 
-""" % (read('README.txt'), 
+""" % (read('README.txt'),
        read('collective', 'lineage', 'README.txt'),
        read('docs', 'INSTALL.txt'),
        read('docs', 'HISTORY.txt'))
@@ -34,9 +34,10 @@ setup(name='collective.lineage',
       keywords='plone lineage',
       author='Six Feet Up, Inc.',
       author_email='info@sixfeetup.com',
-      url='http://plone.org',
+      url='http://plone.org/products/collective-lineage',
       license='GPL',
-      packages=find_packages(exclude=['ez_setup']),
+      packages=find_packages('src'),
+	  package_dir = {'': 'src'},
       namespace_packages=['collective'],
       include_package_data=True,
       zip_safe=False,
