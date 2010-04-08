@@ -1,0 +1,12 @@
+# Set with:
+#   svn propset svn:ignore -F IGNORE.txt .
+#
+# ignoring these dirs in the buildout
+
+develop-eggs
+bin
+parts
+var
+fake-eggs
+.installed.cfg
+

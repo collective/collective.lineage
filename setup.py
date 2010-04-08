@@ -17,7 +17,7 @@ long_description = """
 %s
 
 """ % (read('README.txt'),
-       read('collective', 'lineage', 'README.txt'),
+       read('src', 'collective', 'lineage', 'README.txt'),
        read('docs', 'INSTALL.txt'),
        read('docs', 'HISTORY.txt'))
 
