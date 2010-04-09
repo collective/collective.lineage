@@ -86,4 +86,13 @@
       handler=".subscribers.disableChildSite"
       />
 
+  <genericsetup:upgradeStep
+      source="0.2"
+      destination="100"
+      profile="collective.lineage:default"
+      title="Migrate the Child Folder objects"
+      description=""
+      handler="collective.lineage.upgrades.migrateChildFolders"
+    />
+
 </configure>

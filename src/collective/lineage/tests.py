@@ -9,10 +9,11 @@ import Products.Archetypes.interfaces
 
 from zope.app.component.interfaces import ISite
 from zope.event import notify
-from zope.app.publication.interfaces import BeforeTraverseEvent
 
 from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone.utils import _createObjectByType
+
+from Products.GenericSetup.upgrade import _upgrade_registry
+from Products.GenericSetup.registry import _profile_registry
 
 import unittest
 from Products.Five import zcml
@@ -21,8 +22,6 @@ from Products.Five import fiveconfigure
 from Products.PloneTestCase import PloneTestCase as ptc
 from Products.PloneTestCase.layer import onsetup
 from Testing import ZopeTestCase as ztc
-
-from zope.app.component.hooks import getSite
 
 @onsetup
 def setup_package():
@@ -65,15 +64,16 @@ class IntegrationTests(ptc.PloneTestCase):
 
     def test_migration(self):
         """we are going to test the migration from 0.1 to >0.1"""
-        # first create 3 old child folders
-        # then run the migration upgrade step
-        # we should end up with 3 activated folders containing the
-        # same stuff as before
         roles = ('Member', 'Manager')
         self.portal.portal_membership.addMember('manager',
                                                 'secret',
                                                 roles, [])
         self.login('manager')
+
+        # allow the Child Folder type to be addable
+        pt = getToolByName(self.portal, "portal_types")
+        cf_type = pt["Child Folder"]
+        cf_type.global_allow = True
 
         # cf1
         self.portal.invokeFactory("Child Folder", "cf1")
@@ -84,12 +84,16 @@ class IntegrationTests(ptc.PloneTestCase):
         self.failUnless(cf1.Description() == "Description of CF 1")
 
         cf1.invokeFactory("Document", "doc1")
-        # add some text in the doc1 and a title
         cf1.invokeFactory("Document", "doc2")
+        doc1 = cf1["doc1"]
+        doc1.setTitle("Doc 1")
+        doc1.setDescription("Description of Doc 1")
+        doc1.setText("<p>Some Text here</p>")
 
         # cf2
         self.portal.invokeFactory("Child Folder", "cf2")
         cf2 = self.portal.cf2
+
         #cf3
         cf2.invokeFactory("Child Folder", "cf3")
         cf3 = cf2.cf3
@@ -98,14 +102,45 @@ class IntegrationTests(ptc.PloneTestCase):
         self.failUnless(cf3.Title() == "CF 3")
         self.failUnless(cf3.Description() == "Description of CF 3")
 
+        cf3.invokeFactory("Document", "doc1")
+        cf3.invokeFactory("Document", "doc2")
+        doc1 = cf3["doc1"]
+        doc1.setTitle("Doc 1")
+        doc1.setDescription("Description of Doc 1")
+        doc1.setText("<p>Some Text here</p>")
+
+        import transaction; transaction.savepoint();
         # Now run the migration step
+        profile_id = "collective.lineage:default"
+        setup_tool = getToolByName(self.portal, 'portal_setup')
+        steps_to_run = _upgrade_registry.getUpgradeStepsForProfile(profile_id)
+
+        for step_id in steps_to_run:
+            step = _upgrade_registry.getUpgradeStep(profile_id, step_id)
+            if step is not None:
+                if step.title == "Migrate the Child Folder objects":
+                    step.doStep(setup_tool)
+
         # then we test if cf1-3 are still existing
         # but are just normal folder that are subtyped
         # also check they still have the correct title
         # description and content
+        cf1 = self.portal.cf1
+        cf2 = self.portal.cf2
+        cf3 = cf2.cf3
+        doc1 = cf3.doc1
+        self.failUnless(cf1.Title() == "CF 1")
+        self.failUnless(cf3.Title() == "CF 3")
+        self.failUnless(cf3.Description() == "Description of CF 3")
+        self.failUnless(cf1.portal_type == "Folder")
+        self.failUnless(cf3.portal_type == "Folder")
+        self.failUnless(doc1.getText() == "<p>Some Text here</p>")
+
+
 
 
 def test_suite():
     suite = unittest.TestSuite()
     suite.addTest(unittest.makeSuite(IntegrationTests))
     return suite
+

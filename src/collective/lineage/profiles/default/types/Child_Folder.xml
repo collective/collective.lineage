@@ -9,7 +9,7 @@
   <property name="product"></property>
   <property name="factory">collective.lineage.ChildFolder</property>
   <property name="immediate_view">@@edit</property>
-  <property name="global_allow">True</property>
+  <property name="global_allow">False</property>
   <property name="filter_content_types">False</property>
   <property name="allowed_content_types" />
   <property name="allow_discussion">False</property>
