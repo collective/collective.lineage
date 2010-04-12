@@ -1,4 +1,5 @@
 from Products.CMFCore.utils import getToolByName
+from DateTime import DateTime
 
 import zope.component
 import transaction
@@ -11,6 +12,7 @@ def migrateChildFolders(context):
     that are subtyped"""
     # allow the Child Folder type to be addable
     pt = getToolByName(context, "portal_types")
+    pw = getToolByName(context, "portal_workflow")
     cf_type = pt["Child Folder"]
     cf_type.global_allow = True
 
@@ -21,6 +23,9 @@ def migrateChildFolders(context):
         parent = child_folder.getParentNode()
         children_ids = child_folder.objectIds()
 
+        cf_state = pw.getInfoFor(child_folder, "review_state")
+        cf_wf = pw.getDefaultChainFor(child_folder)
+        cf_wf = cf_wf and cf_wf[0]
         cf_title = child_folder.Title()
         cf_desc = child_folder.Description()
         cf_id = child_folder.getId()
@@ -35,6 +40,18 @@ def migrateChildFolders(context):
         zope.component.provideUtility(engine.Subtyper())
         subtyper = zope.component.getUtility(interfaces.ISubtyper)
         subtyper.change_type(new_folder, u'collective.lineage.childsite')
+
+        if cf_wf:
+            new_state = {
+                'actor': 'Administrator',
+                'action': None,
+                'review_state':cf_state,
+                'time': DateTime(),
+                'comments': 'setting up the workflow of the item correctly',
+                }
+            pw.setStatusOf(cf_wf, new_folder, new_state)
+            new_folder.reindexObject()
+
 
         if children_ids:
             cut_items = child_folder.manage_cutObjects(ids=children_ids)

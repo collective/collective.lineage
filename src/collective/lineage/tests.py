@@ -8,12 +8,10 @@ from p4a.subtyper import engine
 import Products.Archetypes.interfaces
 
 from zope.app.component.interfaces import ISite
-from zope.event import notify
 
 from Products.CMFCore.utils import getToolByName
 
 from Products.GenericSetup.upgrade import _upgrade_registry
-from Products.GenericSetup.registry import _profile_registry
 
 import unittest
 from Products.Five import zcml
@@ -69,6 +67,7 @@ class IntegrationTests(ptc.PloneTestCase):
                                                 'secret',
                                                 roles, [])
         self.login('manager')
+        pw = getToolByName(self.portal, "portal_workflow")
 
         # allow the Child Folder type to be addable
         pt = getToolByName(self.portal, "portal_types")
@@ -80,8 +79,10 @@ class IntegrationTests(ptc.PloneTestCase):
         cf1 = self.portal.cf1
         cf1.setTitle("CF 1")
         cf1.setDescription("Description of CF 1")
+        pw.doActionFor(cf1, "publish")
         self.failUnless(cf1.Title() == "CF 1")
         self.failUnless(cf1.Description() == "Description of CF 1")
+        self.failUnless(pw.getInfoFor(cf1, "review_state") == "published")
 
         cf1.invokeFactory("Document", "doc1")
         cf1.invokeFactory("Document", "doc2")
@@ -99,8 +100,10 @@ class IntegrationTests(ptc.PloneTestCase):
         cf3 = cf2.cf3
         cf3.setTitle("CF 3")
         cf3.setDescription("Description of CF 3")
+        pw.doActionFor(cf3, "publish")
         self.failUnless(cf3.Title() == "CF 3")
         self.failUnless(cf3.Description() == "Description of CF 3")
+        self.failUnless(pw.getInfoFor(cf3, "review_state") == "published")
 
         cf3.invokeFactory("Document", "doc1")
         cf3.invokeFactory("Document", "doc2")
@@ -130,13 +133,13 @@ class IntegrationTests(ptc.PloneTestCase):
         cf3 = cf2.cf3
         doc1 = cf3.doc1
         self.failUnless(cf1.Title() == "CF 1")
+        self.failUnless(pw.getInfoFor(cf1, "review_state") == "published")
         self.failUnless(cf3.Title() == "CF 3")
         self.failUnless(cf3.Description() == "Description of CF 3")
+        self.failUnless(pw.getInfoFor(cf3, "review_state") == "published")
         self.failUnless(cf1.portal_type == "Folder")
         self.failUnless(cf3.portal_type == "Folder")
         self.failUnless(doc1.getText() == "<p>Some Text here</p>")
-
-
 
 
 def test_suite():

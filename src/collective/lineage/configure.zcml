@@ -32,6 +32,16 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
+  <genericsetup:importStep
+      name="collective.lineage: default" 
+      title="collective.lineage: Various steps" 
+      description="Setup handlers for collective.lineage" 
+      handler="collective.lineage.setuphandlers.importVarious">
+    <depends name="content"/>
+  </genericsetup:importStep>
+
+
+
   <!-- Old Child Folder stuff, to be removed after next release -->
   <permission 
     id="collective.lineage.AddChildFolder" 
