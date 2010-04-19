@@ -47,10 +47,12 @@ class IntegrationTests(ptc.PloneTestCase):
         class SimpleFolder(object):
             zope.interface.implements(Products.Archetypes.interfaces.IBaseFolder)
             portal_type = 'Folder'
-        zope.interface.classImplements(SimpleFolder, zope.app.annotation.interfaces.IAttributeAnnotatable)
+        zope.interface.classImplements(SimpleFolder,
+                                       zope.app.annotation.interfaces.IAttributeAnnotatable)
 
         adapted = interfaces.IPossibleDescriptors(SimpleFolder())
-        self.failUnless(u'collective.lineage.childsite' in dict(adapted.possible).keys())
+        self.failUnless(u'collective.lineage.childsite' in \
+                            dict(adapted.possible).keys())
 
     def test_component_registry(self):
         self.login('contributor')
@@ -140,6 +142,28 @@ class IntegrationTests(ptc.PloneTestCase):
         self.failUnless(cf1.portal_type == "Folder")
         self.failUnless(cf3.portal_type == "Folder")
         self.failUnless(doc1.getText() == "<p>Some Text here</p>")
+
+    def test_uninstall(self):
+        """testing the uninstall of collective.lineage"""
+        roles = ('Member', 'Manager')
+        self.portal.portal_membership.addMember('manager',
+                                                'secret',
+                                                roles, [])
+        self.login('manager')
+        pq = getToolByName(self.portal, "portal_quickinstaller")
+        pq.uninstallProducts(["collective.lineage"])
+
+        zope.component.provideAdapter(zope.app.annotation.attribute.AttributeAnnotations)
+        zope.component.provideAdapter(default.folderish_possible_descriptors)
+        class SimpleFolder(object):
+            zope.interface.implements(Products.Archetypes.interfaces.IBaseFolder)
+            portal_type = 'Folder'
+        zope.interface.classImplements(SimpleFolder,
+                                       zope.app.annotation.interfaces.IAttributeAnnotatable)
+
+        adapted = interfaces.IPossibleDescriptors(SimpleFolder())
+        self.failUnless(u'collective.lineage.childsite' not in \
+                            dict(adapted.possible).keys())
 
 
 def test_suite():
