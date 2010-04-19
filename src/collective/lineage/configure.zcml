@@ -81,11 +81,6 @@
       layer=".interfaces.ILineageBrowserLayer"
       />
 
-  <utility
-      name="collective.lineage.childsite"
-      factory=".descriptors.ChildSiteDescriptor"
-      />
-
   <subscriber
       for="p4a.subtyper.interfaces.ISubtypeAddedEvent"
       handler=".subscribers.enableChildSite"

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<componentregistry>
+  <utilities>
+      <utility interface="p4a.subtyper.interfaces.IPortalTypedFolderishDescriptor"
+               name="collective.lineage.childsite"
+               factory="collective.lineage.descriptors.ChildSiteDescriptor" />
+  </utilities>
+</componentregistry>
+
