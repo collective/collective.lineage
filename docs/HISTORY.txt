@@ -4,6 +4,31 @@ Changelog
 0.3 - (XXXX-XX-XX)
 ------------------
 
+- moved the registration of the utility in component registry so 
+  it gets registered locally, this fixes #5 [lucielejard]
+
+- added a deprecation warning on the Child Folder type
+  [lucielejard]
+
+- put back some old zcml so the Child Folder migration can be tested
+  [lucielejard]
+
+- added a test for the migration from 0.1 to >0.1
+  [lucielejard]
+
+- updated the version in metadata.xml for the upgrade step
+  [lucielejard]
+
+- made the Child Folder type not globally addable
+  [lucielejard]
+
+- added an upgrade step that will migrate the old Child Folder objects
+  [lucielejard]
+
+- added an import various step so that the upgrade step gets run 
+  automatically on reinstall
+  [lucielejard]
+
 - Set up for i18n translations
   [claytron]
 
