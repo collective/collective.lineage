@@ -1,6 +1,9 @@
 import zope.interface
 import zope.component
-import zope.app.annotation.attribute
+try:
+    import zope.app.annotation.attribute as zaa
+except:
+    import zope.annotation.attribute as zaa
 
 from p4a.subtyper import interfaces
 from p4a.subtyper import default
@@ -42,13 +45,17 @@ class IntegrationTests(ptc.PloneTestCase):
                                                 roles, [])
 
     def test_folder_is_activatable(self):
-        zope.component.provideAdapter(zope.app.annotation.attribute.AttributeAnnotations)
+        zope.component.provideAdapter(zaa.AttributeAnnotations)
         zope.component.provideAdapter(default.folderish_possible_descriptors)
         class SimpleFolder(object):
             zope.interface.implements(Products.Archetypes.interfaces.IBaseFolder)
             portal_type = 'Folder'
-        zope.interface.classImplements(SimpleFolder,
+        try:
+            zope.interface.classImplements(SimpleFolder,
                                        zope.app.annotation.interfaces.IAttributeAnnotatable)
+        except:
+            zope.interface.classImplements(SimpleFolder,
+                                       zope.annotation.interfaces.IAttributeAnnotatable)
 
         adapted = interfaces.IPossibleDescriptors(SimpleFolder())
         self.failUnless(u'collective.lineage.childsite' in \
@@ -141,7 +148,7 @@ class IntegrationTests(ptc.PloneTestCase):
         self.failUnless(pw.getInfoFor(cf3, "review_state") == "published")
         self.failUnless(cf1.portal_type == "Folder")
         self.failUnless(cf3.portal_type == "Folder")
-        self.failUnless(doc1.getText() == "<p>Some Text here</p>")
+        self.failUnless(doc1.getRawText() == "<p>Some Text here</p>")
 
     def test_uninstall(self):
         """testing the uninstall of collective.lineage"""
@@ -153,13 +160,18 @@ class IntegrationTests(ptc.PloneTestCase):
         pq = getToolByName(self.portal, "portal_quickinstaller")
         pq.uninstallProducts(["collective.lineage"])
 
-        zope.component.provideAdapter(zope.app.annotation.attribute.AttributeAnnotations)
+        zope.component.provideAdapter(zaa.AttributeAnnotations)
         zope.component.provideAdapter(default.folderish_possible_descriptors)
         class SimpleFolder(object):
             zope.interface.implements(Products.Archetypes.interfaces.IBaseFolder)
             portal_type = 'Folder'
-        zope.interface.classImplements(SimpleFolder,
+
+        try:
+            zope.interface.classImplements(SimpleFolder,
                                        zope.app.annotation.interfaces.IAttributeAnnotatable)
+        except:
+            zope.interface.classImplements(SimpleFolder,
+                                       zope.annotation.interfaces.IAttributeAnnotatable)
 
         adapted = interfaces.IPossibleDescriptors(SimpleFolder())
         self.failUnless(u'collective.lineage.childsite' not in \
