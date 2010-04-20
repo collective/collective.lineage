@@ -1,9 +1,16 @@
 import zope.interface
 import zope.component
+
+#for plone3-plone4 compatibility purposes
 try:
     import zope.app.annotation.attribute as zaa
 except:
     import zope.annotation.attribute as zaa
+try:
+    import zope.app.annotation.interfaces as zai
+except:
+    import zope.annotation.interfaces as zai
+
 
 from p4a.subtyper import interfaces
 from p4a.subtyper import default
@@ -50,12 +57,8 @@ class IntegrationTests(ptc.PloneTestCase):
         class SimpleFolder(object):
             zope.interface.implements(Products.Archetypes.interfaces.IBaseFolder)
             portal_type = 'Folder'
-        try:
-            zope.interface.classImplements(SimpleFolder,
-                                       zope.app.annotation.interfaces.IAttributeAnnotatable)
-        except:
-            zope.interface.classImplements(SimpleFolder,
-                                       zope.annotation.interfaces.IAttributeAnnotatable)
+        zope.interface.classImplements(SimpleFolder,
+                                       zai.IAttributeAnnotatable)
 
         adapted = interfaces.IPossibleDescriptors(SimpleFolder())
         self.failUnless(u'collective.lineage.childsite' in \
@@ -166,12 +169,8 @@ class IntegrationTests(ptc.PloneTestCase):
             zope.interface.implements(Products.Archetypes.interfaces.IBaseFolder)
             portal_type = 'Folder'
 
-        try:
-            zope.interface.classImplements(SimpleFolder,
-                                       zope.app.annotation.interfaces.IAttributeAnnotatable)
-        except:
-            zope.interface.classImplements(SimpleFolder,
-                                       zope.annotation.interfaces.IAttributeAnnotatable)
+        zope.interface.classImplements(SimpleFolder,
+                                       zai.IAttributeAnnotatable)
 
         adapted = interfaces.IPossibleDescriptors(SimpleFolder())
         self.failUnless(u'collective.lineage.childsite' not in \
