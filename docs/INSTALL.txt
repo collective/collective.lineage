@@ -35,6 +35,41 @@ Now you can re-run your buildout to get the all the dependencies::
 
     $ ./bin/buildout
 
-Once your buildout is finished you can start up your instance and install Lineage via the ``Add-on Products`` configlet in site setup.
+Once your buildout is finished, you can start up your instance and install Lineage via the ``Add-on Products`` configlet in site setup.
 
 .. _PLIP 234: http://plone.org/products/plone/roadmap/234
+
+Migration from 0.1 to >0.1
+==========================
+
+In versions of collective.lineage >0.1, the Child Folder type
+has been deprecated and you can know activate a folder using
+the subtyper action when you are on a Folder.
+
+An upgrade step takes care of migrating the old Child Folder
+to Folder. Make sure to backup your data and then, once you
+have updated your instance to use the latest collective.lineage,
+reinstall "Lineage", it will migrate the items automatically.
+
+Working on the trunk of lineage
+===============================
+
+To work on the trunk of lineage, do the following:
+
+    $ svn co https://svn.plone.org/svn/collective/collective.lineage/trunk/ lineage-trunk
+    $ cd lineage-trunk
+    $ python2.4 bootstrap.py
+    $ bin/buildout -v
+    $ bin/instance fg
+
+Then:
+
+- go to  http://localhost:8080/manage (admin/admin)
+- add a plone site
+- quickinstall lineage in the new plone site
+- create a folder and subtype it to see if everything works fine 
+
+You can run the tests in debug mode with the following command:
+
+    $ bin/test -D
+

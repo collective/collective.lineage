@@ -1,15 +1,7 @@
-Things that need to be done before a 0.3 release
+Things that need to be done before next release
 
 - update README to reflect 'activation' changes
 - write more tests!
-- create migration profile
-- Finish up uninstall profile
 - Finish up subscribers for site deletion
-- re-enable child site creation permission
 - Large Folder child site?  normal AT folder?  plone.app.content container?
 
-complimentary products:
-
-- wrote exportimport for p4a.subtyper, working on gaining commit access
-- support child site properties, wrote collective.proxyproperties and lineage.proxyprops to support this
-- support theming (currently the claytron branch of themetweaker.themeswitcher, needs to be merged down to trunk)

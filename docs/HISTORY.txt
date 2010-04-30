@@ -1,8 +1,19 @@
 Changelog
 =========
 
-0.3 - (XXXX-XX-XX)
+0.3 - (2010-04-30)
 ------------------
+
+- getting the unit testing to work with plone4 and allowing 
+  childsite editing with plone4, refs #16 [tbesluau]
+
+- updated README.txt with useful links [lucielejard]
+
+- added tests for the uninstall of lineage [lucielejard]
+
+- updated the list of items todo, removed rolemap.xml since
+  we don't use it anymore, updated the history with the recent
+  changes [lucielejard]
 
 - moved the registration of the utility in component registry so 
   it gets registered locally, this fixes #5 [lucielejard]
