@@ -13,9 +13,8 @@ to your instance part::
     zcml =
       collective.lineage
 
-Currently this code depends on `PLIP 234`_ which should become a part
-of Plone 3.3.  If you want to use it now you can add the branches
-of the eggs for the plip::
+If you are using Plone <3.3, you will need to use the code added for `PLIP 234`.
+To do so, you'll have to add the branches of the eggs for the plip::
 
     [buildout]
     parts =

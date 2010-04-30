@@ -1,8 +1,10 @@
 Changelog
 =========
 
-0.4 - (XXXX-XX-XX)
+0.4 - (2010-04-30)
 ------------------
+
+- updated docs about PLIP
 
 - Update docs with information about "activation" behavior.
   [clayton]
