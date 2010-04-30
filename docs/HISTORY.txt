@@ -1,6 +1,12 @@
 Changelog
 =========
 
+0.4 - (XXXX-XX-XX)
+------------------
+
+- Update docs with information about "activation" behavior.
+  [clayton]
+
 0.3 - (2010-04-30)
 ------------------
 
