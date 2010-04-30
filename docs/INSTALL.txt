@@ -54,7 +54,7 @@ reinstall "Lineage", it will migrate the items automatically.
 Working on the trunk of lineage
 ===============================
 
-To work on the trunk of lineage, do the following:
+To work on the trunk of lineage, do the following::
 
     $ svn co https://svn.plone.org/svn/collective/collective.lineage/trunk/ lineage-trunk
     $ cd lineage-trunk
@@ -69,7 +69,7 @@ Then:
 - quickinstall lineage in the new plone site
 - create a folder and subtype it to see if everything works fine 
 
-You can run the tests in debug mode with the following command:
+You can run the tests in debug mode with the following command::
 
     $ bin/test -D
 
