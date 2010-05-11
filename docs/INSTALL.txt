@@ -1,6 +1,9 @@
 Installation Instructions
 =========================
 
+First step
+----------
+
 If you are using zc.buildout and the plone.recipe.zope2instance
 recipe to manage your project, you can add ``collective.lineage``
 to your instance part::
@@ -13,7 +16,11 @@ to your instance part::
     zcml =
       collective.lineage
 
-If you are using Plone <3.3, you will need to use the code added for `PLIP 234`.
+
+If you are using Plone 3.2
+---------------------------
+
+You will need to use the code added for `PLIP 234`.
 To do so, you'll have to add the branches of the eggs for the plip::
 
     [buildout]
@@ -26,27 +33,44 @@ To do so, you'll have to add the branches of the eggs for the plip::
     location = plip234-branches
     as_eggs = true
     urls =
-      # these urls are for Plone 3.2
       http://svn.plone.org/svn/plone/Plone/branches/calvinhp-inavigationroot-fixes Plone
       http://svn.plone.org/svn/plone/plone.app.layout/branches/calvinhp-inavigationroot-fixes plone.app.layout
       http://svn.plone.org/svn/plone/plone.app.portlets/branches/calvinhp-inavigationroot-fixes plone.app.portlets
-      # these ones are for Plone 3.1.7
+
+If you are using Plone 3.1.7
+----------------------------
+
+You will need to use the branches created by duffyd::
+
+    [buildout]
+    parts =
+      ...
+      plone317-branches
+    
+    [plone317-branches]
+    recipe = infrae.subversion
+    location = plone317-branches
+    as_eggs = true
+    urls =
       http://svn.plone.org/svn/plone/Plone/branches/duffyd-inavigationroot-fixes-317/ Plone
       http://svn.plone.org/svn/plone/plone.app.layout/branches/duffyd-inavigationroot-fixes-317/ plone.app.layout
       http://svn.plone.org/svn/plone/plone.app.portlets/branches/duffyd-inavigationroot-fixes-317/ plone.app.portlets
 
+Last step
+---------
+
 Now you can re-run your buildout to get the all the dependencies::
 
-    $ ./bin/buildout
+    $ bin/buildout
 
 Once your buildout is finished, you can start up your instance and install Lineage via the ``Add-on Products`` configlet in site setup.
 
 .. _PLIP 234: http://plone.org/products/plone/roadmap/234
 
-Migration from 0.1 to >0.1
-==========================
+Migration from 0.1 to the latest version
+========================================
 
-In versions of collective.lineage >0.1, the Child Folder type
+In versions of collective.lineage that are greater than 0.1, the Child Folder type
 has been deprecated and you can know activate a folder using
 the subtyper action when you are on a Folder.
 

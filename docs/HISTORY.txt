@@ -6,7 +6,7 @@ Changelog
 
 - updated docs with links to the branches created by
   duffyd for the backports of the plip #234 mods to
-  Plone 3.1.7
+  Plone 3.1.7 [lucielejard]
 
 0.4 - (2010-04-30)
 ------------------
