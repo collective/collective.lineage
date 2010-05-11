@@ -26,9 +26,14 @@ To do so, you'll have to add the branches of the eggs for the plip::
     location = plip234-branches
     as_eggs = true
     urls =
+      # these urls are for Plone 3.2
       http://svn.plone.org/svn/plone/Plone/branches/calvinhp-inavigationroot-fixes Plone
       http://svn.plone.org/svn/plone/plone.app.layout/branches/calvinhp-inavigationroot-fixes plone.app.layout
       http://svn.plone.org/svn/plone/plone.app.portlets/branches/calvinhp-inavigationroot-fixes plone.app.portlets
+      # these ones are for Plone 3.1.7
+      http://svn.plone.org/svn/plone/Plone/branches/duffyd-inavigationroot-fixes-317/ Plone
+      http://svn.plone.org/svn/plone/plone.app.layout/branches/duffyd-inavigationroot-fixes-317/ plone.app.layout
+      http://svn.plone.org/svn/plone/plone.app.portlets/branches/duffyd-inavigationroot-fixes-317/ plone.app.portlets
 
 Now you can re-run your buildout to get the all the dependencies::
 
