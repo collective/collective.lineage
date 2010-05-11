@@ -30,7 +30,6 @@ To do so, you'll have to add the branches of the eggs for the plip::
     
     [plip234-branches]
     recipe = infrae.subversion
-    location = plip234-branches
     as_eggs = true
     urls =
       http://svn.plone.org/svn/plone/Plone/branches/calvinhp-inavigationroot-fixes Plone
@@ -49,7 +48,6 @@ You will need to use the branches created by duffyd::
     
     [plone317-branches]
     recipe = infrae.subversion
-    location = plone317-branches
     as_eggs = true
     urls =
       http://svn.plone.org/svn/plone/Plone/branches/duffyd-inavigationroot-fixes-317/ Plone
