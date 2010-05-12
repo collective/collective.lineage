@@ -39,20 +39,35 @@ To do so, you'll have to add the branches of the eggs for the plip::
 If you are using Plone 3.1.7
 ----------------------------
 
-You will need to use the branches created by duffyd::
+You will need to use the branches created by duffyd (note the reference
+to ``${plone317-products:location}`` in the ``products`` value of the
+``instance`` section must be first in the list)::
 
     [buildout]
     parts =
-      ...
-      plone317-branches
+    ...
+    plone317-products
+    plone317-eggs
     
-    [plone317-branches]
+    [instance]
+    recipe = plone.recipe.zope2instance
+    ...
+    products =
+        ${plone317-products:location}
+        ...
+    
+    [plone317-products]
+    recipe = infrae.subversion
+    urls =
+        http://svn.plone.org/svn/plone/Plone/branches/duffyd-inavigationroot-fixes-317/ Plone
+    
+    [plone317-eggs]
     recipe = infrae.subversion
     as_eggs = true
     urls =
-      http://svn.plone.org/svn/plone/Plone/branches/duffyd-inavigationroot-fixes-317/ Plone
-      http://svn.plone.org/svn/plone/plone.app.layout/branches/duffyd-inavigationroot-fixes-317/ plone.app.layout
-      http://svn.plone.org/svn/plone/plone.app.portlets/branches/duffyd-inavigationroot-fixes-317/ plone.app.portlets
+        http://svn.plone.org/svn/plone/plone.app.layout/branches/duffyd-inavigationroot-fixes-317/ plone.app.layout
+        http://svn.plone.org/svn/plone/plone.app.portlets/branches/duffyd-inavigationroot-fixes-317/ plone.app.portlets
+
 
 Last step
 ---------

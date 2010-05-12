@@ -1,15 +1,19 @@
 Changelog
 =========
 
-0.6 - (2010-XX-XX)
-------------------
+0.5.1 - (2010-05-12)
+--------------------
+
+- updated docs as per duffyd suggestions
+  [lucielejard]
 
 0.5 - (2010-05-11)
 ------------------
 
 - updated docs with links to the branches created by
   duffyd for the backports of the plip #234 mods to
-  Plone 3.1.7 [lucielejard]
+  Plone 3.1.7
+  [lucielejard]
 
 0.4 - (2010-04-30)
 ------------------
