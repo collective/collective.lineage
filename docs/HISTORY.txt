@@ -4,6 +4,11 @@ Changelog
 0.6 - (2010-XX-XX)
 ------------------
 
+- updated the migration so it keeps the layout on the folder
+  fixes #18
+  [lucielejard]
+
+
 0.5.1 - (2010-05-12)
 --------------------
 

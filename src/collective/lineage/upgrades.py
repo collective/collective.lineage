@@ -23,12 +23,15 @@ def migrateChildFolders(context):
         parent = child_folder.getParentNode()
         children_ids = child_folder.objectIds()
 
+        # we will keep the same state, title, description, id
+        # and display
         cf_state = pw.getInfoFor(child_folder, "review_state")
         cf_wf = pw.getDefaultChainFor(child_folder)
         cf_wf = cf_wf and cf_wf[0]
         cf_title = child_folder.Title()
         cf_desc = child_folder.Description()
         cf_id = child_folder.getId()
+        cf_display = child_folder.layout
         cf_new_id = "%s-old" % cf_id
         parent.manage_renameObjects([cf_id], [cf_new_id])
 
@@ -36,6 +39,7 @@ def migrateChildFolders(context):
         new_folder = parent[cf_id]
         new_folder.setTitle(cf_title)
         new_folder.setDescription(cf_desc)
+        new_folder.layout = cf_display
         new_folder.processForm()
         zope.component.provideUtility(engine.Subtyper())
         subtyper = zope.component.getUtility(interfaces.ISubtyper)

@@ -91,10 +91,12 @@ class IntegrationTests(ptc.PloneTestCase):
         cf1 = self.portal.cf1
         cf1.setTitle("CF 1")
         cf1.setDescription("Description of CF 1")
+        cf1.layout = "layout1"
         pw.doActionFor(cf1, "publish")
         self.failUnless(cf1.Title() == "CF 1")
         self.failUnless(cf1.Description() == "Description of CF 1")
         self.failUnless(pw.getInfoFor(cf1, "review_state") == "published")
+        self.failUnless(cf1.layout == "layout1")
 
         cf1.invokeFactory("Document", "doc1")
         cf1.invokeFactory("Document", "doc2")
@@ -106,12 +108,15 @@ class IntegrationTests(ptc.PloneTestCase):
         # cf2
         self.portal.invokeFactory("Child Folder", "cf2")
         cf2 = self.portal.cf2
+        cf2.layout = "layout-2"
+
 
         #cf3
         cf2.invokeFactory("Child Folder", "cf3")
         cf3 = cf2.cf3
         cf3.setTitle("CF 3")
         cf3.setDescription("Description of CF 3")
+        cf3.layout = "3layout"
         pw.doActionFor(cf3, "publish")
         self.failUnless(cf3.Title() == "CF 3")
         self.failUnless(cf3.Description() == "Description of CF 3")
@@ -139,15 +144,18 @@ class IntegrationTests(ptc.PloneTestCase):
         # then we test if cf1-3 are still existing
         # but are just normal folder that are subtyped
         # also check they still have the correct title
-        # description and content
+        # description, content, state and layout
         cf1 = self.portal.cf1
         cf2 = self.portal.cf2
         cf3 = cf2.cf3
         doc1 = cf3.doc1
         self.failUnless(cf1.Title() == "CF 1")
         self.failUnless(pw.getInfoFor(cf1, "review_state") == "published")
+        self.failUnless(cf1.layout == "layout1")
+        self.failUnless(cf2.layout == "layout-2")
         self.failUnless(cf3.Title() == "CF 3")
         self.failUnless(cf3.Description() == "Description of CF 3")
+        self.failUnless(cf3.layout == "3layout")
         self.failUnless(pw.getInfoFor(cf3, "review_state") == "published")
         self.failUnless(cf1.portal_type == "Folder")
         self.failUnless(cf3.portal_type == "Folder")
