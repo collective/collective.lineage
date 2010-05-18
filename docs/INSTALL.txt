@@ -92,6 +92,9 @@ to Folder. Make sure to backup your data and then, once you
 have updated your instance to use the latest collective.lineage,
 reinstall "Lineage", it will migrate the items automatically.
 
+Note: we are assuming that the Child Folder and the Folder workflows
+are the same.
+
 Working on the trunk of lineage
 ===============================
 

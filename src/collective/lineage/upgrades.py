@@ -31,7 +31,9 @@ def migrateChildFolders(context):
         cf_title = child_folder.Title()
         cf_desc = child_folder.Description()
         cf_id = child_folder.getId()
-        cf_display = child_folder.layout
+        has_layout = hasattr(child_folder, "layout")
+        if has_layout:
+            cf_display = child_folder.layout
         cf_new_id = "%s-old" % cf_id
         parent.manage_renameObjects([cf_id], [cf_new_id])
 
@@ -39,7 +41,8 @@ def migrateChildFolders(context):
         new_folder = parent[cf_id]
         new_folder.setTitle(cf_title)
         new_folder.setDescription(cf_desc)
-        new_folder.layout = cf_display
+        if has_layout:
+            new_folder.layout = cf_display
         new_folder.processForm()
         zope.component.provideUtility(engine.Subtyper())
         subtyper = zope.component.getUtility(interfaces.ISubtyper)
@@ -66,5 +69,6 @@ def migrateChildFolders(context):
 
         brains = pc.searchResults(portal_type="Child Folder")
 
+    pw.updateRoleMappings()
     cf_type.global_allow = False
 

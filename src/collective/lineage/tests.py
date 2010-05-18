@@ -1,5 +1,6 @@
 import zope.interface
 import zope.component
+from AccessControl import Unauthorized
 
 #for plone3-plone4 compatibility purposes
 try:
@@ -108,7 +109,6 @@ class IntegrationTests(ptc.PloneTestCase):
         # cf2
         self.portal.invokeFactory("Child Folder", "cf2")
         cf2 = self.portal.cf2
-        cf2.layout = "layout-2"
 
 
         #cf3
@@ -152,7 +152,6 @@ class IntegrationTests(ptc.PloneTestCase):
         self.failUnless(cf1.Title() == "CF 1")
         self.failUnless(pw.getInfoFor(cf1, "review_state") == "published")
         self.failUnless(cf1.layout == "layout1")
-        self.failUnless(cf2.layout == "layout-2")
         self.failUnless(cf3.Title() == "CF 3")
         self.failUnless(cf3.Description() == "Description of CF 3")
         self.failUnless(cf3.layout == "3layout")
@@ -160,6 +159,14 @@ class IntegrationTests(ptc.PloneTestCase):
         self.failUnless(cf1.portal_type == "Folder")
         self.failUnless(cf3.portal_type == "Folder")
         self.failUnless(doc1.getRawText() == "<p>Some Text here</p>")
+
+        #check that anonymous can see the published items
+        self.logout()
+        try:
+            cf1_item = self.portal.restrictedTraverse("cf1")
+        except Unauthorized:
+            cf1_item = None
+        self.failUnless(cf1_item != None)
 
     def test_uninstall(self):
         """testing the uninstall of collective.lineage"""
