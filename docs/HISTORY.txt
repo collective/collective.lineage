@@ -4,6 +4,9 @@ Changelog
 0.6 - (2010-XX-XX)
 ------------------
 
+- used z3c.autoinclude and removed the zcml slug in buildout.cfg
+  [tbesluau]
+
 - update the security settings at the end of the migration so
   that the workflow is applied correctly on the new migrated
   folders, fixes #20
