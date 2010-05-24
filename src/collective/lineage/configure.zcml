@@ -9,10 +9,9 @@
   <five:registerPackage package="." initialize=".initialize"/>
 
   <i18n:registerTranslations directory="locales" />
-  
-  <include package="p4a.z2utils"/>
-  <include package="p4a.subtyper"/>
-  <include package="p4a.subtyper" file="meta.zcml"/>
+
+  <includePlugins package="." />
+  <includeDependencies package="." />
   
   <!-- GenericSetup profile -->
   <genericsetup:registerProfile
