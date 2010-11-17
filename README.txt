@@ -11,6 +11,8 @@ Lineage is a Plone product that allows subfolders of a Plone site to appear as a
 
 Lineage can be used within a large organization to manage multiple microsites, such as school district sites, university departments, corporate product sites, public library satellites,  professional association events, and more.
 
+Lineage works with Plone 3 and Plone 4.
+
 Useful links
 ============
 
