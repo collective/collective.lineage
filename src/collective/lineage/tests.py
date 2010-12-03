@@ -73,6 +73,18 @@ class IntegrationTests(ptc.PloneTestCase):
         subtyper.change_type(self.portal.site1, u'collective.lineage.childsite')
         self.failUnless(ISite.providedBy(self.portal.site1))
 
+
+    def run_migration_step(self):
+        # Now run the migration step
+        profile_id = "collective.lineage:default"
+        setup_tool = getToolByName(self.portal, 'portal_setup')
+        steps_to_run = _upgrade_registry.getUpgradeStepsForProfile(profile_id)
+        for step_id in steps_to_run:
+            step = _upgrade_registry.getUpgradeStep(profile_id, step_id)
+            if step is not None:
+                if step.title == "Migrate the Child Folder objects":
+                    step.doStep(setup_tool)
+
     def test_migration(self):
         """we are going to test the migration from 0.1 to >0.1"""
         roles = ('Member', 'Manager')
@@ -130,16 +142,7 @@ class IntegrationTests(ptc.PloneTestCase):
         doc1.setText("<p>Some Text here</p>")
 
         import transaction; transaction.savepoint();
-        # Now run the migration step
-        profile_id = "collective.lineage:default"
-        setup_tool = getToolByName(self.portal, 'portal_setup')
-        steps_to_run = _upgrade_registry.getUpgradeStepsForProfile(profile_id)
-
-        for step_id in steps_to_run:
-            step = _upgrade_registry.getUpgradeStep(profile_id, step_id)
-            if step is not None:
-                if step.title == "Migrate the Child Folder objects":
-                    step.doStep(setup_tool)
+        self.run_migration_step()
 
         # then we test if cf1-3 are still existing
         # but are just normal folder that are subtyped
@@ -167,6 +170,38 @@ class IntegrationTests(ptc.PloneTestCase):
         except Unauthorized:
             cf1_item = None
         self.failUnless(cf1_item != None)
+        
+    def test_migration_preserves_default_view(self):
+        """we are going to test the migration from 0.1 to >0.1"""
+        roles = ('Member', 'Manager')
+        self.portal.portal_membership.addMember('manager',
+                                                'secret',
+                                                roles, [])
+        self.login('manager')
+        pw = getToolByName(self.portal, "portal_workflow")
+
+        # allow the Child Folder type to be addable
+        pt = getToolByName(self.portal, "portal_types")
+        cf_type = pt["Child Folder"]
+        cf_type.global_allow = True
+
+        # cf1
+        self.portal.invokeFactory("Child Folder", "cf1")
+        cf1 = self.portal.cf1
+        cf1.setTitle("CF 1")
+        pw.doActionFor(cf1, "publish")
+        self.failUnless(cf1.Title() == "CF 1")
+        self.failUnless(pw.getInfoFor(cf1, "review_state") == "published")
+
+        cf1.invokeFactory("Document", "doc1")
+        doc1 = cf1["doc1"]
+        doc1.setTitle("Doc 1")
+        
+        cf1.setDefaultPage("doc1")
+        import transaction; transaction.savepoint();
+        self.run_migration_step()
+        cf1 = self.portal.cf1
+        self.assertEquals(cf1.getDefaultPage(), "doc1")                
 
     def test_uninstall(self):
         """testing the uninstall of collective.lineage"""

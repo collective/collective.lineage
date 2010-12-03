@@ -7,6 +7,8 @@ import transaction
 from p4a.subtyper import engine
 from p4a.subtyper import interfaces
 
+from plone.app.layout.navigation.defaultpage import getDefaultPage
+
 def migrateChildFolders(context):
     """Migrates Child Folder objects to normal Folder objects
     that are subtyped"""
@@ -34,6 +36,7 @@ def migrateChildFolders(context):
         has_layout = hasattr(child_folder, "layout")
         if has_layout:
             cf_display = child_folder.layout
+        cf_default_page = getDefaultPage(child_folder)
         cf_new_id = "%s-old" % cf_id
         parent.manage_renameObjects([cf_id], [cf_new_id])
 
@@ -63,7 +66,9 @@ def migrateChildFolders(context):
         if children_ids:
             cut_items = child_folder.manage_cutObjects(ids=children_ids)
             new_folder.manage_pasteObjects(cut_items)
-
+        if cf_default_page:
+            new_folder.setDefaultPage(cf_default_page)
+            
         parent.manage_delObjects([cf_new_id])
         transaction.savepoint()
 
