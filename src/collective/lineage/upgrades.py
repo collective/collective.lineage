@@ -1,5 +1,7 @@
 from DateTime import DateTime
 
+from logging import getLogger
+
 from p4a.subtyper import engine
 from p4a.subtyper import interfaces
 
@@ -20,9 +22,12 @@ from zope.component import queryUtility
 from zope.component import provideUtility
 import transaction
 
+logger = getLogger('collective.lineage.upgrades')
+
 def migrateChildFolders(context):
     """Migrates Child Folder objects to normal Folder objects
     that are subtyped"""
+    logger.info('Migrating child folder objects to normal folder objects')
     # allow the Child Folder type to be addable
     pt = getToolByName(context, "portal_types")
     pw = getToolByName(context, "portal_workflow")
@@ -33,6 +38,7 @@ def migrateChildFolders(context):
     brains = pc.searchResults(portal_type="Child Folder")
     while brains:
         child_folder = brains[0].getObject()
+        logger.info('Migrating child folder %s' % child_folder.getId())
         parent = child_folder.getParentNode()
         children_ids = child_folder.objectIds()
 
@@ -87,22 +93,29 @@ def migrateChildFolders(context):
 
     pw.updateRoleMappings()
     cf_type.global_allow = False
+    logger.info('Finished migrating child folders')
 
 def copy_portlet_assignments_and_settings(src, target):
+    """Return a dictionary of portlet manager name to assignments dictionary"""
     if not ILocalPortletAssignable.providedBy(src):
         alsoProvides(src, ILocalPortletAssignable)
         
     for manager_name, src_manager in getUtilitiesFor(IPortletManager, context=src):
         src_manager_assignments = getMultiAdapter((src, src_manager), IPortletAssignmentMapping)
         target_manager = queryUtility(IPortletManager, name=manager_name, context=target)
-        target_manager_assignments = getMultiAdapter((target, target_manager), 
-                                            IPortletAssignmentMapping)
-        for id, assignment in src_manager_assignments.items():
-            target_manager_assignments[id] = assignment
-        src_assignment_manager = getMultiAdapter((src, src_manager),
-                                             ILocalPortletAssignmentManager)
-        target_assignment_manager = getMultiAdapter((target, target_manager),
-                                             ILocalPortletAssignmentManager)
-        for category in (CONTEXT_CATEGORY, GROUP_CATEGORY, CONTENT_TYPE_CATEGORY):
-            target_assignment_manager.setBlacklistStatus(category, 
-                                  src_assignment_manager.getBlacklistStatus(category))             
+        if target_manager is None:
+            logger.warning('New folder %s does not have portlet manager %s' % 
+                           (target.getId(), target_manager))
+        else:
+            target_manager_assignments = getMultiAdapter((target, target_manager), 
+                                                IPortletAssignmentMapping)
+            for id, assignment in src_manager_assignments.items():
+                target_manager_assignments[id] = assignment
+            src_assignment_manager = getMultiAdapter((src, src_manager),
+                                                 ILocalPortletAssignmentManager)
+            target_assignment_manager = getMultiAdapter((target, target_manager),
+                                                 ILocalPortletAssignmentManager)
+            for category in (CONTEXT_CATEGORY, GROUP_CATEGORY, CONTENT_TYPE_CATEGORY):
+                target_assignment_manager.setBlacklistStatus(category, 
+                                      src_assignment_manager.getBlacklistStatus(category))
+             
