@@ -12,10 +12,17 @@ try:
 except:
     import zope.annotation.interfaces as zai
 
+from five.localsitemanager import make_objectmanager_site
 
 from p4a.subtyper import interfaces
 from p4a.subtyper import default
 from p4a.subtyper import engine
+from plone.portlets.constants import CONTEXT_CATEGORY, GROUP_CATEGORY, CONTENT_TYPE_CATEGORY
+from plone.portlets.interfaces import ILocalPortletAssignable
+from plone.portlets.interfaces import ILocalPortletAssignmentManager
+from plone.portlets.interfaces import IPortletManager
+from plone.portlets.interfaces import IPortletType
+
 import Products.Archetypes.interfaces
 
 from zope.app.component.interfaces import ISite
@@ -32,6 +39,12 @@ from Products.PloneTestCase import PloneTestCase as ptc
 from Products.PloneTestCase.layer import onsetup
 from Testing import ZopeTestCase as ztc
 
+from zope.app.component.interfaces import ISite
+from zope.component import getMultiAdapter
+from zope.component import getUtility
+from zope.interface import alsoProvides
+from zope.interface import noLongerProvides
+
 @onsetup
 def setup_package():
     fiveconfigure.debug_mode = True
@@ -42,7 +55,6 @@ def setup_package():
 
 setup_package()
 ptc.setupPloneSite(products=['collective.lineage'])
-
 
 class IntegrationTests(ptc.PloneTestCase):
 
@@ -97,6 +109,8 @@ class IntegrationTests(ptc.PloneTestCase):
                             dict(adapted.possible).keys())
 
 class MigrationTests(ptc.PloneTestCase):        
+    """we are going to test the migration from 0.1 to >0.1"""
+    
     def afterSetUp(self):
         roles = ('Member', 'Manager')
         self.portal.portal_membership.addMember('manager',
@@ -111,6 +125,7 @@ class MigrationTests(ptc.PloneTestCase):
 
         self.pw = getToolByName(self.portal, "portal_workflow")
 
+
     def run_migration_step(self):
         import transaction; transaction.savepoint();
         # Now run the migration step
@@ -124,7 +139,6 @@ class MigrationTests(ptc.PloneTestCase):
                     step.doStep(setup_tool)
 
     def test_migration(self):
-        """we are going to test the migration from 0.1 to >0.1"""
         # cf1
         self.portal.invokeFactory("Child Folder", "cf1")
         cf1 = self.portal.cf1
@@ -197,23 +211,66 @@ class MigrationTests(ptc.PloneTestCase):
         self.failUnless(cf1_item != None)
         
     def test_migration_preserves_default_view(self):
-        """we are going to test the migration from 0.1 to >0.1"""
-        # cf1
         self.portal.invokeFactory("Child Folder", "cf1")
         cf1 = self.portal.cf1
         cf1.setTitle("CF 1")
         self.pw.doActionFor(cf1, "publish")
         self.failUnless(cf1.Title() == "CF 1")
         self.failUnless(self.pw.getInfoFor(cf1, "review_state") == "published")
-
         cf1.invokeFactory("Document", "doc1")
         doc1 = cf1["doc1"]
         doc1.setTitle("Doc 1")
-        
         cf1.setDefaultPage("doc1")
+        
         self.run_migration_step()
+        
         cf1 = self.portal.cf1
         self.assertEquals(cf1.getDefaultPage(), "doc1")                
+
+    def test_migration_preserves_portlets(self):
+        self.portal.invokeFactory("Child Folder", "cf1")
+        cf1 = self.portal.cf1
+        cf1.setTitle("CF 1")
+        make_objectmanager_site(cf1)
+        self.pw.doActionFor(cf1, "publish")
+        self.failUnless(cf1.Title() == "CF 1")
+        self.failUnless(self.pw.getInfoFor(cf1, "review_state") == "published")
+        self.failUnless(ISite.providedBy(cf1))
+        # Child folders in 0.1 seemed to provide ILocalPortletAssignable but not in 0.6
+        if not ILocalPortletAssignable.providedBy(cf1):
+            alsoProvides(cf1, ILocalPortletAssignable)
+            added_portlet_assignable_interace = True
+        else:
+            added_portlet_assignable_interace = False                        
+                    
+        mapping = cf1.restrictedTraverse('++contextportlets++plone.leftcolumn')
+        for m in mapping.keys():
+            del mapping[m]
+        portlet = getUtility(IPortletType, name='plone.portlet.static.Static')
+        addview = mapping.restrictedTraverse('+/' + portlet.addview)
+        addview.createAndAdd(data={'header' : u"test title", 'text' : u"test text"})
+        self.assertEquals(len(mapping), 1)
+        
+        left_col_manager = getUtility(IPortletManager, name='plone.leftcolumn', context=cf1)
+        assignment_manager = getMultiAdapter((cf1, left_col_manager), ILocalPortletAssignmentManager)
+        assignment_manager.setBlacklistStatus(CONTEXT_CATEGORY, True)
+        assignment_manager.setBlacklistStatus(GROUP_CATEGORY, None)
+        assignment_manager.setBlacklistStatus(CONTENT_TYPE_CATEGORY, False)
+        
+        if added_portlet_assignable_interace:
+            noLongerProvides(cf1, ILocalPortletAssignable)
+        
+        self.run_migration_step()
+        
+        cf1 = self.portal.cf1
+        mapping = cf1.restrictedTraverse('++contextportlets++plone.leftcolumn')
+        self.assertEquals(len(mapping), 1)        
+
+        left_col_manager = getUtility(IPortletManager, name='plone.leftcolumn', context=cf1)
+        assignment_manager = getMultiAdapter((cf1, left_col_manager), ILocalPortletAssignmentManager)
+        self.assertTrue(assignment_manager.getBlacklistStatus(CONTEXT_CATEGORY))
+        self.assertTrue(assignment_manager.getBlacklistStatus(GROUP_CATEGORY) is None)
+        self.assertFalse(assignment_manager.getBlacklistStatus(CONTENT_TYPE_CATEGORY))
 
 def test_suite():
     suite = unittest.TestSuite()
