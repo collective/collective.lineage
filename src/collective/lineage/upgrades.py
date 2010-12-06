@@ -115,7 +115,12 @@ def copy_portlet_assignments_and_settings(src, target):
                                                  ILocalPortletAssignmentManager)
             target_assignment_manager = getMultiAdapter((target, target_manager),
                                                  ILocalPortletAssignmentManager)
-            for category in (CONTEXT_CATEGORY, GROUP_CATEGORY, CONTENT_TYPE_CATEGORY):
+            # 
+            # In lineage 0.1 child folders did not inherit their parent's portlets
+            # no matter what porlet block settings were set.
+            #
+            target_assignment_manager.setBlacklistStatus(CONTEXT_CATEGORY, True)
+            for category in (GROUP_CATEGORY, CONTENT_TYPE_CATEGORY):
                 target_assignment_manager.setBlacklistStatus(category, 
                                       src_assignment_manager.getBlacklistStatus(category))
              

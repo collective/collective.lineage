@@ -253,7 +253,6 @@ class MigrationTests(ptc.PloneTestCase):
         
         left_col_manager = getUtility(IPortletManager, name='plone.leftcolumn', context=cf1)
         assignment_manager = getMultiAdapter((cf1, left_col_manager), ILocalPortletAssignmentManager)
-        assignment_manager.setBlacklistStatus(CONTEXT_CATEGORY, True)
         assignment_manager.setBlacklistStatus(GROUP_CATEGORY, None)
         assignment_manager.setBlacklistStatus(CONTENT_TYPE_CATEGORY, False)
         
