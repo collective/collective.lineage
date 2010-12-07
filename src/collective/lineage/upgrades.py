@@ -40,8 +40,6 @@ def migrateChildFolders(context):
         child_folder = brains[0].getObject()
         logger.info('Migrating child folder %s' % child_folder.getId())
         parent = child_folder.getParentNode()
-        children_ids = child_folder.objectIds()
-
         # we will keep the same state, title, description, id
         # and display
         cf_state = pw.getInfoFor(child_folder, "review_state")
@@ -79,6 +77,7 @@ def migrateChildFolders(context):
             pw.setStatusOf(cf_wf, new_folder, new_state)
             new_folder.reindexObject()
 
+        children_ids = child_folder.objectIds()
         if children_ids:
             cut_items = child_folder.manage_cutObjects(ids=children_ids)
             new_folder.manage_pasteObjects(cut_items)
@@ -96,7 +95,6 @@ def migrateChildFolders(context):
     logger.info('Finished migrating child folders')
 
 def copy_portlet_assignments_and_settings(src, target):
-    """Return a dictionary of portlet manager name to assignments dictionary"""
     if not ILocalPortletAssignable.providedBy(src):
         alsoProvides(src, ILocalPortletAssignable)
         
