@@ -1,6 +1,7 @@
 import zope.interface
 import zope.component
 from AccessControl import Unauthorized
+from plone.app.layout.navigation.interfaces import INavigationRoot
 
 #for plone3-plone4 compatibility purposes
 try:
@@ -12,11 +13,13 @@ try:
 except:
     import zope.annotation.interfaces as zai
 
+from DateTime import DateTime
 from five.localsitemanager import make_objectmanager_site
 
 from p4a.subtyper import interfaces
 from p4a.subtyper import default
 from p4a.subtyper import engine
+from plone.app.layout.navigation.defaultpage import getDefaultPage
 from plone.portlets.constants import CONTEXT_CATEGORY, GROUP_CATEGORY, CONTENT_TYPE_CATEGORY
 from plone.portlets.interfaces import ILocalPortletAssignable
 from plone.portlets.interfaces import ILocalPortletAssignmentManager
@@ -24,6 +27,7 @@ from plone.portlets.interfaces import IPortletManager
 from plone.portlets.interfaces import IPortletType
 
 import Products.Archetypes.interfaces
+from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
 
 from zope.app.component.interfaces import ISite
 
@@ -270,6 +274,33 @@ class MigrationTests(ptc.PloneTestCase):
         self.assertTrue(assignment_manager.getBlacklistStatus(CONTEXT_CATEGORY))
         self.assertTrue(assignment_manager.getBlacklistStatus(GROUP_CATEGORY) is None)
         self.assertFalse(assignment_manager.getBlacklistStatus(CONTENT_TYPE_CATEGORY))
+        
+    def test_migration_preserves_references(self):
+        self.portal.invokeFactory("Child Folder", "cf1")
+        cf1 = self.portal.cf1
+        cf1.setTitle("CF 1")
+        make_objectmanager_site(cf1)
+        self.pw.doActionFor(cf1, "publish")
+        self.failUnless(cf1.Title() == "CF 1")
+        self.failUnless(self.pw.getInfoFor(cf1, "review_state") == "published")
+        self.failUnless(ISite.providedBy(cf1))
+        
+        cf1.invokeFactory("Document", "doc1", Title="Doc 1")
+        doc1 = cf1["doc1"]
+        cf1.setDefaultPage("doc1")
+        
+        doc2_text = '<p><a href="resolveuid/%s" class="internal">Link to doc 1</a></p>' % doc1.UID()
+        cf1.invokeFactory("Document", "doc2", Title="Doc 2", text=doc2_text)
+        doc2 = cf1["doc2"]
+        # I'm not sure what layer of Plone code adds these
+        doc2.addReference(doc1, 'isReferencing', updateReferences=True)
+        self.assertEquals(len(doc2._getReferenceAnnotations().objectItems()), 1)
+
+        self.run_migration_step()
+        
+        cf1 = self.portal.cf1
+        doc2 = cf1["doc2"]
+        self.assertEquals(len(doc2._getReferenceAnnotations().objectItems()), 1)
 
 def test_suite():
     suite = unittest.TestSuite()
