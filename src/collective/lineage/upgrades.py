@@ -47,16 +47,15 @@ def migrateChildFolders(context):
         cf_wf = cf_wf and cf_wf[0]
         cf_title = child_folder.Title()
         cf_desc = child_folder.Description()
-        cf_id = child_folder.getId()
+        cf_orig_id = child_folder.getId()        
         has_layout = hasattr(child_folder, "layout")
         if has_layout:
             cf_display = child_folder.layout
         cf_default_page = getDefaultPage(child_folder)
-        cf_new_id = "%s-old" % cf_id
-        parent.manage_renameObjects([cf_id], [cf_new_id])
+        f_temp_id = '%s-temp' % cf_orig_id
 
-        parent.invokeFactory("Folder", cf_id)
-        new_folder = parent[cf_id]
+        parent.invokeFactory("Folder", f_temp_id)
+        new_folder = parent[f_temp_id]
         new_folder.setTitle(cf_title)
         new_folder.setDescription(cf_desc)
         if has_layout:
@@ -85,9 +84,10 @@ def migrateChildFolders(context):
             new_folder.setDefaultPage(cf_default_page)
         copy_portlet_assignments_and_settings(child_folder, new_folder)
             
-        parent.manage_delObjects([cf_new_id])
+        parent.manage_delObjects([cf_orig_id])
         transaction.savepoint()
-
+        parent.manage_renameObjects([f_temp_id], [cf_orig_id])
+        transaction.savepoint()
         brains = pc.searchResults(portal_type="Child Folder")
 
     pw.updateRoleMappings()
