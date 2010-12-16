@@ -120,6 +120,9 @@ class MigrationTests(ptc.PloneTestCase):
         self.portal.portal_membership.addMember('manager',
                                                 'secret',
                                                 roles, [])
+        self.portal.portal_membership.addMember('testuser',
+                                                'secret',
+                                                (), [])
         self.login('manager')
 
         # allow the Child Folder type to be addable
@@ -301,6 +304,24 @@ class MigrationTests(ptc.PloneTestCase):
         cf1 = self.portal.cf1
         doc2 = cf1["doc2"]
         self.assertEquals(len(doc2._getReferenceAnnotations().objectItems()), 1)
+        
+        
+    def test_migration_preserves_sharing_settings(self):
+        self.portal.invokeFactory("Child Folder", "cf1")
+        cf1 = self.portal.cf1
+        cf1.setTitle("CF 1")
+        make_objectmanager_site(cf1)
+        self.pw.doActionFor(cf1, "publish")
+        self.failUnless(cf1.Title() == "CF 1")
+        self.failUnless(self.pw.getInfoFor(cf1, "review_state") == "published")
+        self.failUnless(ISite.providedBy(cf1))
+        
+        cf1.manage_setLocalRoles('testuser', ['Contributor'])
+        
+        self.run_migration_step()
+        
+        cf1 = self.portal.cf1
+        self.assertEquals(('Contributor',), cf1.get_local_roles_for_userid('testuser'))        
 
 def test_suite():
     suite = unittest.TestSuite()
