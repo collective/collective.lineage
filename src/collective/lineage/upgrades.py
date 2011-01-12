@@ -10,9 +10,12 @@ from plone.portlets.interfaces import ILocalPortletAssignable
 from plone.portlets.interfaces import ILocalPortletAssignmentManager
 from plone.portlets.interfaces import IPortletAssignmentMapping
 from plone.portlets.interfaces import IPortletManager
-from plone.portlets.constants import CONTEXT_CATEGORY, GROUP_CATEGORY, CONTENT_TYPE_CATEGORY
+from plone.portlets.constants import CONTEXT_CATEGORY
+from plone.portlets.constants import GROUP_CATEGORY
+from plone.portlets.constants import CONTENT_TYPE_CATEGORY
 
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import base_hasattr
 
 from zope.interface import alsoProvides
 from zope.component import getMultiAdapter
@@ -47,8 +50,8 @@ def migrateChildFolders(context):
         cf_wf = cf_wf and cf_wf[0]
         cf_title = child_folder.Title()
         cf_desc = child_folder.Description()
-        cf_orig_id = child_folder.getId()        
-        has_layout = hasattr(child_folder, "layout")
+        cf_orig_id = child_folder.getId()
+        has_layout = base_hasattr(child_folder, "layout")
         if has_layout:
             cf_display = child_folder.layout
         cf_default_page = getDefaultPage(child_folder)
@@ -84,7 +87,7 @@ def migrateChildFolders(context):
             new_folder.setDefaultPage(cf_default_page)
         copy_portlet_assignments_and_settings(child_folder, new_folder)
         copy_sharing_settings(child_folder, new_folder)
-            
+
         parent.manage_delObjects([cf_orig_id])
         transaction.savepoint()
         parent.manage_renameObjects([f_temp_id], [cf_orig_id])
@@ -94,15 +97,15 @@ def migrateChildFolders(context):
     pw.updateRoleMappings()
     cf_type.global_allow = False
     logger.info('Finished migrating child folders')
-    
+
 def copy_sharing_settings(src, target):
     sharing_view = getMultiAdapter((src, src.REQUEST), name="sharing")
     sharing_settings = sharing_view.existing_role_settings()
     for user_sharing_setting in sharing_settings:
         # may equally be a group but doesn't matter
         user_id = user_sharing_setting['id']
-        user_roles_set_here = [role_id 
-                        for role_id, explicitly_set in user_sharing_setting['roles'].items() 
+        user_roles_set_here = [role_id
+                        for role_id, explicitly_set in user_sharing_setting['roles'].items()
                         if explicitly_set]
         if user_roles_set_here:
             target.manage_setLocalRoles(user_id, user_roles_set_here)
@@ -110,15 +113,15 @@ def copy_sharing_settings(src, target):
 def copy_portlet_assignments_and_settings(src, target):
     if not ILocalPortletAssignable.providedBy(src):
         alsoProvides(src, ILocalPortletAssignable)
-        
+
     for manager_name, src_manager in getUtilitiesFor(IPortletManager, context=src):
         src_manager_assignments = getMultiAdapter((src, src_manager), IPortletAssignmentMapping)
         target_manager = queryUtility(IPortletManager, name=manager_name, context=target)
         if target_manager is None:
-            logger.warning('New folder %s does not have portlet manager %s' % 
+            logger.warning('New folder %s does not have portlet manager %s' %
                            (target.getId(), target_manager))
         else:
-            target_manager_assignments = getMultiAdapter((target, target_manager), 
+            target_manager_assignments = getMultiAdapter((target, target_manager),
                                                 IPortletAssignmentMapping)
             for id, assignment in src_manager_assignments.items():
                 target_manager_assignments[id] = assignment
@@ -126,12 +129,12 @@ def copy_portlet_assignments_and_settings(src, target):
                                                  ILocalPortletAssignmentManager)
             target_assignment_manager = getMultiAdapter((target, target_manager),
                                                  ILocalPortletAssignmentManager)
-            # 
+            #
             # In lineage 0.1 child folders did not inherit their parent's portlets
             # no matter what porlet block settings were set.
             #
             target_assignment_manager.setBlacklistStatus(CONTEXT_CATEGORY, True)
             for category in (GROUP_CATEGORY, CONTENT_TYPE_CATEGORY):
-                target_assignment_manager.setBlacklistStatus(category, 
+                target_assignment_manager.setBlacklistStatus(category,
                                       src_assignment_manager.getBlacklistStatus(category))
-             
+

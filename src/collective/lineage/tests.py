@@ -112,9 +112,9 @@ class IntegrationTests(ptc.PloneTestCase):
         self.failUnless(u'collective.lineage.childsite' not in \
                             dict(adapted.possible).keys())
 
-class MigrationTests(ptc.PloneTestCase):        
+class MigrationTests(ptc.PloneTestCase):
     """we are going to test the migration from 0.1 to >0.1"""
-    
+
     def afterSetUp(self):
         roles = ('Member', 'Manager')
         self.portal.portal_membership.addMember('manager',
@@ -216,7 +216,7 @@ class MigrationTests(ptc.PloneTestCase):
         except Unauthorized:
             cf1_item = None
         self.failUnless(cf1_item != None)
-        
+
     def test_migration_preserves_default_view(self):
         self.portal.invokeFactory("Child Folder", "cf1")
         cf1 = self.portal.cf1
@@ -228,11 +228,11 @@ class MigrationTests(ptc.PloneTestCase):
         doc1 = cf1["doc1"]
         doc1.setTitle("Doc 1")
         cf1.setDefaultPage("doc1")
-        
+
         self.run_migration_step()
-        
+
         cf1 = self.portal.cf1
-        self.assertEquals(cf1.getDefaultPage(), "doc1")                
+        self.assertEquals(cf1.getDefaultPage(), "doc1")
 
     def test_migration_preserves_portlets(self):
         self.portal.invokeFactory("Child Folder", "cf1")
@@ -248,8 +248,8 @@ class MigrationTests(ptc.PloneTestCase):
             alsoProvides(cf1, ILocalPortletAssignable)
             added_portlet_assignable_interace = True
         else:
-            added_portlet_assignable_interace = False                        
-                    
+            added_portlet_assignable_interace = False
+
         mapping = cf1.restrictedTraverse('++contextportlets++plone.leftcolumn')
         for m in mapping.keys():
             del mapping[m]
@@ -257,27 +257,27 @@ class MigrationTests(ptc.PloneTestCase):
         addview = mapping.restrictedTraverse('+/' + portlet.addview)
         addview.createAndAdd(data={'header' : u"test title", 'text' : u"test text"})
         self.assertEquals(len(mapping), 1)
-        
+
         left_col_manager = getUtility(IPortletManager, name='plone.leftcolumn', context=cf1)
         assignment_manager = getMultiAdapter((cf1, left_col_manager), ILocalPortletAssignmentManager)
         assignment_manager.setBlacklistStatus(GROUP_CATEGORY, None)
         assignment_manager.setBlacklistStatus(CONTENT_TYPE_CATEGORY, False)
-        
+
         if added_portlet_assignable_interace:
             noLongerProvides(cf1, ILocalPortletAssignable)
-        
+
         self.run_migration_step()
-        
+
         cf1 = self.portal.cf1
         mapping = cf1.restrictedTraverse('++contextportlets++plone.leftcolumn')
-        self.assertEquals(len(mapping), 1)        
+        self.assertEquals(len(mapping), 1)
 
         left_col_manager = getUtility(IPortletManager, name='plone.leftcolumn', context=cf1)
         assignment_manager = getMultiAdapter((cf1, left_col_manager), ILocalPortletAssignmentManager)
         self.assertTrue(assignment_manager.getBlacklistStatus(CONTEXT_CATEGORY))
         self.assertTrue(assignment_manager.getBlacklistStatus(GROUP_CATEGORY) is None)
         self.assertFalse(assignment_manager.getBlacklistStatus(CONTENT_TYPE_CATEGORY))
-        
+
     def test_migration_preserves_references(self):
         self.portal.invokeFactory("Child Folder", "cf1")
         cf1 = self.portal.cf1
@@ -287,11 +287,11 @@ class MigrationTests(ptc.PloneTestCase):
         self.failUnless(cf1.Title() == "CF 1")
         self.failUnless(self.pw.getInfoFor(cf1, "review_state") == "published")
         self.failUnless(ISite.providedBy(cf1))
-        
+
         cf1.invokeFactory("Document", "doc1", Title="Doc 1")
         doc1 = cf1["doc1"]
         cf1.setDefaultPage("doc1")
-        
+
         doc2_text = '<p><a href="resolveuid/%s" class="internal">Link to doc 1</a></p>' % doc1.UID()
         cf1.invokeFactory("Document", "doc2", Title="Doc 2", text=doc2_text)
         doc2 = cf1["doc2"]
@@ -300,12 +300,12 @@ class MigrationTests(ptc.PloneTestCase):
         self.assertEquals(len(doc2._getReferenceAnnotations().objectItems()), 1)
 
         self.run_migration_step()
-        
+
         cf1 = self.portal.cf1
         doc2 = cf1["doc2"]
         self.assertEquals(len(doc2._getReferenceAnnotations().objectItems()), 1)
-        
-        
+
+
     def test_migration_preserves_sharing_settings(self):
         self.portal.invokeFactory("Child Folder", "cf1")
         cf1 = self.portal.cf1
@@ -315,13 +315,13 @@ class MigrationTests(ptc.PloneTestCase):
         self.failUnless(cf1.Title() == "CF 1")
         self.failUnless(self.pw.getInfoFor(cf1, "review_state") == "published")
         self.failUnless(ISite.providedBy(cf1))
-        
+
         cf1.manage_setLocalRoles('testuser', ['Contributor'])
-        
+
         self.run_migration_step()
-        
+
         cf1 = self.portal.cf1
-        self.assertEquals(('Contributor',), cf1.get_local_roles_for_userid('testuser'))        
+        self.assertEquals(('Contributor',), cf1.get_local_roles_for_userid('testuser'))
 
 def test_suite():
     suite = unittest.TestSuite()
