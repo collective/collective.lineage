@@ -9,4 +9,5 @@ parts
 var
 fake-eggs
 .installed.cfg
-
+eggs
+downloads
