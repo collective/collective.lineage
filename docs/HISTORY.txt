@@ -1,8 +1,50 @@
 Changelog
 =========
 
-0.7 - (XXXX-XX-XX)
-------------------
+0.6.1 - (2011-01-12)
+--------------------
+
+- Making sure that we copy the fact that the item inherits from its parent or not
+  [lucielejard]
+
+- Updated the ignores
+  [lucielejard]
+
+- Fixed the upgrade so that when we grab the layout of a folder, it does not 
+  get it using acquisition if it doesn't have one, fixes #18
+  [lucielejard]
+
+- Copy over sharing settings from child folder to new folder, fixes #38
+  [anthonygerrard]
+
+- Fix by not renaming the child folder, instead create new folder with temp 
+  id and rename that to the child folder id after the child folder has been
+  deleted, fixes #37
+  [anthonygerrard]
+
+- Adding a failing test case for #37 here as it is a serious bug but I have 
+  no idea how to fix it
+  [anthonygerrard]
+
+- In lineage 0.1 child folders never inherited their parent's portlets so 
+  always block parent portlets when migrating, fixes #34
+  [anthonygerrard]
+
+- Added a warning if portlet manager is not available on the new folder, 
+  fixes #35
+  [anthonygerrard]
+
+- Copy portlet assignments from and blocking settings across on migration, 
+  fixes #34
+  [anthonygerrard]
+
+- Refactor tests so that migration tests are in their own class and so can 
+  have common setup logic
+  [anthonygerrard]
+ 
+- Read the default page of the child folder before conversion and then set 
+  it afterwards, fixes #18
+  [anthonygerrard]
 
 
 0.6 - (2010-05-25)
