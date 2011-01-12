@@ -99,16 +99,23 @@ def migrateChildFolders(context):
     logger.info('Finished migrating child folders')
 
 def copy_sharing_settings(src, target):
+    # copying the sharing roles
     sharing_view = getMultiAdapter((src, src.REQUEST), name="sharing")
     sharing_settings = sharing_view.existing_role_settings()
     for user_sharing_setting in sharing_settings:
         # may equally be a group but doesn't matter
         user_id = user_sharing_setting['id']
         user_roles_set_here = [role_id
-                        for role_id, explicitly_set in user_sharing_setting['roles'].items()
+                        for role_id, explicitly_set in \
+                               user_sharing_setting['roles'].items()
                         if explicitly_set]
         if user_roles_set_here:
             target.manage_setLocalRoles(user_id, user_roles_set_here)
+    # copying the inheritance
+    target_sharing_view = getMultiAdapter((target, target.REQUEST),
+                                           name="sharing")
+    target_sharing_view.update_inherit(sharing_view.inherited())
+
 
 def copy_portlet_assignments_and_settings(src, target):
     if not ILocalPortletAssignable.providedBy(src):
