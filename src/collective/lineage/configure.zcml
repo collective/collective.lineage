@@ -72,12 +72,31 @@
 
     <!-- end old Child Folder -->
 
+  <browser:page
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      name="lineage-configuration"
+      class=".browser.LineageConfigurationForm"
+      permission="cmf.ManagePortal"
+      />
+
+  <adapter
+      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
+      provides=".interfaces.ILineageConfiguration"
+      factory=".browser.LineageConfigurationFormAdapter" />
+
   <browser:viewlet
       name="collective.lineage.switcher"
       manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
       class=".browser.LineageSwitcherViewlet"
       permission="zope2.View" 
       layer=".interfaces.ILineageBrowserLayer"
+      />
+
+  <browser:page
+      name="lineageutils"
+      for="*"
+      class="collective.lineage.browser.LineageUtils"
+      permission="zope.Public"
       />
 
   <subscriber

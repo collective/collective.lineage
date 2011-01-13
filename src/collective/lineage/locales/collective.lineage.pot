@@ -39,8 +39,3 @@ msgstr ""
 msgid "Create a new lineage folder"
 msgstr ""
 
-#. Default: "Jump to child site"
-#: ./collective/lineage/switcher.pt:6
-msgid "Jump to child site"
-msgstr ""
-

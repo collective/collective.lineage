@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<object name="portal_properties" meta_type="Plone Properties Tool">
+ <object name="lineage_properties" meta_type="Plone Property Sheet">
+  <property name="title">lineage properties</property>     
+  <property name="menu_text" type="string">Jump to Child Site</property>
+ </object>
+</object>    

@@ -1,5 +1,6 @@
 from cStringIO import StringIO
 from Products.CMFCore.utils import getToolByName
+from collective.lineage.sitesetup import setup_site
 
 def runProfile(portal, profileName):
     setupTool = getToolByName(portal, 'portal_setup')
@@ -7,6 +8,7 @@ def runProfile(portal, profileName):
 
 def install(portal):
     """Run the GS profile to install this package"""
+    setup_site(portal)
     out = StringIO()
     runProfile(portal, 'profile-collective.lineage:default')
     print >>out, "Installed collective.lineage"
