@@ -1,6 +1,15 @@
 Changelog
 =========
 
+1.0.0 - (xxxx-xx-xx)
+--------------------
+
+- Changed the `collective.lineage.childsite` component to use the
+  `IFolderishContentTypeDescriptor` interface instead of
+  `IPortalTypedFolderishDescriptor`, allowing any folderish type to become
+  a child site.
+  [davidblewett]
+
 0.6.1 - (2011-01-12)
 --------------------
 

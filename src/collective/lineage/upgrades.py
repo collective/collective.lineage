@@ -144,4 +144,3 @@ def copy_portlet_assignments_and_settings(src, target):
             for category in (GROUP_CATEGORY, CONTENT_TYPE_CATEGORY):
                 target_assignment_manager.setBlacklistStatus(category,
                                       src_assignment_manager.getBlacklistStatus(category))
-

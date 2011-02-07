@@ -1,7 +1,7 @@
 import os
 from setuptools import setup, find_packages
 
-version = '0.7'
+version = '1.0'
 
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
@@ -46,7 +46,7 @@ setup(name='collective.lineage',
           # -*- Extra requirements: -*-
           'p4a.z2utils',
           'p4a.common',
-          'p4a.subtyper',
+          'p4a.subtyper>=1.2.0',
       ],
       entry_points="""
       # -*- Entry points: -*-
