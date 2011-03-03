@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.lineage\n"
-"POT-Creation-Date: 2010-11-16 20:37+0000\n"
-"PO-Revision-Date: 2010-11-16 16:03-0400\n"
+"POT-Creation-Date: 2011-03-03 15:24+0000\n"
+"PO-Revision-Date: 2011-03-03 11:11-0400\n"
 "Last-Translator: Leonardo J. Caballero G. <leonardocaballero@gmail.com>\n"
 "Language-Team: Spanish <plone-conosur@lists.plone.org>\n"
 "MIME-Version: 1.0\n"
@@ -40,8 +40,19 @@ msgstr "Sitio hijo"
 msgid "Create a new lineage folder"
 msgstr "Crear una nueva carpeta descendente"
 
-#. Default: "Jump to child site"
-#: ../switcher.pt:6
-msgid "Jump to child site"
-msgstr "Cambiar a sitio hijo"
+#: ../browser.py:33
+msgid "Lineage Configuration Panel"
+msgstr "Panel de Configuración Lineage"
+
+#: ../interfaces.py:17
+msgid "Sub-types dropdown display: "
+msgstr "Lista desplegable a mostrar Sub-types: "
+
+#: ../browser.py:34
+msgid "You can define the text that will appear                    under the 'Sub-types' tab. Default is 'Child Site'"
+msgstr "Usted puede definir el texto que aparecerá debajo de la pestaña 'Sub-types'. Por defecto es 'Sitio hijo'"
+
+#: ../browser.py:36
+msgid "settings"
+msgstr "configuraciones"
 
