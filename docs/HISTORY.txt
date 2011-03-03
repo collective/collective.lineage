@@ -3,6 +3,11 @@ Changelog
 
 1.0.0 - (xxxx-xx-xx)
 --------------------
+- added support for plone domain
+  [macagua]
+
+- Added Spanish translation
+  [macagua]
 
 - Changed the `collective.lineage.childsite` component to use the
   `IFolderishContentTypeDescriptor` interface instead of
