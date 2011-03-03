@@ -1,7 +1,8 @@
 <?xml version="1.0"?>
 <object name="Child Folder"
    meta_type="Factory-based Type Information with dynamic views"
-   i18n:domain="collective.lineage" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
+   xmlns:i18n="http://xml.zope.org/namespaces/i18n" i18n:domain="collective.lineage">
+
   <property name="title" i18n:translate="">Child Folder</property>
   <property name="description" i18n:translate="">A folder that can be published as a separate site</property>
   <property name="content_meta_type">Child Folder</property>
@@ -20,10 +21,12 @@
     <element value="folder_tabular_view"/>
     <element value="atct_album_view"/>
   </property>
+
   <alias from="(Default)" to="(dynamic view)" />
   <alias from="edit" to="@@edit" />
   <alias from="sharing" to="@@sharing" />
   <alias from="view" to="(selected layout)" />
+
   <action title="View" action_id="view" category="object" condition_expr=""
     url_expr="string:${object_url}" visible="True">
     <permission value="View" />
@@ -32,4 +35,5 @@
     url_expr="string:${object_url}/edit" visible="True">
     <permission value="Modify portal content" />
   </action>
+
 </object>
