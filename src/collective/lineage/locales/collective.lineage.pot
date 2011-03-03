@@ -4,8 +4,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2009-06-23 15:00+0000\n"
-"PO-Revision-Date: 2009-06-23 15:00+0000\n"
+"POT-Creation-Date: 2011-03-03 15:24+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,25 +17,39 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.lineage\n"
 
-#: ./collective/lineage/descriptors.py:12
+#: ../descriptors.py:12
 msgid "A child site"
 msgstr ""
 
-#. Default: "A folder that can be published as a separate site"
-#: ./collective/lineage/profiles/default/types/Child_Folder.xml
+#: ../profiles/default/types/Child_Folder.xml
 msgid "A folder that can be published as a separate site"
 msgstr ""
 
-#. Default: "Child Folder"
-#: ./collective/lineage/profiles/default/types/Child_Folder.xml
+#: ../profiles/default/types/Child_Folder.xml
 msgid "Child Folder"
 msgstr ""
 
-#: ./collective/lineage/descriptors.py:11
+#: ../descriptors.py:11
 msgid "Child Site"
 msgstr ""
 
-#: ./collective/lineage/content.py:32
+#: ../content.py:39
 msgid "Create a new lineage folder"
+msgstr ""
+
+#: ../browser.py:33
+msgid "Lineage Configuration Panel"
+msgstr ""
+
+#: ../interfaces.py:17
+msgid "Sub-types dropdown display: "
+msgstr ""
+
+#: ../browser.py:34
+msgid "You can define the text that will appear                    under the 'Sub-types' tab. Default is 'Child Site'"
+msgstr ""
+
+#: ../browser.py:36
+msgid "settings"
 msgstr ""
 
