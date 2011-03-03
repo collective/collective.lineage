@@ -1,6 +1,9 @@
 i18ndude rebuild-pot --pot ./collective.lineage.pot --create collective.lineage ../ || exit 1
 i18ndude sync --pot ./collective.lineage.pot ./*/LC_MESSAGES/collective.lineage.po
 
+i18ndude rebuild-pot --pot ../i18n/collective.lineage-plone.pot --create plone ../profiles
+i18ndude sync --pot ../i18n/collective.lineage-plone.pot ../i18n/collective.lineage-plone-*.po
+
 WARNINGS=`find . -name "*pt" | xargs i18ndude find-untranslated | grep -e '^-WARN' | wc -l`
 ERRORS=`find . -name "*pt" | xargs i18ndude find-untranslated | grep -e '^-ERROR' | wc -l`
 FATAL=`find . -name "*pt"  | xargs i18ndude find-untranslated | grep -e '^-FATAL' | wc -l`
