@@ -27,6 +27,7 @@ import transaction
 
 logger = getLogger('collective.lineage.upgrades')
 
+
 def migrateChildFolders(context):
     """Migrates Child Folder objects to normal Folder objects
     that are subtyped"""
@@ -72,7 +73,7 @@ def migrateChildFolders(context):
             new_state = {
                 'actor': 'Administrator',
                 'action': None,
-                'review_state':cf_state,
+                'review_state': cf_state,
                 'time': DateTime(),
                 'comments': 'setting up the workflow of the item correctly',
                 }
@@ -98,6 +99,7 @@ def migrateChildFolders(context):
     cf_type.global_allow = False
     logger.info('Finished migrating child folders')
 
+
 def copy_sharing_settings(src, target):
     # copying the sharing roles
     sharing_view = getMultiAdapter((src, src.REQUEST), name="sharing")
@@ -120,27 +122,37 @@ def copy_sharing_settings(src, target):
 def copy_portlet_assignments_and_settings(src, target):
     if not ILocalPortletAssignable.providedBy(src):
         alsoProvides(src, ILocalPortletAssignable)
-
-    for manager_name, src_manager in getUtilitiesFor(IPortletManager, context=src):
-        src_manager_assignments = getMultiAdapter((src, src_manager), IPortletAssignmentMapping)
-        target_manager = queryUtility(IPortletManager, name=manager_name, context=target)
+    src_utilities = getUtilitiesFor(IPortletManager, context=src)
+    for manager_name, src_manager in src_utilities:
+        src_manager_assignments = getMultiAdapter(
+            (src, src_manager),
+            IPortletAssignmentMapping)
+        target_manager = queryUtility(
+            IPortletManager,
+            name=manager_name,
+            context=target)
         if target_manager is None:
             logger.warning('New folder %s does not have portlet manager %s' %
                            (target.getId(), target_manager))
         else:
-            target_manager_assignments = getMultiAdapter((target, target_manager),
-                                                IPortletAssignmentMapping)
+            target_manager_assignments = getMultiAdapter(
+                (target, target_manager),
+                IPortletAssignmentMapping)
             for id, assignment in src_manager_assignments.items():
                 target_manager_assignments[id] = assignment
-            src_assignment_manager = getMultiAdapter((src, src_manager),
-                                                 ILocalPortletAssignmentManager)
-            target_assignment_manager = getMultiAdapter((target, target_manager),
-                                                 ILocalPortletAssignmentManager)
+            src_assignment_manager = getMultiAdapter(
+                (src, src_manager),
+                ILocalPortletAssignmentManager)
+            target_assignment_manager = getMultiAdapter(
+                (target, target_manager),
+                ILocalPortletAssignmentManager)
             #
-            # In lineage 0.1 child folders did not inherit their parent's portlets
-            # no matter what porlet block settings were set.
+            # In lineage 0.1 child folders did not inherit their parent's
+            # portlets no matter what porlet block settings were set.
             #
-            target_assignment_manager.setBlacklistStatus(CONTEXT_CATEGORY, True)
+            target_assignment_manager.setBlacklistStatus(
+                CONTEXT_CATEGORY, True)
             for category in (GROUP_CATEGORY, CONTENT_TYPE_CATEGORY):
-                target_assignment_manager.setBlacklistStatus(category,
-                                      src_assignment_manager.getBlacklistStatus(category))
+                target_assignment_manager.setBlacklistStatus(
+                    category,
+                    src_assignment_manager.getBlacklistStatus(category))

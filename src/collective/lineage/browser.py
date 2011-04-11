@@ -39,12 +39,13 @@ class LineageConfigurationForm(ControlPanelForm):
 class LineageConfigurationFormAdapter(SchemaAdapterBase):
     adapts(IPloneSiteRoot)
     implements(ILineageConfiguration)
+
     def __init__(self, context):
         super(LineageConfigurationFormAdapter, self).__init__(context)
         self.context = getUtility(IPropertiesTool).lineage_properties
 
     menu_text = ProxyFieldProperty(
-        ILineageConfiguration['menu_text']
+        ILineageConfiguration['menu_text'],
     )
 
 
@@ -68,8 +69,7 @@ class LineageSwitcherViewlet(BrowserView):
             dict(title=c.Title, description=c.Description, url=c.getURL())
             for c in catalog(path='/',
                              object_provides=IChildSite.__identifier__,
-                             sort_on='sortable_title')
-        ]
+                             sort_on='sortable_title')]
         if not sites:
             return []
         portal_url = getToolByName(self.context, 'portal_url')
@@ -92,4 +92,3 @@ class LineageUtils(BrowserView):
         if "lineage_properties" in ptool:
             return ptool.lineage_properties.getProperty('menu_text')
         return "Jump to Child Site"
-

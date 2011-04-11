@@ -9,6 +9,7 @@ from collective.lineage.interfaces import IChildSite
 from collective.lineage.events import ChildSiteCreatedEvent
 from collective.lineage.events import ChildSiteRemovedEvent
 
+
 def enableChildSite(event):
     """When a lineage folder is created, turn it into a component site
     """
@@ -21,9 +22,10 @@ def enableChildSite(event):
         pc = getToolByName(folder, 'portal_catalog')
         pc.reindexObject(
             folder,
-            idxs=['object_provides']
+            idxs=['object_provides'],
             )
         zope.event.notify(ChildSiteCreatedEvent(event.object))
+
 
 def disableChildSite(event):
     """When a child site is turned off, remove the local components
@@ -33,12 +35,12 @@ def disableChildSite(event):
         folder = event.object
         # remove local site components
         disableSite(folder)
-        
+
         # reindex the object so that the object_provides index is
         # aware that we've removed it
         pc = getToolByName(folder, 'portal_catalog')
         pc.reindexObject(
             folder,
-            idxs=['object_provides']
+            idxs=['object_provides'],
             )
         zope.event.notify(ChildSiteRemovedEvent(event.object))
