@@ -25,10 +25,6 @@ class IChildSite(INavigationRoot, IPossibleSite):
     INavigationRoot
       make this a navigation root
 
-    IPloneSiteRoot
-      pretend to be the Plone site root so that we can get views
-      that are registered for this
-
     IPossibleSite
       support local component registries
     """
