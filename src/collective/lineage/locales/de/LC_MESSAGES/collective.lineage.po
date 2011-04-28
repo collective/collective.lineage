@@ -1,0 +1,54 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: collective.lineage\n"
+"POT-Creation-Date: 2011-04-28 20:34+0000\n"
+"PO-Revision-Date: 2011-03-03 11:11-0400\n"
+"Last-Translator: Timo Stollenwerk <contact@timostollenwerk.net>\n"
+"Language-Team: Deutsch <plone-i18n@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: de\n"
+"Language-Name: Deutsch\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: collective.lineage\n"
+
+#: ../descriptors.py:13
+msgid "A child site"
+msgstr "Eine Subsite"
+
+#. Default: "A folder that can be published as a separate site"
+#: ../profiles/default/types/Child_Folder.xml
+msgid "A folder that can be published as a separate site"
+msgstr "Ordner der als separate Seite veröffentlicht werden kann"
+
+#. Default: "Child Folder"
+#: ../profiles/default/types/Child_Folder.xml
+msgid "Child Folder"
+msgstr "Unterordner"
+
+#: ../descriptors.py:12
+msgid "Child Site"
+msgstr "Subsite"
+
+#: ../content.py:44
+msgid "Create a new lineage folder"
+msgstr "Neuen linage Ordner erstellen"
+
+#: ../browser.py:33
+msgid "Lineage Configuration Panel"
+msgstr "Linage Konfiguration"
+
+#: ../interfaces.py:17
+msgid "Sub-types dropdown display: "
+msgstr ""
+
+#: ../browser.py:34
+msgid "You can define the text that will appear                    under the 'Sub-types' tab. Default is 'Child Site'"
+msgstr "Definieren sie welcher Text unter dem 'Sub-type' Register erscheint. Der Standardwert ist 'Child Site'"
+
+#: ../browser.py:36
+msgid "settings"
+msgstr "Konfiguration"
+
