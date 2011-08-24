@@ -1,0 +1,20 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: collective.lineage\n"
+"POT-Creation-Date: 2011-03-03 15:50+0000\n"
+"PO-Revision-Date: 2011-08-24 09:00+0200\n"
+"Last-Translator: Kees Hink <hink@gw20e.com>\n"
+"Language-Team: Nederlands <plone-i18n@lists.sourceforge.net>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: nl\n"
+"Language-Name: Nederlands\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: plone\n"
+
+#: ../profiles/default/controlpanel.xml
+msgid "Lineage Configuration"
+msgstr "Instellingen voor Lineage"
+
