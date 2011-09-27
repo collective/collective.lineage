@@ -92,3 +92,9 @@ class LineageUtils(BrowserView):
         if "lineage_properties" in ptool:
             return ptool.lineage_properties.getProperty('menu_text')
         return "Jump to Child Site"
+
+    def isChildSite(self):
+        portal_state = self.context.restrictedTraverse('plone_portal_state')
+        root_path = portal_state.navigation_root_path()
+        nav_root = self.context.restrictedTraverse(root_path)
+        return IChildSite.providedBy(nav_root)

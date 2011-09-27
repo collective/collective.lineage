@@ -4,6 +4,10 @@ Changelog
 1.0.0 - (xxxx-xx-xx)
 --------------------
 
+- Added an `isChildSite` method to the `LineageUtils` view, to determine if
+  the current context is part of a child site.
+  [davidblewett]
+
 - Id attribute added to the lineage selection form to make Diazo/XDV theming
   easier.
   [timo]
