@@ -3,6 +3,7 @@ from zope.interface import implements
 from zope.deprecation import deprecated
 
 from zope.component.factory import Factory
+from zope import annotation
 from zope.app.component.interfaces import ISite
 from zope.app.component.interfaces import IPossibleSite
 
@@ -34,6 +35,7 @@ class ChildFolder(OrderSupport, BrowserDefaultMixin, Container):
                INameFromTitle,      # title-to-id renaming
                IPossibleSite,       # support local component registries
                                     # see enable_site() below.
+               annotation.IAttributeAnnotatable,
                )
 
     portal_type = "Child Folder"
