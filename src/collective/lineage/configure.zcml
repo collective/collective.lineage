@@ -98,15 +98,8 @@
       permission="zope.Public"
       />
 
-  <subscriber
-      for="p4a.subtyper.interfaces.ISubtypeAddedEvent"
-      handler=".subscribers.enableChildSite"
-      />
-
-  <subscriber
-      for="p4a.subtyper.interfaces.ISubtypeRemovedEvent"
-      handler=".subscribers.disableChildSite"
-      />
+  <subscriber handler=".subscribers.enableChildSite" />
+  <subscriber handler=".subscribers.disableChildSite" />
 
   <genericsetup:upgradeStep
       source="0.2"

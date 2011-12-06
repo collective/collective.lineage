@@ -4,6 +4,10 @@ Changelog
 1.0.0 - (xxxx-xx-xx)
 --------------------
 
+- The subscribers are now registered to the IChildSite interface so
+  that custom child site types are still made into IObjectManagerSites.
+  [rossp]
+
 - Added an `isChildSite` method to the `LineageUtils` view, to determine if
   the current context is part of a child site.
   [davidblewett]

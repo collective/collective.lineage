@@ -1,9 +1,13 @@
+from zope import component
 from zope.app.component.interfaces import ISite
 import zope.event
 
 from Products.CMFCore.utils import getToolByName
 from Products.Five.component import disableSite
 from five.localsitemanager import make_objectmanager_site
+
+from p4a.subtyper.interfaces import ISubtypeAddedEvent
+from p4a.subtyper.interfaces import ISubtypeRemovedEvent
 
 from collective.lineage.interfaces import IChildSite
 from collective.lineage.events import ChildSiteCreatedEvent
@@ -33,17 +37,17 @@ def disableFolder(folder):
     reindexObjectProvides(folder)
     zope.event.notify(ChildSiteRemovedEvent(folder))
 
-def enableChildSite(event):
+@component.adapter(IChildSite, ISubtypeAddedEvent)
+def enableChildSite(object, event):
     """When a lineage folder is created, turn it into a component site
     """
-    if event.subtype.type_interface == IChildSite:
-        folder = event.object
-        enableFolder(folder)
+    folder = event.object
+    enableFolder(folder)
 
-def disableChildSite(event):
+@component.adapter(IChildSite, ISubtypeRemovedEvent)
+def disableChildSite(object, event):
     """When a child site is turned off, remove the local components
     """
-    if event.subtype is not None and \
-      event.subtype.type_interface == IChildSite:
+    if event.subtype is not None:
         folder = event.object
         disableFolder(folder)
