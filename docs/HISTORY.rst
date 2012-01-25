@@ -4,6 +4,10 @@ Changelog
 1.0.0 - (xxxx-xx-xx)
 --------------------
 
+- moved code to github and increased Plone version used in integrated buildout 
+  to 4.1-latest.
+  [jensens]
+
 - The subscribers are now registered to the IChildSite interface so
   that custom child site types are still made into IObjectManagerSites.
   [rossp]
