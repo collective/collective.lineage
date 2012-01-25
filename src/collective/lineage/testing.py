@@ -34,6 +34,7 @@ class CollectiveLineageMigration(PloneSandboxLayer):
     def setUpPloneSite(self, portal):
         portal.portal_membership.addMember('testuser', 'secret', (), [])
         portal.portal_types["Child Folder"].global_allow = True
+        portal.portal_workflow.setDefaultChain('simple_publication_workflow')
         
 LINEAGE_MIGRATION_FIXTURE = CollectiveLineageMigration()
 LINEAGE_MIGRATION_INTEGRATION_TESTING = \

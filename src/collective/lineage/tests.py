@@ -110,10 +110,11 @@ class MigrationTests(unittest.TestCase):
         cf1.setTitle("CF 1")
         cf1.setDescription("Description of CF 1")
         cf1.layout = "layout1"
-        portal.portal_workflow.doActionFor(cf1, "publish")
+        pw = portal.portal_workflow
+        pw.doActionFor(cf1, "publish")
         self.failUnless(cf1.Title() == "CF 1")
         self.failUnless(cf1.Description() == "Description of CF 1")
-        self.failUnless(self.pw.getInfoFor(cf1, "review_state") == "published")
+        self.failUnless(pw.getInfoFor(cf1, "review_state") == "published")
         self.failUnless(cf1.layout == "layout1")
 
         cf1.invokeFactory("Document", "doc1")
@@ -124,8 +125,8 @@ class MigrationTests(unittest.TestCase):
         doc1.setText("<p>Some Text here</p>")
 
         # cf2
-        self.portal.invokeFactory("Child Folder", "cf2")
-        cf2 = self.portal.cf2
+        portal.invokeFactory("Child Folder", "cf2")
+        cf2 = portal.cf2
 
         #cf3
         cf2.invokeFactory("Child Folder", "cf3")
@@ -133,10 +134,10 @@ class MigrationTests(unittest.TestCase):
         cf3.setTitle("CF 3")
         cf3.setDescription("Description of CF 3")
         cf3.layout = "3layout"
-        self.pw.doActionFor(cf3, "publish")
+        pw.doActionFor(cf3, "publish")
         self.failUnless(cf3.Title() == "CF 3")
         self.failUnless(cf3.Description() == "Description of CF 3")
-        self.failUnless(self.pw.getInfoFor(cf3, "review_state") == "published")
+        self.failUnless(pw.getInfoFor(cf3, "review_state") == "published")
 
         cf3.invokeFactory("Document", "doc1")
         cf3.invokeFactory("Document", "doc2")
@@ -156,12 +157,12 @@ class MigrationTests(unittest.TestCase):
         cf3 = cf2.cf3
         doc1 = cf3.doc1
         self.failUnless(cf1.Title() == "CF 1")
-        self.failUnless(self.pw.getInfoFor(cf1, "review_state") == "published")
+        self.failUnless(pw.getInfoFor(cf1, "review_state") == "published")
         self.failUnless(cf1.layout == "layout1")
         self.failUnless(cf3.Title() == "CF 3")
         self.failUnless(cf3.Description() == "Description of CF 3")
         self.failUnless(cf3.layout == "3layout")
-        self.failUnless(self.pw.getInfoFor(cf3, "review_state") == "published")
+        self.failUnless(pw.getInfoFor(cf3, "review_state") == "published")
         self.failUnless(cf1.portal_type == "Folder")
         self.failUnless(cf3.portal_type == "Folder")
         self.failUnless(doc1.getRawText() == "<p>Some Text here</p>")
@@ -180,9 +181,10 @@ class MigrationTests(unittest.TestCase):
         portal.invokeFactory("Child Folder", "cf1")
         cf1 = portal.cf1
         cf1.setTitle("CF 1")
-        portal.portal_workflow.doActionFor(cf1, "publish")
+        pw = portal.portal_workflow
+        pw.doActionFor(cf1, "publish")
         self.failUnless(cf1.Title() == "CF 1")
-        self.failUnless(self.pw.getInfoFor(cf1, "review_state") == "published")
+        self.failUnless(pw.getInfoFor(cf1, "review_state") == "published")
         cf1.invokeFactory("Document", "doc1")
         doc1 = cf1["doc1"]
         doc1.setTitle("Doc 1")
@@ -198,14 +200,15 @@ class MigrationTests(unittest.TestCase):
         cf1 = portal.cf1
         cf1.setTitle("CF 1")
         make_objectmanager_site(cf1)
-        portal.portal_workflow.doActionFor(cf1, "publish")
+        pw = portal.portal_workflow
+        pw.doActionFor(cf1, "publish")
         self.failUnless(cf1.Title() == "CF 1")
-        self.failUnless(self.pw.getInfoFor(cf1, "review_state") == "published")
+        self.failUnless(pw.getInfoFor(cf1, "review_state") == "published")
         self.failUnless(ISite.providedBy(cf1))
         # Child folders in 0.1 seemed to provide ILocalPortletAssignable but
         # not in 0.6
         if not ILocalPortletAssignable.providedBy(cf1):
-            zope.component.alsoProvides(cf1, ILocalPortletAssignable)
+            zope.interface.alsoProvides(cf1, ILocalPortletAssignable)
             added_portlet_assignable_interace = True
         else:
             added_portlet_assignable_interace = False
@@ -221,7 +224,7 @@ class MigrationTests(unittest.TestCase):
             'text': u"test text"})
         self.assertEquals(len(mapping), 1)
 
-        left_col_manager = getUtility(
+        left_col_manager = zope.component.getUtility(
             IPortletManager,
             name='plone.leftcolumn',
             context=cf1)
@@ -236,11 +239,11 @@ class MigrationTests(unittest.TestCase):
 
         self.run_migration_step()
 
-        cf1 = self.portal.cf1
+        cf1 = portal.cf1
         mapping = cf1.restrictedTraverse('++contextportlets++plone.leftcolumn')
         self.assertEquals(len(mapping), 1)
 
-        left_col_manager = getUtility(
+        left_col_manager = zope.component.getUtility(
             IPortletManager,
             name='plone.leftcolumn',
             context=cf1)
@@ -261,9 +264,10 @@ class MigrationTests(unittest.TestCase):
         cf1 = portal.cf1
         cf1.setTitle("CF 1")
         make_objectmanager_site(cf1)
-        portal.portal_workflow.doActionFor(cf1, "publish")
+        pw = portal.portal_workflow
+        pw.doActionFor(cf1, "publish")
         self.failUnless(cf1.Title() == "CF 1")
-        self.failUnless(self.pw.getInfoFor(cf1, "review_state") == "published")
+        self.failUnless(pw.getInfoFor(cf1, "review_state") == "published")
         self.failUnless(ISite.providedBy(cf1))
 
         cf1.invokeFactory("Document", "doc1", Title="Doc 1")
@@ -294,9 +298,10 @@ class MigrationTests(unittest.TestCase):
         cf1 = portal.cf1
         cf1.setTitle("CF 1")
         make_objectmanager_site(cf1)
-        portal.portal_workflow.doActionFor(cf1, "publish")
+        pw = portal.portal_workflow
+        pw.doActionFor(cf1, "publish")
         self.failUnless(cf1.Title() == "CF 1")
-        self.failUnless(self.pw.getInfoFor(cf1, "review_state") == "published")
+        self.failUnless(pw.getInfoFor(cf1, "review_state") == "published")
         self.failUnless(ISite.providedBy(cf1))
 
         cf1.manage_setLocalRoles('testuser', ['Contributor'])
