@@ -16,12 +16,12 @@ msgstr ""
 
 #: ../descriptors.py:13
 msgid "A child site"
-msgstr "Eine Subsite"
+msgstr "Eine Unterseite"
 
 #. Default: "A folder that can be published as a separate site"
 #: ../profiles/default/types/Child_Folder.xml
 msgid "A folder that can be published as a separate site"
-msgstr "Ordner der als separate Seite veröffentlicht werden kann"
+msgstr "Ein Ordner der als separate Seite veröffentlicht werden kann"
 
 #. Default: "Child Folder"
 #: ../profiles/default/types/Child_Folder.xml
@@ -30,23 +30,23 @@ msgstr "Unterordner"
 
 #: ../descriptors.py:12
 msgid "Child Site"
-msgstr "Subsite"
+msgstr "Unterseite"
 
 #: ../content.py:44
 msgid "Create a new lineage folder"
-msgstr "Neuen linage Ordner erstellen"
+msgstr "Neuen Lineage Ordner erstellen"
 
 #: ../browser.py:33
 msgid "Lineage Configuration Panel"
-msgstr "Linage Konfiguration"
+msgstr "Lineage Konfiguration"
 
 #: ../interfaces.py:17
 msgid "Sub-types dropdown display: "
-msgstr ""
+msgstr "Unterseiten Dropdown Bezeichnung: "
 
 #: ../browser.py:34
 msgid "You can define the text that will appear                    under the 'Sub-types' tab. Default is 'Child Site'"
-msgstr "Definieren sie welcher Text unter dem 'Sub-type' Register erscheint. Der Standardwert ist 'Child Site'"
+msgstr "Definieren Sie, welcher Text unter dem 'Sub-type' Register erscheint. Der Standardwert ist 'Child Site'"
 
 #: ../browser.py:36
 msgid "settings"
