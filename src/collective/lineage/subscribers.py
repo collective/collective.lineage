@@ -37,17 +37,21 @@ def disableFolder(folder):
     reindexObjectProvides(folder)
     zope.event.notify(ChildSiteRemovedEvent(folder))
 
-@component.adapter(IChildSite, ISubtypeAddedEvent)
-def enableChildSite(object, event):
+@component.adapter(ISubtypeAddedEvent)
+def enableChildSite(event):
     """When a lineage folder is created, turn it into a component site
     """
+    if not IChildSite.providedBy(event.object):
+        return
     folder = event.object
     enableFolder(folder)
 
-@component.adapter(IChildSite, ISubtypeRemovedEvent)
-def disableChildSite(object, event):
+@component.adapter(ISubtypeRemovedEvent)
+def disableChildSite(event):
     """When a child site is turned off, remove the local components
     """
+    if not IChildSite.providedBy(event.object):
+        return
     if event.subtype is not None:
         folder = event.object
         disableFolder(folder)
