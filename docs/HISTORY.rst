@@ -4,6 +4,13 @@ Changelog
 1.0.0 - (xxxx-xx-xx)
 --------------------
 
+- modernized tests, using layers now.
+  [jensens]
+
+- fixed failing test with subscribers, subtype added event is not an object 
+  event!
+  [jensens]
+
 - moved code to github and increased Plone version used in integrated buildout 
   to 4.1-latest.
   [jensens]
