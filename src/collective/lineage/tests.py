@@ -1,63 +1,40 @@
-import unittest
+import unittest2 as unittest
 import zope.interface
 import zope.component
-from zope.app.component.interfaces import ISite
-from zope.component import getMultiAdapter
-from zope.component import getUtility
-from zope.interface import alsoProvides
-from zope.interface import noLongerProvides
+from zope.component.interfaces import ISite
+import zope.annotation.attribute as zaa
+import zope.annotation.interfaces as zai
 from AccessControl import Unauthorized
-from Testing import ZopeTestCase as ztc
-#for plone3-plone4 compatibility purposes
-try:
-    import zope.app.annotation.attribute as zaa
-except:
-    import zope.annotation.attribute as zaa
-try:
-    import zope.app.annotation.interfaces as zai
-except:
-    import zope.annotation.interfaces as zai
-from five.localsitemanager import make_objectmanager_site
-from plone.portlets.constants import CONTEXT_CATEGORY
-from plone.portlets.constants import GROUP_CATEGORY
-from plone.portlets.constants import CONTENT_TYPE_CATEGORY
-from plone.portlets.interfaces import ILocalPortletAssignable
-from plone.portlets.interfaces import ILocalPortletAssignmentManager
-from plone.portlets.interfaces import IPortletManager
-from plone.portlets.interfaces import IPortletType
-from Products.Five import zcml
-from Products.Five import fiveconfigure
-from Products.PloneTestCase import PloneTestCase as ptc
-from Products.PloneTestCase.layer import onsetup
-from Products.CMFCore.utils import getToolByName
-import Products.Archetypes.interfaces
 from Products.GenericSetup.upgrade import _upgrade_registry
-from p4a.subtyper import interfaces
-from p4a.subtyper import default
-from p4a.subtyper import engine
+import Products.Archetypes.interfaces
+from five.localsitemanager import make_objectmanager_site
+from plone.portlets.constants import (
+    CONTEXT_CATEGORY,
+    GROUP_CATEGORY,
+    CONTENT_TYPE_CATEGORY,
+)
+from plone.portlets.interfaces import (
+    ILocalPortletAssignable,
+    ILocalPortletAssignmentManager,
+    IPortletManager,
+    IPortletType,
+)
+from p4a.subtyper import (
+    interfaces,
+    default,
+    engine,
+)
+from plone.testing import z2
+from plone.app.testing.interfaces import PLONE_SITE_ID
+from .testing import (
+    LINEAGE_INTEGRATION_TESTING, 
+    LINEAGE_MIGRATION_INTEGRATION_TESTING,
+)
 
-
-@onsetup
-def setup_package():
-    fiveconfigure.debug_mode = True
-    import collective.lineage
-    zcml.load_config('configure.zcml', collective.lineage)
-    fiveconfigure.debug_mode = False
-    ztc.installPackage('collective.lineage')
-
-
-setup_package()
-ptc.setupPloneSite(products=['collective.lineage'])
-
-
-class IntegrationTests(ptc.PloneTestCase):
-
-    def afterSetUp(self):
-        roles = ('Member', 'Contributor')
-        self.portal.portal_membership.addMember('contributor',
-                                                'secret',
-                                                roles, [])
-
+class IntegrationTests(unittest.TestCase):
+    
+    layer = LINEAGE_INTEGRATION_TESTING
+        
     def test_folder_is_activatable(self):
         zope.component.provideAdapter(zaa.AttributeAnnotations)
         zope.component.provideAdapter(default.folderish_possible_descriptors)
@@ -75,25 +52,21 @@ class IntegrationTests(ptc.PloneTestCase):
                             dict(adapted.possible).keys())
 
     def test_component_registry(self):
-        self.login('contributor')
-        self.portal.invokeFactory('Folder', 'site1')
+        portal = self.layer['portal']
+        z2.login(portal['acl_users'], 'contributor')
+        portal.invokeFactory('Folder', 'site1')
         zope.component.provideUtility(engine.Subtyper())
         subtyper = zope.component.getUtility(interfaces.ISubtyper)
         subtyper.change_type(
-            self.portal.site1,
+            portal.site1,
             u'collective.lineage.childsite')
-        self.failUnless(ISite.providedBy(self.portal.site1))
+        self.failUnless(ISite.providedBy(portal.site1))
 
     def test_uninstall(self):
         """testing the uninstall of collective.lineage"""
-        roles = ('Member', 'Manager')
-        self.portal.portal_membership.addMember('manager',
-                                                'secret',
-                                                roles, [])
-        self.login('manager')
-        pq = getToolByName(self.portal, "portal_quickinstaller")
-        pq.uninstallProducts(["collective.lineage"])
-
+        portal = self.layer['portal']
+        z2.login(portal['acl_users'], 'manager')
+        portal.portal_quickinstaller.uninstallProducts(["collective.lineage"])
         zope.component.provideAdapter(zaa.AttributeAnnotations)
         zope.component.provideAdapter(default.folderish_possible_descriptors)
 
@@ -110,32 +83,17 @@ class IntegrationTests(ptc.PloneTestCase):
                             dict(adapted.possible).keys())
 
 
-class MigrationTests(ptc.PloneTestCase):
+class MigrationTests(unittest.TestCase):
     """we are going to test the migration from 0.1 to >0.1"""
 
-    def afterSetUp(self):
-        roles = ('Member', 'Manager')
-        self.portal.portal_membership.addMember('manager',
-                                                'secret',
-                                                roles, [])
-        self.portal.portal_membership.addMember('testuser',
-                                                'secret',
-                                                (), [])
-        self.login('manager')
-
-        # allow the Child Folder type to be addable
-        pt = getToolByName(self.portal, "portal_types")
-        cf_type = pt["Child Folder"]
-        cf_type.global_allow = True
-
-        self.pw = getToolByName(self.portal, "portal_workflow")
+    layer = LINEAGE_MIGRATION_INTEGRATION_TESTING
 
     def run_migration_step(self):
         import transaction
         transaction.savepoint()
         # Now run the migration step
         profile_id = "collective.lineage:default"
-        setup_tool = getToolByName(self.portal, 'portal_setup')
+        setup_tool = self.layer['portal'].portal_setup
         steps_to_run = _upgrade_registry.getUpgradeStepsForProfile(profile_id)
         for step_id in steps_to_run:
             step = _upgrade_registry.getUpgradeStep(profile_id, step_id)
@@ -145,12 +103,14 @@ class MigrationTests(ptc.PloneTestCase):
 
     def test_migration(self):
         # cf1
-        self.portal.invokeFactory("Child Folder", "cf1")
-        cf1 = self.portal.cf1
+        portal = self.layer['portal']
+        z2.login(portal['acl_users'], 'manager')
+        portal.invokeFactory("Child Folder", "cf1")
+        cf1 = portal.cf1
         cf1.setTitle("CF 1")
         cf1.setDescription("Description of CF 1")
         cf1.layout = "layout1"
-        self.pw.doActionFor(cf1, "publish")
+        portal.portal_workflow.doActionFor(cf1, "publish")
         self.failUnless(cf1.Title() == "CF 1")
         self.failUnless(cf1.Description() == "Description of CF 1")
         self.failUnless(self.pw.getInfoFor(cf1, "review_state") == "published")
@@ -191,8 +151,8 @@ class MigrationTests(ptc.PloneTestCase):
         # but are just normal folder that are subtyped
         # also check they still have the correct title
         # description, content, state and layout
-        cf1 = self.portal.cf1
-        cf2 = self.portal.cf2
+        cf1 = portal.cf1
+        cf2 = portal.cf2
         cf3 = cf2.cf3
         doc1 = cf3.doc1
         self.failUnless(cf1.Title() == "CF 1")
@@ -207,43 +167,45 @@ class MigrationTests(ptc.PloneTestCase):
         self.failUnless(doc1.getRawText() == "<p>Some Text here</p>")
 
         #check that anonymous can see the published items
-        self.logout()
+        z2.logout()
         try:
-            cf1_item = self.portal.restrictedTraverse("cf1")
+            cf1_item = portal.restrictedTraverse("cf1")
         except Unauthorized:
             cf1_item = None
         self.failUnless(cf1_item != None)
 
     def test_migration_preserves_default_view(self):
-        self.portal.invokeFactory("Child Folder", "cf1")
-        cf1 = self.portal.cf1
+        portal = self.layer['portal']
+        z2.login(portal['acl_users'], 'manager')
+        portal.invokeFactory("Child Folder", "cf1")
+        cf1 = portal.cf1
         cf1.setTitle("CF 1")
-        self.pw.doActionFor(cf1, "publish")
+        portal.portal_workflow.doActionFor(cf1, "publish")
         self.failUnless(cf1.Title() == "CF 1")
         self.failUnless(self.pw.getInfoFor(cf1, "review_state") == "published")
         cf1.invokeFactory("Document", "doc1")
         doc1 = cf1["doc1"]
         doc1.setTitle("Doc 1")
         cf1.setDefaultPage("doc1")
-
         self.run_migration_step()
-
-        cf1 = self.portal.cf1
+        cf1 = portal.cf1
         self.assertEquals(cf1.getDefaultPage(), "doc1")
 
     def test_migration_preserves_portlets(self):
-        self.portal.invokeFactory("Child Folder", "cf1")
-        cf1 = self.portal.cf1
+        portal = self.layer['portal']
+        z2.login(portal['acl_users'], 'manager')
+        portal.invokeFactory("Child Folder", "cf1")
+        cf1 = portal.cf1
         cf1.setTitle("CF 1")
         make_objectmanager_site(cf1)
-        self.pw.doActionFor(cf1, "publish")
+        portal.portal_workflow.doActionFor(cf1, "publish")
         self.failUnless(cf1.Title() == "CF 1")
         self.failUnless(self.pw.getInfoFor(cf1, "review_state") == "published")
         self.failUnless(ISite.providedBy(cf1))
         # Child folders in 0.1 seemed to provide ILocalPortletAssignable but
         # not in 0.6
         if not ILocalPortletAssignable.providedBy(cf1):
-            alsoProvides(cf1, ILocalPortletAssignable)
+            zope.component.alsoProvides(cf1, ILocalPortletAssignable)
             added_portlet_assignable_interace = True
         else:
             added_portlet_assignable_interace = False
@@ -251,7 +213,8 @@ class MigrationTests(ptc.PloneTestCase):
         mapping = cf1.restrictedTraverse('++contextportlets++plone.leftcolumn')
         for m in mapping.keys():
             del mapping[m]
-        portlet = getUtility(IPortletType, name='plone.portlet.static.Static')
+        portlet = zope.component.getUtility(IPortletType, 
+                                            name='plone.portlet.static.Static')
         addview = mapping.restrictedTraverse('+/' + portlet.addview)
         addview.createAndAdd(data={
             'header': u"test title",
@@ -262,14 +225,14 @@ class MigrationTests(ptc.PloneTestCase):
             IPortletManager,
             name='plone.leftcolumn',
             context=cf1)
-        assignment_manager = getMultiAdapter(
+        assignment_manager = zope.component.getMultiAdapter(
             (cf1, left_col_manager),
             ILocalPortletAssignmentManager)
         assignment_manager.setBlacklistStatus(GROUP_CATEGORY, None)
         assignment_manager.setBlacklistStatus(CONTENT_TYPE_CATEGORY, False)
 
         if added_portlet_assignable_interace:
-            noLongerProvides(cf1, ILocalPortletAssignable)
+            zope.interface.noLongerProvides(cf1, ILocalPortletAssignable)
 
         self.run_migration_step()
 
@@ -281,7 +244,7 @@ class MigrationTests(ptc.PloneTestCase):
             IPortletManager,
             name='plone.leftcolumn',
             context=cf1)
-        assignment_manager = getMultiAdapter(
+        assignment_manager = zope.component.getMultiAdapter(
             (cf1, left_col_manager),
             ILocalPortletAssignmentManager)
         self.assertTrue(
@@ -292,11 +255,13 @@ class MigrationTests(ptc.PloneTestCase):
             assignment_manager.getBlacklistStatus(CONTENT_TYPE_CATEGORY))
 
     def test_migration_preserves_references(self):
-        self.portal.invokeFactory("Child Folder", "cf1")
-        cf1 = self.portal.cf1
+        portal = self.layer['portal']
+        z2.login(portal['acl_users'], 'manager')
+        portal.invokeFactory("Child Folder", "cf1")
+        cf1 = portal.cf1
         cf1.setTitle("CF 1")
         make_objectmanager_site(cf1)
-        self.pw.doActionFor(cf1, "publish")
+        portal.portal_workflow.doActionFor(cf1, "publish")
         self.failUnless(cf1.Title() == "CF 1")
         self.failUnless(self.pw.getInfoFor(cf1, "review_state") == "published")
         self.failUnless(ISite.providedBy(cf1))
@@ -317,17 +282,19 @@ class MigrationTests(ptc.PloneTestCase):
 
         self.run_migration_step()
 
-        cf1 = self.portal.cf1
+        cf1 = portal.cf1
         doc2 = cf1["doc2"]
         self.assertEquals(
             len(doc2._getReferenceAnnotations().objectItems()), 1)
 
     def test_migration_preserves_sharing_settings(self):
-        self.portal.invokeFactory("Child Folder", "cf1")
-        cf1 = self.portal.cf1
+        portal = self.layer['portal']
+        z2.login(portal['acl_users'], 'manager')
+        portal.invokeFactory("Child Folder", "cf1")
+        cf1 = portal.cf1
         cf1.setTitle("CF 1")
         make_objectmanager_site(cf1)
-        self.pw.doActionFor(cf1, "publish")
+        portal.portal_workflow.doActionFor(cf1, "publish")
         self.failUnless(cf1.Title() == "CF 1")
         self.failUnless(self.pw.getInfoFor(cf1, "review_state") == "published")
         self.failUnless(ISite.providedBy(cf1))
@@ -336,7 +303,7 @@ class MigrationTests(ptc.PloneTestCase):
 
         self.run_migration_step()
 
-        cf1 = self.portal.cf1
+        cf1 = portal.cf1
         self.assertEquals(
             ('Contributor',), cf1.get_local_roles_for_userid('testuser'))
 

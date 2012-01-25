@@ -38,6 +38,12 @@ setup(name='collective.lineage',
           'p4a.common',
           'p4a.subtyper>=1.2.0',
       ],
+      extras_require={
+          'test': [
+              'interlude',
+              'plone.app.testing',
+          ],
+      },
       entry_points="""
       [z3c.autoinclude.plugin]
       target = plone
