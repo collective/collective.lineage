@@ -20,7 +20,7 @@ Useful links
 - pypi: http://pypi.python.org/pypi/collective.lineage
 - Plone: http://plone.org/products/collective-lineage
 - issue tracker: http://plone.org/products/collective-lineage/issues
-- svn repository: http://dev.plone.org/collective/browser/collective.lineage
+- code repository: http://github.com/collective/collective.lineage/
 
 Detailed Documentation
 ======================
