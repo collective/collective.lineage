@@ -19,7 +19,7 @@ Useful links
 - irc room: #plone-lineage
 - pypi: http://pypi.python.org/pypi/collective.lineage
 - Plone: http://plone.org/products/collective-lineage
-- issue tracker: https://github.com/collective/collective.lineage/issues/5
+- issue tracker: https://github.com/collective/collective.lineage/issues/
 - code repository: http://github.com/collective/collective.lineage/
 
 Detailed Documentation
