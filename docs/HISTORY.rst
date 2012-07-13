@@ -4,6 +4,9 @@ Changelog
 1.0.0 - (xxxx-xx-xx)
 --------------------
 
+- PEP8 and pyflakes cleanup
+  [claytron]
+
 - modernized tests, using layers now.
   [jensens]
 

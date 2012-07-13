@@ -25,16 +25,16 @@ from p4a.subtyper import (
     engine,
 )
 from plone.testing import z2
-from plone.app.testing.interfaces import PLONE_SITE_ID
 from .testing import (
-    LINEAGE_INTEGRATION_TESTING, 
+    LINEAGE_INTEGRATION_TESTING,
     LINEAGE_MIGRATION_INTEGRATION_TESTING,
 )
 
+
 class IntegrationTests(unittest.TestCase):
-    
+
     layer = LINEAGE_INTEGRATION_TESTING
-        
+
     def test_folder_is_activatable(self):
         zope.component.provideAdapter(zaa.AttributeAnnotations)
         zope.component.provideAdapter(default.folderish_possible_descriptors)
@@ -216,7 +216,7 @@ class MigrationTests(unittest.TestCase):
         mapping = cf1.restrictedTraverse('++contextportlets++plone.leftcolumn')
         for m in mapping.keys():
             del mapping[m]
-        portlet = zope.component.getUtility(IPortletType, 
+        portlet = zope.component.getUtility(IPortletType,
                                             name='plone.portlet.static.Static')
         addview = mapping.restrictedTraverse('+/' + portlet.addview)
         addview.createAndAdd(data={

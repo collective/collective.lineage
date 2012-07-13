@@ -4,6 +4,7 @@ from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import IntegrationTesting
 from zope.configuration import xmlconfig
 
+
 class CollectiveLineage(PloneSandboxLayer):
 
     defaultBases = (PLONE_FIXTURE, )
@@ -11,7 +12,7 @@ class CollectiveLineage(PloneSandboxLayer):
     def setUpZope(self, app, configurationContext):
         # Load ZCML
         import collective.lineage
-        xmlconfig.file('configure.zcml', collective.lineage, 
+        xmlconfig.file('configure.zcml', collective.lineage,
                        context=configurationContext)
 
     def setUpPloneSite(self, portal):
@@ -23,10 +24,13 @@ class CollectiveLineage(PloneSandboxLayer):
         portal.portal_membership.addMember('contributor', 'secret', roles, [])
 
 LINEAGE_FIXTURE = CollectiveLineage()
-LINEAGE_INTEGRATION_TESTING = \
-    IntegrationTesting(bases=(LINEAGE_FIXTURE, ), 
-                       name="collective.lineage:Integration")
-    
+LINEAGE_INTEGRATION_TESTING = (
+    IntegrationTesting(
+        bases=(LINEAGE_FIXTURE, ),
+        name="collective.lineage:Integration")
+)
+
+
 class CollectiveLineageMigration(PloneSandboxLayer):
 
     defaultBases = (LINEAGE_FIXTURE, )
@@ -35,9 +39,10 @@ class CollectiveLineageMigration(PloneSandboxLayer):
         portal.portal_membership.addMember('testuser', 'secret', (), [])
         portal.portal_types["Child Folder"].global_allow = True
         portal.portal_workflow.setDefaultChain('simple_publication_workflow')
-        
+
 LINEAGE_MIGRATION_FIXTURE = CollectiveLineageMigration()
-LINEAGE_MIGRATION_INTEGRATION_TESTING = \
-    IntegrationTesting(bases=(LINEAGE_MIGRATION_FIXTURE, ), 
-                       name="collective.lineage:Integration")
-                
+LINEAGE_MIGRATION_INTEGRATION_TESTING = (
+    IntegrationTesting(
+        bases=(LINEAGE_MIGRATION_FIXTURE, ),
+        name="collective.lineage:Integration")
+)

@@ -3,6 +3,7 @@ from setuptools import setup, find_packages
 
 version = '1.0'
 
+
 def read(*rnames):
     return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
 
@@ -27,7 +28,7 @@ setup(name='collective.lineage',
       url='http://plone.org/products/collective-lineage',
       license='GPL',
       packages=find_packages('src'),
-	  package_dir = {'': 'src'},
+      package_dir={'': 'src'},
       namespace_packages=['collective'],
       include_package_data=True,
       zip_safe=False,
