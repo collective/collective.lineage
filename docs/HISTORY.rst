@@ -19,7 +19,7 @@ Changelog
   that custom child site types are still made into IObjectManagerSites.
   [rossp]
 
-- Added an `isChildSite` method to the `LineageUtils` view, to determine if
+- Added an ``isChildSite`` method to the ``LineageUtils`` view, to determine if
   the current context is part of a child site.
   [davidblewett]
 
@@ -36,9 +36,9 @@ Changelog
 - Added Spanish translation
   [macagua]
 
-- Changed the `collective.lineage.childsite` component to use the
-  `IFolderishContentTypeDescriptor` interface instead of
-  `IPortalTypedFolderishDescriptor`, allowing any folderish type to become
+- Changed the ``collective.lineage.childsite`` component to use the
+  ``IFolderishContentTypeDescriptor`` interface instead of
+  ``IPortalTypedFolderishDescriptor``, allowing any folderish type to become
   a child site.
   [davidblewett]
 
