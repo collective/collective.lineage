@@ -1,52 +1,15 @@
-from zope.interface import implements
-from zope.component import adapts
-from zope.formlib import form
-from zope.schema.fieldproperty import FieldProperty
 from zope.i18nmessageid import MessageFactory
 from zope.component import getUtility
-from OFS.SimpleItem import SimpleItem
-from plone.app.controlpanel.form import ControlPanelForm
+from plone.registry.interfaces import IRegistry
 
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.CMFCore.utils import getToolByName
-from Products.CMFDefault.formlib.schema import SchemaAdapterBase
-from Products.CMFCore.interfaces import IPropertiesTool
-from Products.CMFPlone.interfaces import IPloneSiteRoot
-from Products.CMFDefault.formlib.schema import ProxyFieldProperty
 
 from collective.lineage.interfaces import IChildSite
-from collective.lineage.interfaces import ILineageConfiguration
+from collective.lineage.interfaces import ILineageSettings
 
 _ = MessageFactory('collective.lineage')
-
-
-class LineageConfiguration(SimpleItem):
-    implements(ILineageConfiguration)
-
-    menu_text = FieldProperty(ILineageConfiguration['menu_text'])
-
-
-class LineageConfigurationForm(ControlPanelForm):
-    form_fields = form.Fields(ILineageConfiguration)
-
-    label = _(u"Lineage Configuration Panel")
-    description = _(u"You can define the text that will appear\
-                    under the 'Sub-types' tab. Default is 'Child Site'")
-    form_name = _(u'settings')
-
-
-class LineageConfigurationFormAdapter(SchemaAdapterBase):
-    adapts(IPloneSiteRoot)
-    implements(ILineageConfiguration)
-
-    def __init__(self, context):
-        super(LineageConfigurationFormAdapter, self).__init__(context)
-        self.context = getUtility(IPropertiesTool).lineage_properties
-
-    menu_text = ProxyFieldProperty(
-        ILineageConfiguration['menu_text'],
-    )
 
 
 class LineageSwitcherViewlet(BrowserView):
@@ -87,10 +50,10 @@ class LineageSwitcherViewlet(BrowserView):
 class LineageUtils(BrowserView):
 
     def getSwitcherDefault(self):
-
-        ptool = getToolByName(self, 'portal_properties')
-        if "lineage_properties" in ptool:
-            return ptool.lineage_properties.getProperty('menu_text')
+        registry = getUtility(IRegistry)
+        settings = registry.forInterface(ILineageSettings)
+        if settings.menu_text:
+            return settings.menu_text
         return "Jump to Child Site"
 
     def isChildSite(self):

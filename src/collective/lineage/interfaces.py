@@ -12,12 +12,6 @@ class ILineageBrowserLayer(Interface):
     """
 
 
-class ILineageConfiguration(Interface):
-    """This interface defines the lineage configlet."""
-    menu_text = schema.TextLine(title=_(u"Sub-types dropdown display: "),
-                                  required=False)
-
-
 class IChildSite(INavigationRoot, IPossibleSite):
     """A marker interface for a Child Site.  This is comprised of
     several other marker interfaces.
@@ -38,3 +32,14 @@ class IChildSiteCreatedEvent(Interface):
 class IChildSiteRemovedEvent(Interface):
     """An event that is fired after a child site is removed
     """
+
+
+class ILineageSettings(Interface):
+    """Global Lineage Settings
+    """
+    menu_text = schema.TextLine(title=_(u"Sub-type menu text"),
+                              description=_(u"help_subtype_text",
+                              default=u"You can define the text that will appear \
+                                        under the 'Sub-types' tab. Default is 'Child Site'"),
+                                  required=False,
+                                  default=u'',)
