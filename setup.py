@@ -38,6 +38,7 @@ setup(name='collective.lineage',
           'p4a.z2utils',
           'p4a.common',
           'p4a.subtyper>=1.2.0',
+          'plone.app.registry',
       ],
       extras_require={
           'test': [
