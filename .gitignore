@@ -10,3 +10,4 @@ src/*.egg-info
 .pydevproject
 .tmp*
 dist
+*.mo
