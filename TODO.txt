@@ -4,4 +4,4 @@ Things that need to be done before next release
 - Write tests for p4a.subtyper code and merge branch down into trunk, then release
 - Finish up subscribers for site deletion
 - Large Folder child site?  normal AT folder?  plone.app.content container?
-
+- Investigate inability to override the absolute_url for the lineage container itself

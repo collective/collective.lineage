@@ -60,3 +60,23 @@ def disableChildSite(event):
     if event.subtype is not None:
         folder = event.object
         disableFolder(folder)
+
+def addBrainOverride(event):
+    """When Plone starts up, add our override of AbstractCatalogBrain.getURL
+    """
+    # Ideally, we could use `useBrains`,
+    # But ZCatalog forces AbstractCatalogBrain first in the MRO.
+    from Products.ZCatalog.CatalogBrains import AbstractCatalogBrain
+    from collective.lineage import brains
+    AbstractCatalogBrain._getURL = AbstractCatalogBrain.getURL
+    AbstractCatalogBrain.getURL = brains.getURL
+
+    #from zope.app.appsetup.bootstrap import getInformationFromEvent
+    #from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
+    #from collective.lineage.brains import VHMAwareBrain
+    #db, connection, root, root_folder = getInformationFromEvent(event)
+
+    #for obj_id, obj in root_folder.items():
+    #    if IPloneSiteRoot.providedBy(obj):
+    #        catalog = getToolByName(obj, 'portal_catalog')
+    #        catalog._catalog.useBrains(VHMAwareBrain)
