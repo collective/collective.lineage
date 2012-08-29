@@ -37,8 +37,8 @@ class CollectiveLineageMigration(PloneSandboxLayer):
 
     def setUpPloneSite(self, portal):
         portal.portal_membership.addMember('testuser', 'secret', (), [])
-        portal.portal_types["Child Folder"].global_allow = True
-        portal.portal_workflow.setDefaultChain('simple_publication_workflow')
+        # XXX: some stuff was moved from here to setUp() in test_migration.py
+        # as the test were not set up in presence of more modules; why?
 
 LINEAGE_MIGRATION_FIXTURE = CollectiveLineageMigration()
 LINEAGE_MIGRATION_INTEGRATION_TESTING = (

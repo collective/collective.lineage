@@ -25,12 +25,13 @@ from p4a.subtyper import (
     engine,
 )
 from plone.testing import z2
-from .testing import (
+from collective.lineage.testing import (
     LINEAGE_INTEGRATION_TESTING,
     LINEAGE_MIGRATION_INTEGRATION_TESTING,
 )
 
 
+# TODO: move this case test to other modules
 class IntegrationTests(unittest.TestCase):
 
     layer = LINEAGE_INTEGRATION_TESTING
@@ -62,6 +63,7 @@ class IntegrationTests(unittest.TestCase):
             u'collective.lineage.childsite')
         self.failUnless(ISite.providedBy(portal.site1))
 
+    # TODO: this should be moved to test_setup.py
     def test_uninstall(self):
         """testing the uninstall of collective.lineage"""
         portal = self.layer['portal']
@@ -87,6 +89,12 @@ class MigrationTests(unittest.TestCase):
     """we are going to test the migration from 0.1 to >0.1"""
 
     layer = LINEAGE_MIGRATION_INTEGRATION_TESTING
+
+    def setUp(self):
+        self.portal = self.layer['portal']
+        wf = self.portal.portal_workflow
+        wf.setDefaultChain('simple_publication_workflow')
+        self.portal.portal_types["Child Folder"].global_allow = True
 
     def run_migration_step(self):
         import transaction
@@ -311,10 +319,3 @@ class MigrationTests(unittest.TestCase):
         cf1 = portal.cf1
         self.assertEquals(
             ('Contributor',), cf1.get_local_roles_for_userid('testuser'))
-
-
-def test_suite():
-    suite = unittest.TestSuite()
-    suite.addTest(unittest.makeSuite(IntegrationTests))
-    suite.addTest(unittest.makeSuite(MigrationTests))
-    return suite
