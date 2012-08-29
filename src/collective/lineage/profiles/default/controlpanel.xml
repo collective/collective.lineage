@@ -2,7 +2,7 @@
 <object
     name="portal_controlpanel"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
-    i18n:domain="collective.akismet"
+    i18n:domain="collective.lineage"
     purge="False">
 
     <configlet

@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<registry>
+ <record name="collective.lineage.interfaces.ILineageSettings.menu_text" delete="true" />
+</registry>
