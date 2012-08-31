@@ -14,15 +14,23 @@ from plone.portlets.constants import CONTEXT_CATEGORY
 from plone.portlets.constants import GROUP_CATEGORY
 from plone.portlets.constants import CONTENT_TYPE_CATEGORY
 
+from plone.registry.interfaces import IRegistry
+
 from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import base_hasattr
 
 from zope.interface import alsoProvides
+from zope.interface import noLongerProvides
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.component import getUtilitiesFor
 from zope.component import queryUtility
 from zope.component import provideUtility
+from zope.app.component.hooks import getSite
+
+from collective.lineage.interfaces import ILineageConfiguration
+from collective.lineage.interfaces import ILineageSettings
+
 import transaction
 
 logger = getLogger('collective.lineage.upgrades')
@@ -156,3 +164,51 @@ def copy_portlet_assignments_and_settings(src, target):
                 target_assignment_manager.setBlacklistStatus(
                     category,
                     src_assignment_manager.getBlacklistStatus(category))
+
+
+def migrateControlPanel(context):
+    """keep existing settings for 'menu_text' intact,
+       delete the lineage_properties from portal_properties,
+       un-register/remove the 'lineage_config' utility,
+       remove the ILineageConfiguration interface
+    """
+    migrate_settings(context)
+    remove_utility(context)
+    remove_interface(context)
+
+def migrate_settings(context):
+    """keep existing settings for menu_text
+    """
+    ptool = getToolByName(context, 'portal_properties')
+    registry = getUtility(IRegistry)
+    settings = registry.forInterface(ILineageSettings)
+    if "lineage_properties" in ptool:
+        settings.menu_text = ptool.lineage_properties.getProperty('menu_text').decode('utf-8')
+        logger.info("Menu Text set to %s" % settings.menu_text)
+        ptool.manage_delObjects(['lineage_properties'])
+        logger.info("removed lineage_properties from portal_properties")
+
+def remove_utility(context):
+    """unregister lineage utility
+    """
+    site = getSite()
+    sm = site.getSiteManager()
+    util = sm.queryUtility(ILineageConfiguration, name='lineage_config')
+    sm.unregisterUtility(util, ILineageConfiguration, name='lineage_config')
+    del util
+    logger.info("removed utility 'lineage_config'")
+    
+
+def remove_interface(context):
+    """remove ILineageConfiguration interface
+    """
+    pc = getToolByName(context, 'portal_catalog')
+    brains = pc.searchResults()
+    for b in brains:
+        try:
+            obj = b.getObject()
+            noLongerProvides(obj, ILineageConfiguration)
+        except:
+            logger.error("Could not remove ILineageConfiguration from %s" % obj.id)
+            continue
+
