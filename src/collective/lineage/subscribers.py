@@ -55,8 +55,7 @@ def enableChildSite(event):
 def disableChildSite(event):
     """When a child site is turned off, remove the local components
     """
-    if not IChildSite.providedBy(event.object):
-        return
-    if event.subtype is not None:
+    subtype = event.subtype
+    if subtype is not None and subtype.type_interface == IChildSite:
         folder = event.object
         disableFolder(folder)
