@@ -101,6 +101,14 @@
       handler="collective.lineage.upgrades.migrateChildFolders"
       />
 
+  <genericsetup:upgradeStep
+      source="0.6"
+      destination="200"
+      profile="collective.lineage:default"
+      title="Migrate the control panel to p.a.registry based one"
+      description=""
+      handler="collective.lineage.upgrades.migrateControlPanel"
+      />
 
   <!-- Control panel -->
   <browser:page
