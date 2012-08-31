@@ -45,6 +45,10 @@ Changelog
   a child site.
   [davidblewett]
 
+- Fixed issue where deactivating a Child Site wouldn't remove it from the
+  Lineage dropdown menu
+  [calvinhp]
+
 
 0.6.1 - (2011-01-12)
 --------------------
