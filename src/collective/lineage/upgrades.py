@@ -173,6 +173,7 @@ def migrateControlPanel(context):
        remove the ILineageConfiguration interface
     """
     migrate_settings(context)
+    remove_controlpanel_action(context)
     remove_utility(context)
     remove_interface(context)
 
@@ -187,6 +188,20 @@ def migrate_settings(context):
         logger.info("Menu Text set to %s" % settings.menu_text)
         ptool.manage_delObjects(['lineage_properties'])
         logger.info("removed lineage_properties from portal_properties")
+
+def remove_controlpanel_action(context):
+    """remove control panel action
+    """
+    cp = getToolByName(context, 'portal_controlpanel')
+    actions = cp.listActions()
+    index = 0
+    for action in actions:
+        if action.id == "LineageConfiguration":
+            cp.deleteActions([index])
+            logger.info("removed LineageConfiguration from portal_controlpanel")
+            break
+        index += 1
+
 
 def remove_utility(context):
     """unregister lineage utility
