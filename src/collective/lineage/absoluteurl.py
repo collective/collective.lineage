@@ -31,7 +31,7 @@ def map_url(path, request):
     registry = getUtility(IRegistry)
     settings = registry.forInterface(ILineageSettings)
     vhm_map = getattr(settings, 'vhm_map', {})
-    child_site_url = ''
+    child_site_netloc = ''
     scheme = urlparse.urlparse(request.getURL())[0]
 
     # We want to sort by descending path distance,
