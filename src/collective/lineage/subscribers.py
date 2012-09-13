@@ -61,8 +61,11 @@ def disableChildSite(event):
         folder = event.object
         disableFolder(folder)
 
-def addBrainOverride(event):
-    """When Plone starts up, add our override of AbstractCatalogBrain.getURL
+def addURLOverrides(event):
+    """When Plone starts up, add our overrides for
+        - AbstractCatalogBrain.getURL
+        - OFS.Traversable.Traversable.absolute_url
+        - OFS.absoluteurl.AbsoluteURL
     """
     # Ideally, we could use `useBrains`,
     # But ZCatalog forces AbstractCatalogBrain first in the MRO.
@@ -70,6 +73,19 @@ def addBrainOverride(event):
     from collective.lineage import brains
     AbstractCatalogBrain._getURL = AbstractCatalogBrain.getURL
     AbstractCatalogBrain.getURL = brains.getURL
+
+    from OFS.absoluteurl import AbsoluteURL, OFSTraversableAbsoluteURL
+    from collective.lineage.absoluteurl import LineageAbsoluteURL
+
+    for class_to_patch in (AbsoluteURL, OFSTraversableAbsoluteURL):
+        class_to_patch._str = class_to_patch.__str__
+        class_to_patch.__str__ = LineageAbsoluteURL.__str__
+
+    from OFS.Traversable import Traversable
+    from collective.lineage.absoluteurl import absolute_url
+
+    Traversable._absolute_url = Traversable.absolute_url
+    Traversable.absolute_url = absolute_url
 
     #from zope.app.appsetup.bootstrap import getInformationFromEvent
     #from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot

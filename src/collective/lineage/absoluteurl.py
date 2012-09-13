@@ -1,15 +1,18 @@
 import urlparse
 
+from Acquisition import aq_acquire
+
 from zope.component import getUtility
 
-from OFS.absoluteurl import AbsoluteURL
+from OFS.absoluteurl import AbsoluteURL, OFSTraversableAbsoluteURL
+from OFS.interfaces import ITraversable
 
 from plone.registry.interfaces import IRegistry
 
-from collective.lineage.interfaces import ILineageSettings
+from collective.lineage.interfaces import ILineageSettings, IChildSite
 
 
-class LineageAbsoluteURL(AbsoluteURL):
+class LineageAbsoluteURL(object):
     """An absolute_url adapter for generic objects in Zope 2 that
     checks if the context is inside an IChildSite with a customized
     URL.
@@ -18,7 +21,10 @@ class LineageAbsoluteURL(AbsoluteURL):
         mapped_url = map_url('/'.join(self.context.getPhysicalPath()),
                              self.request)
         if mapped_url is None:
-            return super(LineageAbsoluteURL, self).__str__()
+            if ITraversable.providedBy(self.context):
+                return OFSTraversableAbsoluteURL.__str__(self)
+            else:
+                return AbsoluteURL.__str__(self)
         else:
             return mapped_url
 
@@ -56,4 +62,16 @@ def map_url(path, request):
         '',
         ''
     ])
+    return url.encode('UTF-8')
+
+
+def absolute_url(self, relative=0):
+    if not IChildSite.providedBy(self):
+        return self._absolute_url(relative)
+    elif relative:
+        self.virtual_url_path()
+
+    url = map_url('/'.join(self.getPhysicalPath()),
+                  aq_acquire(self, 'REQUEST'))
+
     return url

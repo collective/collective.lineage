@@ -8,7 +8,7 @@
 
     <subscriber
         for="zope.processlifetime.IDatabaseOpenedWithRoot"
-        handler=".subscribers.addBrainOverride"
+        handler=".subscribers.addURLOverrides"
         />
 
     <browser:page
