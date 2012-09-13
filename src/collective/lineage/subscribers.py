@@ -74,6 +74,9 @@ def addURLOverrides(event):
     AbstractCatalogBrain._getURL = AbstractCatalogBrain.getURL
     AbstractCatalogBrain.getURL = brains.getURL
 
+    # The following is required because the stock classes use the
+    # context's parent for finding the absolute_url, leading to the
+    # navigation root objects themselves not using the stored mapping
     from OFS.absoluteurl import AbsoluteURL, OFSTraversableAbsoluteURL
     from collective.lineage.absoluteurl import LineageAbsoluteURL
 
