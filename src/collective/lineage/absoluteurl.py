@@ -88,13 +88,15 @@ def physicalPathToURL(self, path, relative=0):
     """
     if type(path) is type(''):
         path_to_map = path.split( '/')
+    elif path is None:
+        path_to_map = []
     else:
-        path_to_map = path
+        path_to_map = list(path)
     if path_to_map and path_to_map[0] != '':
         path_to_map.insert(0, '')
     mapped_url = map_url('/'.join(path_to_map), self)
 
     if relative or mapped_url is None:
-        return self._physicalPathToURL(path, relative)
+        return self._physicalPathToURL(path or '', relative)
     else:
         return mapped_url
