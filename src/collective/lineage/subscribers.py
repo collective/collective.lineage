@@ -63,33 +63,16 @@ def disableChildSite(event):
 
 def addURLOverrides(event):
     """When Plone starts up, add our overrides for
-        - AbstractCatalogBrain.getURL
-        - OFS.Traversable.Traversable.absolute_url
-        - OFS.absoluteurl.AbsoluteURL
+        - ZPublisher.HTTPRequest.HTTPRequest.physicalPathToURL
     """
+    from ZPublisher.HTTPRequest import HTTPRequest
+    from collective.lineage.absoluteurl import physicalPathToURL
+
+    HTTPRequest._physicalPathToURL = HTTPRequest.physicalPathToURL
+    HTTPRequest.physicalPathToURL = physicalPathToURL
+
     # Ideally, we could use `useBrains`,
     # But ZCatalog forces AbstractCatalogBrain first in the MRO.
-    from Products.ZCatalog.CatalogBrains import AbstractCatalogBrain
-    from collective.lineage import brains
-    AbstractCatalogBrain._getURL = AbstractCatalogBrain.getURL
-    AbstractCatalogBrain.getURL = brains.getURL
-
-    # The following is required because the stock classes use the
-    # context's parent for finding the absolute_url, leading to the
-    # navigation root objects themselves not using the stored mapping
-    from OFS.absoluteurl import AbsoluteURL, OFSTraversableAbsoluteURL
-    from collective.lineage.absoluteurl import LineageAbsoluteURL
-
-    for class_to_patch in (AbsoluteURL, OFSTraversableAbsoluteURL):
-        class_to_patch._str = class_to_patch.__str__
-        class_to_patch.__str__ = LineageAbsoluteURL.__str__
-
-    from OFS.Traversable import Traversable
-    from collective.lineage.absoluteurl import absolute_url
-
-    Traversable._absolute_url = Traversable.absolute_url
-    Traversable.absolute_url = absolute_url
-
     #from zope.app.appsetup.bootstrap import getInformationFromEvent
     #from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
     #from collective.lineage.brains import VHMAwareBrain
