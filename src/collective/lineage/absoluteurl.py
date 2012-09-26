@@ -13,7 +13,7 @@ from plone.registry.interfaces import IRegistry
 from collective.lineage.interfaces import ILineageSettings, IChildSite
 
 
-class LineageAbsoluteURL(object):
+class LineageAbsoluteURL(OFSTraversableAbsoluteURL):
     """An absolute_url adapter for generic objects in Zope 2 that
     checks if the context is inside an IChildSite with a customized
     URL.
@@ -23,7 +23,7 @@ class LineageAbsoluteURL(object):
                              self.request)
         if mapped_url is None:
             if ITraversable.providedBy(self.context):
-                return OFSTraversableAbsoluteURL.__str__(self)
+                return super(LineageAbsoluteURL, self).__str__()
             else:
                 return AbsoluteURL.__str__(self)
         else:
