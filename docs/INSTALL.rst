@@ -97,6 +97,11 @@ reinstall "Lineage", it will migrate the items automatically.
 Note: we are assuming that the Child Folder and the Folder workflows
 are the same.
 
+Migration to 1.0
+================
+
+Pre-1.0 installations will need to run the GenericSetup profile when migrating to 1.0 or your site will produce a SiteError when attempting to view because of the changes that have been made. If you are using the `collective.recipe.plonesite` buildout part, you can add it to run automatically on your install/upgrade. Otherwise, please login to the ZMI and go to the `portal_setup` tool and select the Lineage profile from the import tab and run all steps. You site will be ready to go.
+
 Working on the trunk of lineage
 ===============================
 
