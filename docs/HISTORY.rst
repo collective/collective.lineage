@@ -49,6 +49,9 @@ Changelog
   Lineage dropdown menu
   [calvinhp]
 
+- Format README so that it fits within 72 columns.
+  [claytron]
+
 
 0.6.1 - (2011-01-12)
 --------------------
@@ -221,4 +224,6 @@ Changelog
 Special Thanks
 ==============
 
-Six Feet Up would especially like to thank Martin Aspeli for his inspiration and the Duke Clinical Research Institute group for project funding.
+Six Feet Up would especially like to thank Martin Aspeli for his
+inspiration and the Duke Clinical Research Institute group for project
+funding.

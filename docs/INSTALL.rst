@@ -78,29 +78,37 @@ Now you can re-run your buildout to get the all the dependencies::
 
     $ bin/buildout
 
-Once your buildout is finished, you can start up your instance and install Lineage via the ``Add-on Products`` configlet in site setup.
+Once your buildout is finished, you can start up your instance and
+install Lineage via the ``Add-on Products`` configlet in site setup.
 
 .. _PLIP 234: http://plone.org/products/plone/roadmap/234
 
 Migration from 0.1 to the latest version
 ========================================
 
-In versions of collective.lineage that are greater than 0.1, the Child Folder type
-has been deprecated and you can know activate a folder using
+In versions of collective.lineage that are greater than 0.1, the Child
+Folder type has been deprecated and you can know activate a folder using
 the subtyper action when you are on a Folder.
 
-An upgrade step takes care of migrating the old Child Folder
-to Folder. Make sure to backup your data and then, once you
-have updated your instance to use the latest collective.lineage,
-reinstall "Lineage", it will migrate the items automatically.
+An upgrade step takes care of migrating the old Child Folder to Folder.
+Make sure to backup your data and then, once you have updated your
+instance to use the latest collective.lineage, reinstall "Lineage", it
+will migrate the items automatically.
 
-Note: we are assuming that the Child Folder and the Folder workflows
-are the same.
+NOTE: we are assuming that the Child Folder and the Folder workflows are
+the same.
 
 Migration to 1.0
 ================
 
-Pre-1.0 installations will need to run the GenericSetup profile when migrating to 1.0 or your site will produce a SiteError when attempting to view because of the changes that have been made. If you are using the `collective.recipe.plonesite` buildout part, you can add it to run automatically on your install/upgrade. Otherwise, please login to the ZMI and go to the `portal_setup` tool and select the Lineage profile from the import tab and run all steps. You site will be ready to go.
+Pre-1.0 installations will need to run the GenericSetup profile when
+migrating to 1.0 or your site will produce a ``SiteError`` when
+attempting to view because of the changes that have been made. If you
+are using the ``collective.recipe.plonesite`` buildout part, you can add
+it to run automatically on your install/upgrade. Otherwise, please login
+to the ZMI and go to the ``portal_setup`` tool and select the Lineage
+profile from the import tab and run all steps. You site will be ready to
+go.
 
 Working on the trunk of lineage
 ===============================
