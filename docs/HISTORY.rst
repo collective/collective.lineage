@@ -205,7 +205,7 @@ Changelog
   [claytron]
 
 
-0.2 - (XXXX-XX-XX)
+0.2 - (2010-04-08)
 ------------------
 
 - Doc clarifications
