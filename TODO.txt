@@ -1,7 +1,0 @@
-Things that need to be done before next release
-
-- write more tests!
-- Write tests for p4a.subtyper code and merge branch down into trunk, then release
-- Finish up subscribers for site deletion
-- Large Folder child site?  normal AT folder?  plone.app.content container?
-
