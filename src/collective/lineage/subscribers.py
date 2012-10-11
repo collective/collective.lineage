@@ -10,7 +10,9 @@ from p4a.subtyper.interfaces import ISubtypeAddedEvent
 from p4a.subtyper.interfaces import ISubtypeRemovedEvent
 
 from collective.lineage.interfaces import IChildSite
+from collective.lineage.events import ChildSiteWillBeCreatedEvent
 from collective.lineage.events import ChildSiteCreatedEvent
+from collective.lineage.events import ChildSiteWillBeRemovedEvent
 from collective.lineage.events import ChildSiteRemovedEvent
 
 
@@ -23,6 +25,7 @@ def reindexObjectProvides(folder):
 
 
 def enableFolder(folder):
+    zope.event.notify(ChildSiteWillBeCreatedEvent(folder))
     if not ISite.providedBy(folder):
         make_objectmanager_site(folder)
     # reindex so that the object_provides index is aware of our
@@ -32,6 +35,7 @@ def enableFolder(folder):
 
 
 def disableFolder(folder):
+    zope.event.notify(ChildSiteWillBeRemovedEvent(folder))
     # remove local site components
     disableSite(folder)
 
