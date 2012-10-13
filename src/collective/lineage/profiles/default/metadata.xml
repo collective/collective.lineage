@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-  <version>100</version>
+  <version>201</version>
   <dependencies>
     <dependency>profile-p4a.subtyper:default</dependency>
   </dependencies>

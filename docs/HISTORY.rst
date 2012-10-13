@@ -4,6 +4,11 @@ Changelog
 1.0.1 - (xxxx-xx-xx)
 --------------------
 
+- Remove ``setup_site`` from the ``install`` function since this is no
+  longer needed. Also bumped the metadata version so that the upgrade
+  step actually runs.
+  [claytron]
+
 - PEP8
   [clayton]
 

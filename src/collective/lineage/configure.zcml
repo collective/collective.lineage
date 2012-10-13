@@ -103,7 +103,7 @@
 
   <genericsetup:upgradeStep
       source="0.6"
-      destination="200"
+      destination="201"
       profile="collective.lineage:default"
       title="Migrate the control panel to p.a.registry based one"
       description=""
