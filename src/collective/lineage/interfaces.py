@@ -24,8 +24,18 @@ class IChildSite(INavigationRoot, IPossibleSite):
     """
 
 
+class IChildSiteWillBeCreatedEvent(Interface):
+    """An event that is fired before a child site is created
+    """
+
+
 class IChildSiteCreatedEvent(Interface):
     """An event that is fired after a child site is created
+    """
+
+
+class IChildSiteWillBeRemovedEvent(Interface):
+    """An event that is fired before the child site is removed
     """
 
 
