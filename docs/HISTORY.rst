@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0.1 - (xxxx-xx-xx)
+1.0.1 - (2012-10-13)
 --------------------
 
 - Remove ``setup_site`` from the ``install`` function since this is no
