@@ -177,6 +177,7 @@ def migrateControlPanel(context):
     remove_utility(context)
     remove_interface(context)
 
+
 def migrate_settings(context):
     """keep existing settings for menu_text
     """
@@ -184,10 +185,12 @@ def migrate_settings(context):
     registry = getUtility(IRegistry)
     settings = registry.forInterface(ILineageSettings)
     if "lineage_properties" in ptool:
-        settings.menu_text = ptool.lineage_properties.getProperty('menu_text').decode('utf-8')
+        settings.menu_text = ptool.lineage_properties.getProperty(
+            'menu_text').decode('utf-8')
         logger.info("Menu Text set to %s" % settings.menu_text)
         ptool.manage_delObjects(['lineage_properties'])
         logger.info("removed lineage_properties from portal_properties")
+
 
 def remove_controlpanel_action(context):
     """remove control panel action
@@ -198,7 +201,8 @@ def remove_controlpanel_action(context):
     for action in actions:
         if action.id == "LineageConfiguration":
             cp.deleteActions([index])
-            logger.info("removed LineageConfiguration from portal_controlpanel")
+            logger.info(
+                "removed LineageConfiguration from portal_controlpanel")
             break
         index += 1
 
@@ -212,7 +216,7 @@ def remove_utility(context):
     sm.unregisterUtility(util, ILineageConfiguration, name='lineage_config')
     del util
     logger.info("removed utility 'lineage_config'")
-    
+
 
 def remove_interface(context):
     """remove ILineageConfiguration interface
@@ -224,6 +228,6 @@ def remove_interface(context):
             obj = b.getObject()
             noLongerProvides(obj, ILineageConfiguration)
         except:
-            logger.error("Could not remove ILineageConfiguration from %s" % obj.id)
+            logger.error(
+                "Could not remove ILineageConfiguration from %s" % obj.id)
             continue
-

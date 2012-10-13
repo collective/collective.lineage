@@ -41,10 +41,14 @@ class ILineageConfiguration(Interface):
 class ILineageSettings(Interface):
     """Global Lineage Settings
     """
-    menu_text = schema.TextLine(title=_(u"Sub-type menu text"),
-                                description=_(u"help_subtype_text",
-                                default=u"You can define the text that will \
-                                        appear under the 'Sub-types' tab. \
-                                        Default is 'Child Site'"),
-                                required=False,
-                                default=u'',)
+    menu_text = schema.TextLine(
+        title=_(u"Sub-type menu text"),
+        description=_(
+            u"help_subtype_text",
+            default=(
+                u"You can define the text that will appear under the "
+                "'Sub-types' tab. Default is 'Child Site'"),
+        ),
+        required=False,
+        default=u'',
+    )

@@ -12,9 +12,9 @@ class LineageSettingsEditForm(controlpanel.RegistryEditForm):
     def updateFields(self):
         super(LineageSettingsEditForm, self).updateFields()
 
-
     def updateWidgets(self):
         super(LineageSettingsEditForm, self).updateWidgets()
+
 
 class LineageSettingsControlPanel(controlpanel.ControlPanelFormWrapper):
     form = LineageSettingsEditForm
