@@ -1,9 +1,13 @@
 Changelog
 =========
 
-1.0.2 - (xxxx-xx-xx)
---------------------
+1.1 - (xxxx-xx-xx)
+------------------
 
+- Add new events for ``WillBe`` created and removed. This will make
+  add-ons like lineage.registry able to properly deal with the child
+  site before the component registry is removed.
+  [claytron]
 
 1.0.1 - (2012-10-13)
 --------------------
