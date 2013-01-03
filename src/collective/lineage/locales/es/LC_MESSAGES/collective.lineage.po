@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.lineage\n"
-"POT-Creation-Date: 2011-03-03 15:24+0000\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "PO-Revision-Date: 2011-03-03 11:11-0400\n"
 "Last-Translator: Leonardo J. Caballero G. <leonardocaballero@gmail.com>\n"
 "Language-Team: Spanish <plone-conosur@lists.plone.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Domain: collective.lineage\n"
 "X-Is-Fallback-For: es-ar es-bo es-cl es-co es-cr es-do es-ec es-es es-sv es-gt es-hn es-mx es-ni es-pa es-py es-pe es-pr es-us es-uy es-ve\n"
 
-#: ../descriptors.py:12
+#: ../descriptors.py:13
 msgid "A child site"
 msgstr "Un sitio hijo"
 
@@ -29,27 +29,25 @@ msgstr "Una carpeta que puede ser publicada como un sitio separado"
 msgid "Child Folder"
 msgstr "Carpeta hija"
 
-#: ../descriptors.py:11
+#: ../descriptors.py:12
 msgid "Child Site"
 msgstr "Sitio hijo"
 
-#: ../content.py:39
+#: ../content.py:46
 msgid "Create a new lineage folder"
 msgstr "Crear una nueva carpeta descendente"
 
-#: ../browser.py:33
-msgid "Lineage Configuration Panel"
-msgstr "Panel de Configuración Lineage"
+#: ../controlpanel.py:9
+#: ../profiles/default/controlpanel.xml
+msgid "Lineage settings"
+msgstr ""
 
-#: ../interfaces.py:17
-msgid "Sub-types dropdown display: "
-msgstr "Lista desplegable a mostrar Sub-types: "
+#: ../interfaces.py:55
+msgid "Sub-type menu text"
+msgstr ""
 
-#: ../browser.py:34
-msgid "You can define the text that will appear                    under the 'Sub-types' tab. Default is 'Child Site'"
-msgstr "Usted puede definir el texto que aparecerá debajo de la pestaña 'Sub-types'. Por defecto es 'Sitio hijo'"
-
-#: ../browser.py:36
-msgid "settings"
-msgstr "configuraciones"
+#. Default: "You can define the text that will appear under the 'Sub-types' tab. Default is 'Child Site'"
+#: ../interfaces.py:56
+msgid "help_subtype_text"
+msgstr ""
 

@@ -5,7 +5,7 @@
     i18n:domain="collective.lineage">
 
     <configlet
-        title="Lineage Settings"
+        title="Lineage settings"
         action_id="lineage"
         appId="collective.lineage"
 		remove="True">
