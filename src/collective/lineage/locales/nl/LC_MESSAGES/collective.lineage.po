@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.lineage\n"
-"POT-Creation-Date: 2011-04-28 20:34+0000\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "PO-Revision-Date: 2011-08-24 11:11-0400\n"
 "Last-Translator: Kees Hink <hink@gw20e.com>\n"
 "Language-Team: Nederlands <plone-i18n@lists.sourceforge.net>\n"
@@ -32,23 +32,21 @@ msgstr "Subsite"
 msgid "Child Site"
 msgstr "Subsite"
 
-#: ../content.py:44
+#: ../content.py:46
 msgid "Create a new lineage folder"
 msgstr "Een nieuwe Lineage-map maken"
 
-#: ../browser.py:33
-msgid "Lineage Configuration Panel"
-msgstr "Instellingen voor Lineage"
+#: ../controlpanel.py:9
+#: ../profiles/default/controlpanel.xml
+msgid "Lineage settings"
+msgstr ""
 
-#: ../interfaces.py:17
-msgid "Sub-types dropdown display: "
-msgstr "Tekst bij selector voor schakelen tussen sites:"
+#: ../interfaces.py:55
+msgid "Sub-type menu text"
+msgstr ""
 
-#: ../browser.py:34
-msgid "You can define the text that will appear                    under the 'Sub-types' tab. Default is 'Child Site'"
-msgstr "U kunt de tekst dir onder het tabje 'Sub-types' verschijnt instellen.  Standaard is het 'Subsite'."
-
-#: ../browser.py:36
-msgid "settings"
-msgstr "Instellingen"
+#. Default: "You can define the text that will appear under the 'Sub-types' tab. Default is 'Child Site'"
+#: ../interfaces.py:56
+msgid "help_subtype_text"
+msgstr ""
 
