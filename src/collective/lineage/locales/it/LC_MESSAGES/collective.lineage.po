@@ -1,0 +1,55 @@
+# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
+# SOME DESCRIPTIVE TITLE.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: Luca Fabbri <keul@redturtle.it>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: it\n"
+"Language-Name: Italian\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: collective.lineage\n"
+
+#: ../descriptors.py:13
+msgid "A child site"
+msgstr "Un sottosito"
+
+#: ../profiles/default/types/Child_Folder.xml
+msgid "A folder that can be published as a separate site"
+msgstr "Una cartella che può essere pubblicata come un sito a parte"
+
+#: ../profiles/default/types/Child_Folder.xml
+msgid "Child Folder"
+msgstr "Cartella Figlia"
+
+#: ../descriptors.py:12
+msgid "Child Site"
+msgstr "Sottosito"
+
+#: ../content.py:46
+msgid "Create a new lineage folder"
+msgstr "Crea una nuova cartella lineage"
+
+#: ../controlpanel.py:9
+#: ../profiles/default/controlpanel.xml
+msgid "Lineage settings"
+msgstr "Impostazioni di Lineage"
+
+#: ../interfaces.py:55
+msgid "Sub-type menu text"
+msgstr "Testo del menu Sub-type"
+
+#. Default: "You can define the text that will appear under the 'Sub-types' tab. Default is 'Child Site'"
+#: ../interfaces.py:56
+msgid "help_subtype_text"
+msgstr ""
+"Puoi definire il testo che comparirà nella voce sotto al menù' Sub-type'.\n"
+"Il valore predefinito è 'Sottosito'"
+
