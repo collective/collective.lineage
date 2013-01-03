@@ -8,12 +8,7 @@
         title="Lineage Settings"
         action_id="lineage"
         appId="collective.lineage"
-        category="Products"
-        condition_expr=""
-        url_expr="string:${portal_url}/@@lineage-settings"
-        visible="True"
-        i18n:attributes="title">
-            <permission>Manage portal</permission>
+		remove="True">
     </configlet>
 
 </object>
