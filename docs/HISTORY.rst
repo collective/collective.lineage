@@ -1,10 +1,11 @@
 Changelog
 =========
 
-1.1 - (Unreleased)
-------------------
+1.1dev - (Unreleased)
+---------------------
 
-- Update dependencies and import locations.
+- Update dependencies and import locations and make collective.lineage
+  compatible with Plone 4.3.
   [thet]
 
 - Add new events for ``WillBe`` created and removed. This will make
