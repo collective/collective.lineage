@@ -4,6 +4,9 @@ Changelog
 1.1 - (xxxx-xx-xx)
 ------------------
 
+- Update dependencies and import locations.
+  [thet]
+
 - Add new events for ``WillBe`` created and removed. This will make
   add-ons like lineage.registry able to properly deal with the child
   site before the component registry is removed.

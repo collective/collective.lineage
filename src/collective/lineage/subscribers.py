@@ -1,5 +1,5 @@
-from zope import component
-from zope.app.component.interfaces import ISite
+from zope.component.interfaces import ISite
+from zope.component import adapter
 import zope.event
 
 from Products.CMFCore.utils import getToolByName
@@ -45,7 +45,7 @@ def disableFolder(folder):
     zope.event.notify(ChildSiteRemovedEvent(folder))
 
 
-@component.adapter(ISubtypeAddedEvent)
+@adapter(ISubtypeAddedEvent)
 def enableChildSite(event):
     """When a lineage folder is created, turn it into a component site
     """
@@ -55,7 +55,7 @@ def enableChildSite(event):
     enableFolder(folder)
 
 
-@component.adapter(ISubtypeRemovedEvent)
+@adapter(ISubtypeRemovedEvent)
 def disableChildSite(event):
     """When a child site is turned off, remove the local components
     """

@@ -26,7 +26,7 @@ from zope.component import getUtility
 from zope.component import getUtilitiesFor
 from zope.component import queryUtility
 from zope.component import provideUtility
-from zope.app.component.hooks import getSite
+from zope.component.hooks import getSite
 
 from collective.lineage.interfaces import ILineageConfiguration
 from collective.lineage.interfaces import ILineageSettings

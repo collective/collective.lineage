@@ -1,7 +1,7 @@
 from zope.interface import Interface
 from plone.app.layout.navigation.interfaces import INavigationRoot
 from zope import schema
-from zope.app.component.interfaces import IPossibleSite
+from zope.component.interfaces import IPossibleSite
 from zope.i18nmessageid import MessageFactory
 
 _ = MessageFactory('collective.lineage')

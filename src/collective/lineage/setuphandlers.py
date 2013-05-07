@@ -1,4 +1,4 @@
-from zope.app.component.hooks import getSite
+from zope.component.hooks import getSite
 
 from Products.CMFCore.utils import getToolByName
 from Products.GenericSetup.upgrade import _upgrade_registry

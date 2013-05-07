@@ -4,8 +4,8 @@ from zope.deprecation import deprecated
 
 from zope.component.factory import Factory
 from zope import annotation
-from zope.app.component.interfaces import ISite
-from zope.app.component.interfaces import IPossibleSite
+from zope.component.interfaces import ISite
+from zope.component.interfaces import IPossibleSite
 
 from plone.app.content.interfaces import INameFromTitle
 from plone.app.content.container import Container
