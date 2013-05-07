@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2011-03-03 15:24+0000\n"
+"POT-Creation-Date: 2013-01-03 16:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,11 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.lineage\n"
 
-#: ../descriptors.py:12
+#: ../controlpanel.py:10
+msgid ""
+msgstr ""
+
+#: ../descriptors.py:13
 msgid "A child site"
 msgstr ""
 
@@ -29,27 +33,25 @@ msgstr ""
 msgid "Child Folder"
 msgstr ""
 
-#: ../descriptors.py:11
+#: ../descriptors.py:12
 msgid "Child Site"
 msgstr ""
 
-#: ../content.py:39
+#: ../content.py:46
 msgid "Create a new lineage folder"
 msgstr ""
 
-#: ../browser.py:33
-msgid "Lineage Configuration Panel"
+#: ../controlpanel.py:9
+#: ../profiles/default/controlpanel.xml
+msgid "Lineage settings"
 msgstr ""
 
-#: ../interfaces.py:17
-msgid "Sub-types dropdown display: "
+#: ../interfaces.py:55
+msgid "Sub-type menu text"
 msgstr ""
 
-#: ../browser.py:34
-msgid "You can define the text that will appear                    under the 'Sub-types' tab. Default is 'Child Site'"
-msgstr ""
-
-#: ../browser.py:36
-msgid "settings"
+#. Default: "You can define the text that will appear under the 'Sub-types' tab. Default is 'Child Site'"
+#: ../interfaces.py:56
+msgid "help_subtype_text"
 msgstr ""
 

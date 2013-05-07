@@ -172,6 +172,9 @@ def migrateControlPanel(context):
        un-register/remove the 'lineage_config' utility,
        remove the ILineageConfiguration interface
     """
+    # being sure that the registry is ready to be used (see #11)
+    context.portal_setup.runAllImportStepsFromProfile('profile-plone.app.registry:default')
+    context.portal_setup.runImportStepFromProfile('profile-collective.lineage:default', 'plone.app.registry')
     migrate_settings(context)
     remove_controlpanel_action(context)
     remove_utility(context)

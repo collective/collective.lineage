@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1 - (xxxx-xx-xx)
+1.1 - (Unreleased)
 ------------------
 
 - Update dependencies and import locations.
@@ -11,6 +11,16 @@ Changelog
   add-ons like lineage.registry able to properly deal with the child
   site before the component registry is removed.
   [claytron]
+
+- Restored Plone 3.3 compatibility (if plone.app.registry is present)
+  [keul]
+
+- i18n fixes and added italian translation
+  [keul]
+
+- Uninstall step fixed (closed #8 and #11) but also removed other stuff
+  left behind
+  [keul]
 
 1.0.1 - (2012-10-13)
 --------------------
