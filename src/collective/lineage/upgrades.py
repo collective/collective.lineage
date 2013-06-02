@@ -26,7 +26,12 @@ from zope.component import getUtility
 from zope.component import getUtilitiesFor
 from zope.component import queryUtility
 from zope.component import provideUtility
-from zope.component.hooks import getSite
+try:
+    # Plone < 4.3
+    from zope.app.component.hooks import getSite
+except ImportError:
+    # Plone >= 4.3
+    from zope.component.hooks import getSite  # NOQA
 
 from collective.lineage.interfaces import ILineageConfiguration
 from collective.lineage.interfaces import ILineageSettings

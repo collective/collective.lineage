@@ -24,6 +24,8 @@ association events, and more.
 
 Lineage works with Plone 3 and Plone 4.
 
+NOTE: Lineage 1.1 will require Plone >= 4.1
+
 Useful links
 ============
 
