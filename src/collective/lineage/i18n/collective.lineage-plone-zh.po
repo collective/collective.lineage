@@ -1,0 +1,21 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: collective.lineage\n"
+"POT-Creation-Date: 2011-03-03 15:50+0000\n"
+"PO-Revision-Date: 2013-06-23 08:54+0800\n"
+"Last-Translator: adam <yuejun.tang@gmail.com>\n"
+"Language-Team: Spanish <plone-conosur@lists.plone.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: zh-cn\n"
+"Language-Name: Chinese\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: plone\n"
+"X-Is-Fallback-For: zh zh-tw zh-hk\n"
+
+#: ../profiles/default/controlpanel.xml
+msgid "Lineage Configuration"
+msgstr "子站系统配置"
+

@@ -1,0 +1,55 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: collective.lineage\n"
+"POT-Creation-Date: 2011-03-03 15:24+0000\n"
+"PO-Revision-Date: 2013-06-23 08:52+0800\n"
+"Last-Translator: adam <yuejun.tang@gmail.com>\n"
+"Language-Team: Spanish <plone-conosur@lists.plone.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: es\n"
+"Language-Name: Spanish\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: collective.lineage\n"
+"X-Is-Fallback-For: es-ar es-bo es-cl es-co es-cr es-do es-ec es-es es-sv es-gt es-hn es-mx es-ni es-pa es-py es-pe es-pr es-us es-uy es-ve\n"
+
+#: ../descriptors.py:12
+msgid "A child site"
+msgstr "一个子站点"
+
+#. Default: "A folder that can be published as a separate site"
+#: ../profiles/default/types/Child_Folder.xml
+msgid "A folder that can be published as a separate site"
+msgstr "一个能被作为子站点发布的文件夹"
+
+#. Default: "Child Folder"
+#: ../profiles/default/types/Child_Folder.xml
+msgid "Child Folder"
+msgstr "子文件夹"
+
+#: ../descriptors.py:11
+msgid "Child Site"
+msgstr "子站点"
+
+#: ../content.py:39
+msgid "Create a new lineage folder"
+msgstr "创建一个新的子站点文件夹"
+
+#: ../browser.py:33
+msgid "Lineage Configuration Panel"
+msgstr "子站点配置面板"
+
+#: ../interfaces.py:17
+msgid "Sub-types dropdown display: "
+msgstr "下拉列表显示的子类型"
+
+#: ../browser.py:34
+msgid "You can define the text that will appear                    under the 'Sub-types' tab. Default is 'Child Site'"
+msgstr "你可以定义文本名称，该名称将出现在'Sub-types'Tab中，缺省为'Child Site'。"
+
+#: ../browser.py:36
+msgid "settings"
+msgstr "设置"
+
