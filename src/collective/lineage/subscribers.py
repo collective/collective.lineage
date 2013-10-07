@@ -9,6 +9,8 @@ from five.localsitemanager import make_objectmanager_site
 from p4a.subtyper.interfaces import ISubtypeAddedEvent
 from p4a.subtyper.interfaces import ISubtypeRemovedEvent
 
+from plone.app.imaging.interfaces import IImagingSchema
+
 from collective.lineage.interfaces import IChildSite
 from collective.lineage.events import ChildSiteWillBeCreatedEvent
 from collective.lineage.events import ChildSiteCreatedEvent
@@ -45,7 +47,7 @@ def disableFolder(folder):
     zope.event.notify(ChildSiteRemovedEvent(folder))
 
 
-@adapter(ISubtypeAddedEvent)
+@adapter(ISubtypeAddedEvent, IImagingSchema)
 def enableChildSite(event):
     """When a lineage folder is created, turn it into a component site
     """
