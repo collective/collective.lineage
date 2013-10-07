@@ -1,5 +1,6 @@
 from zope.interface import Interface
 from plone.app.layout.navigation.interfaces import INavigationRoot
+from plone.app.imaging.interfaces import IImagingSchema
 from zope import schema
 from zope.component.interfaces import IPossibleSite
 from zope.i18nmessageid import MessageFactory
@@ -12,7 +13,7 @@ class ILineageBrowserLayer(Interface):
     """
 
 
-class IChildSite(INavigationRoot, IPossibleSite):
+class IChildSite(INavigationRoot, IPossibleSite, IImagingSchema):
     """A marker interface for a Child Site.  This is comprised of
     several other marker interfaces.
 
