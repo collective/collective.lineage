@@ -1,6 +1,12 @@
 Changelog
 =========
 
+1.1.1 - (2013-10-10)
+------------------
+- Add an adapter to allow the child site to use the portal image
+  scales. Fixes https://github.com/collective/collective.lineage/issues/18
+  [ableeb]
+
 1.1 - (2013-06-02)
 ---------------------
 

@@ -118,4 +118,9 @@
       permission="cmf.ManagePortal"
       />
 
+  <adapter 
+     for=".interfaces.IChildSite"
+     provides="plone.app.imaging.interfaces.IImagingSchema"
+     factory=".adapters.get_image_traverser" />
+
 </configure>

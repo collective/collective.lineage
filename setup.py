@@ -1,7 +1,7 @@
 import os
 from setuptools import setup, find_packages
 
-version = '1.1'
+version = '1.1.1'
 
 
 def read(*rnames):
@@ -51,6 +51,7 @@ setup(
         'p4a.common',
         'p4a.subtyper>=1.2.0',
         'plone.app.registry',
+        'plone.app.imaging',
     ],
     extras_require={
         'test': [

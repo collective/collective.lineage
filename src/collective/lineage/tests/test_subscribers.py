@@ -7,7 +7,7 @@ from collective.lineage.interfaces import IChildSite
 
 import zope.component
 import zope.interface
-from zope.app.component.interfaces import ISite
+from zope.component.interfaces import ISite
 from plone.testing import z2
 
 import p4a.subtyper
