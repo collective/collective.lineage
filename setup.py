@@ -52,7 +52,6 @@ setup(
         'p4a.subtyper>=1.2.0',
         'plone.app.registry',
         'plone.app.imaging',
-        'zope.app.component',
     ],
     extras_require={
         'test': [
