@@ -1,5 +1,3 @@
 <layers>
-	<layer name="collective.lineage" 
-           interface="collective.lineage.interfaces.ILineageBrowserLayer"
-		   remove="true" />
+  <layer remove="true" name="collective.lineage" interface="collective.lineage.interfaces.ILineageBrowserLayer"/>
 </layers>

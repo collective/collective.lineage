@@ -1,4 +1,3 @@
 <layers>
-	<layer name="collective.lineage" 
-           interface="collective.lineage.interfaces.ILineageBrowserLayer" />
+  <layer name="collective.lineage" interface="collective.lineage.interfaces.ILineageBrowserLayer" />
 </layers>

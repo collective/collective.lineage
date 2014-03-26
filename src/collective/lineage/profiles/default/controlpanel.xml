@@ -4,16 +4,16 @@
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     i18n:domain="collective.lineage">
 
-    <configlet
-        title="Lineage settings"
-        action_id="lineage"
-        appId="collective.lineage"
-        category="Products"
-        condition_expr=""
-        url_expr="string:${portal_url}/@@lineage-settings"
-        visible="True"
-        i18n:attributes="title">
-            <permission>Manage portal</permission>
-    </configlet>
+  <configlet
+      title="Lineage settings"
+      action_id="lineage"
+      appId="collective.lineage"
+      category="Products"
+      condition_expr=""
+      url_expr="string:${portal_url}/@@lineage-settings"
+      visible="True"
+      i18n:attributes="title">
+    <permission>Manage portal</permission>
+  </configlet>
 
 </object>

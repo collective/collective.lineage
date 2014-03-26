@@ -1,8 +1,8 @@
-from zope.interface import Interface
 from plone.app.layout.navigation.interfaces import INavigationRoot
 from zope import schema
 from zope.component.interfaces import IPossibleSite
 from zope.i18nmessageid import MessageFactory
+from zope.interface import Interface
 
 _ = MessageFactory('collective.lineage')
 
@@ -13,7 +13,7 @@ class ILineageBrowserLayer(Interface):
 
 
 class IChildSite(INavigationRoot, IPossibleSite):
-    """A marker interface for a Child Site.  This is comprised of
+    """A marker interface for a Child Site. This is comprised of
     several other marker interfaces.
 
     INavigationRoot

@@ -4,11 +4,11 @@
     xmlns:i18n="http://xml.zope.org/namespaces/i18n"
     i18n:domain="collective.lineage">
 
-    <configlet
-        title="Lineage settings"
-        action_id="lineage"
-        appId="collective.lineage"
-		remove="True">
-    </configlet>
+  <configlet
+      title="Lineage settings"
+      action_id="lineage"
+      appId="collective.lineage"
+      remove="True">
+  </configlet>
 
 </object>

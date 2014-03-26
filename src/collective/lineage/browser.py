@@ -1,13 +1,11 @@
-from zope.i18nmessageid import MessageFactory
-from zope.component import getUtility
-from plone.registry.interfaces import IRegistry
-
+from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.CMFCore.utils import getToolByName
-
 from collective.lineage.interfaces import IChildSite
 from collective.lineage.interfaces import ILineageSettings
+from plone.registry.interfaces import IRegistry
+from zope.component import getUtility
+from zope.i18nmessageid import MessageFactory
 
 _ = MessageFactory('collective.lineage')
 

@@ -1,23 +1,19 @@
-from zope.interface import implements
-
-from zope.deprecation import deprecated
-
-from zope.component.factory import Factory
-from zope import annotation
-from zope.component.interfaces import ISite
-from zope.component.interfaces import IPossibleSite
-
-from plone.app.content.interfaces import INameFromTitle
-from plone.app.content.container import Container
-from plone.app.layout.navigation.interfaces import INavigationRoot
-
-from collective.lineage.interfaces import IChildSite
-from collective.lineage import MessageFactory as _
-
 from OFS.OrderSupport import OrderSupport
 from Products.CMFDynamicViewFTI.browserdefault import BrowserDefaultMixin
 from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
+from collective.lineage import MessageFactory as _
+from collective.lineage.interfaces import IChildSite
 from five.localsitemanager import make_objectmanager_site
+from plone.app.content.container import Container
+from plone.app.content.interfaces import INameFromTitle
+from plone.app.layout.navigation.interfaces import INavigationRoot
+from zope import annotation
+from zope.component.factory import Factory
+from zope.component.interfaces import IPossibleSite
+from zope.component.interfaces import ISite
+from zope.deprecation import deprecated
+from zope.interface import implements
+
 
 deprecated(
     "ChildFolder",

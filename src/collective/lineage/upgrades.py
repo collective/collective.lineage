@@ -1,31 +1,31 @@
 from DateTime import DateTime
-
+from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import base_hasattr
+from collective.lineage.interfaces import ILineageConfiguration
+from collective.lineage.interfaces import ILineageSettings
 from logging import getLogger
-
 from p4a.subtyper import engine
 from p4a.subtyper import interfaces
-
 from plone.app.layout.navigation.defaultpage import getDefaultPage
+from plone.portlets.constants import CONTENT_TYPE_CATEGORY
+from plone.portlets.constants import CONTEXT_CATEGORY
+from plone.portlets.constants import GROUP_CATEGORY
 from plone.portlets.interfaces import ILocalPortletAssignable
 from plone.portlets.interfaces import ILocalPortletAssignmentManager
 from plone.portlets.interfaces import IPortletAssignmentMapping
 from plone.portlets.interfaces import IPortletManager
-from plone.portlets.constants import CONTEXT_CATEGORY
-from plone.portlets.constants import GROUP_CATEGORY
-from plone.portlets.constants import CONTENT_TYPE_CATEGORY
-
 from plone.registry.interfaces import IRegistry
-
-from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone.utils import base_hasattr
-
+from zope.component import getMultiAdapter
+from zope.component import getUtilitiesFor
+from zope.component import getUtility
+from zope.component import provideUtility
+from zope.component import queryUtility
 from zope.interface import alsoProvides
 from zope.interface import noLongerProvides
-from zope.component import getMultiAdapter
-from zope.component import getUtility
-from zope.component import getUtilitiesFor
-from zope.component import queryUtility
-from zope.component import provideUtility
+
+import transaction
+
+
 try:
     # Plone < 4.3
     from zope.app.component.hooks import getSite
@@ -33,10 +33,6 @@ except ImportError:
     # Plone >= 4.3
     from zope.component.hooks import getSite  # NOQA
 
-from collective.lineage.interfaces import ILineageConfiguration
-from collective.lineage.interfaces import ILineageSettings
-
-import transaction
 
 logger = getLogger('collective.lineage.upgrades')
 

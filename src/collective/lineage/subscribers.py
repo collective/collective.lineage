@@ -1,19 +1,16 @@
-from zope.component.interfaces import ISite
-from zope.component import adapter
-import zope.event
-
 from Products.CMFCore.utils import getToolByName
 from Products.Five.component import disableSite
+from collective.lineage.events import ChildSiteCreatedEvent
+from collective.lineage.events import ChildSiteRemovedEvent
+from collective.lineage.events import ChildSiteWillBeCreatedEvent
+from collective.lineage.events import ChildSiteWillBeRemovedEvent
+from collective.lineage.interfaces import IChildSite
 from five.localsitemanager import make_objectmanager_site
-
 from p4a.subtyper.interfaces import ISubtypeAddedEvent
 from p4a.subtyper.interfaces import ISubtypeRemovedEvent
-
-from collective.lineage.interfaces import IChildSite
-from collective.lineage.events import ChildSiteWillBeCreatedEvent
-from collective.lineage.events import ChildSiteCreatedEvent
-from collective.lineage.events import ChildSiteWillBeRemovedEvent
-from collective.lineage.events import ChildSiteRemovedEvent
+from zope.component import adapter
+from zope.component.interfaces import ISite
+import zope.event
 
 
 def reindexObjectProvides(folder):

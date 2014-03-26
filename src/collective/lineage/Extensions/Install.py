@@ -1,11 +1,10 @@
-from cStringIO import StringIO
 from Products.CMFCore.utils import getToolByName
-
+from cStringIO import StringIO
+from collective.lineage.interfaces import IChildSite
 from p4a.subtyper.interfaces import IFolderishContentTypeDescriptor
 from p4a.subtyper.interfaces import ISubtyped
 from p4a.z2utils.utils import remove_marker_ifaces
 
-from collective.lineage.interfaces import IChildSite
 
 def runProfile(portal, profileName):
     setupTool = getToolByName(portal, 'portal_setup')
@@ -19,11 +18,16 @@ def install(portal):
     print >> out, "Installed collective.lineage"
     return out.getvalue()
 
+
 def _unregisterUtility(portal):
     sm = portal.getSiteManager()
-    util = sm.queryUtility(IFolderishContentTypeDescriptor, u'collective.lineage.childsite')
-    sm.unregisterUtility(util, IFolderishContentTypeDescriptor, name=u'collective.lineage.childsite')
+    util = sm.queryUtility(
+        IFolderishContentTypeDescriptor, u'collective.lineage.childsite')
+    sm.unregisterUtility(
+        util,
+        IFolderishContentTypeDescriptor, name=u'collective.lineage.childsite')
     del sm.utilities._subscribers[0][IFolderishContentTypeDescriptor]
+
 
 def uninstall(portal, reinstall=False):
     """Run the GS profile to install this package"""
@@ -33,5 +37,5 @@ def uninstall(portal, reinstall=False):
         _unregisterUtility(portal)
         remove_marker_ifaces(portal, (IChildSite, ISubtyped))
         print >> out, "Uninstalled collective.lineage"
-    
+
     return out.getvalue()

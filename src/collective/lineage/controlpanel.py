@@ -1,6 +1,6 @@
+from collective.lineage.interfaces import _
+from collective.lineage.interfaces import ILineageSettings
 from plone.app.registry.browser import controlpanel
-
-from collective.lineage.interfaces import ILineageSettings, _
 
 
 class LineageSettingsEditForm(controlpanel.RegistryEditForm):
