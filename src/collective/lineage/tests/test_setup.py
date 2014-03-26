@@ -1,13 +1,9 @@
-# -*- coding: utf-8 -*-
-
-import unittest2 as unittest
-
+from collective.lineage.testing import LINEAGE_INTEGRATION_TESTING
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import setRoles
-
 from plone.browserlayer.utils import registered_layers
+import unittest2 as unittest
 
-from collective.lineage.testing import LINEAGE_INTEGRATION_TESTING
 
 PROJECTNAME = 'collective.lineage'
 

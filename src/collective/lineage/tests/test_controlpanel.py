@@ -1,17 +1,12 @@
-# -*- coding: utf-8 -*-
-
-import unittest2 as unittest
-
-from zope.component import getMultiAdapter
-from zope.component import getUtility
-
+from collective.lineage.interfaces import ILineageSettings
+from collective.lineage.testing import LINEAGE_INTEGRATION_TESTING
 from plone.app.testing import TEST_USER_ID
 from plone.app.testing import logout
 from plone.app.testing import setRoles
 from plone.registry.interfaces import IRegistry
-
-from collective.lineage.interfaces import ILineageSettings
-from collective.lineage.testing import LINEAGE_INTEGRATION_TESTING
+from zope.component import getMultiAdapter
+from zope.component import getUtility
+import unittest2 as unittest
 
 PROJECTNAME = 'collective.lineage'
 
@@ -34,9 +29,10 @@ class ControlPanelTestCase(unittest.TestCase):
     def test_controlpanel_view_is_protected(self):
         from AccessControl import Unauthorized
         logout()
-        self.assertRaises(Unauthorized,
-                          self.portal.restrictedTraverse,
-                         '@@lineage-settings')
+        self.assertRaises(
+            Unauthorized,
+            self.portal.restrictedTraverse,
+            '@@lineage-settings')
 
     def test_controlpanel_installed(self):
         actions = [a.getAction(self)['id']

@@ -1,34 +1,26 @@
-import unittest2 as unittest
-import zope.interface
-import zope.component
-from zope.component.interfaces import ISite
-import zope.annotation.attribute as zaa
-import zope.annotation.interfaces as zai
 from AccessControl import Unauthorized
 from Products.GenericSetup.upgrade import _upgrade_registry
-import Products.Archetypes.interfaces
+from collective.lineage.testing import LINEAGE_INTEGRATION_TESTING
+from collective.lineage.testing import LINEAGE_MIGRATION_INTEGRATION_TESTING
 from five.localsitemanager import make_objectmanager_site
-from plone.portlets.constants import (
-    CONTEXT_CATEGORY,
-    GROUP_CATEGORY,
-    CONTENT_TYPE_CATEGORY,
-)
-from plone.portlets.interfaces import (
-    ILocalPortletAssignable,
-    ILocalPortletAssignmentManager,
-    IPortletManager,
-    IPortletType,
-)
-from p4a.subtyper import (
-    interfaces,
-    default,
-    engine,
-)
+from p4a.subtyper import default
+from p4a.subtyper import engine
+from p4a.subtyper import interfaces
+from plone.portlets.constants import CONTENT_TYPE_CATEGORY
+from plone.portlets.constants import CONTEXT_CATEGORY
+from plone.portlets.constants import GROUP_CATEGORY
+from plone.portlets.interfaces import ILocalPortletAssignable
+from plone.portlets.interfaces import ILocalPortletAssignmentManager
+from plone.portlets.interfaces import IPortletManager
+from plone.portlets.interfaces import IPortletType
 from plone.testing import z2
-from collective.lineage.testing import (
-    LINEAGE_INTEGRATION_TESTING,
-    LINEAGE_MIGRATION_INTEGRATION_TESTING,
-)
+from zope.component.interfaces import ISite
+import Products.Archetypes.interfaces
+import unittest2 as unittest
+import zope.annotation.attribute as zaa
+import zope.annotation.interfaces as zai
+import zope.component
+import zope.interface
 
 
 # TODO: move this case test to other modules
@@ -49,8 +41,8 @@ class IntegrationTests(unittest.TestCase):
                                        zai.IAttributeAnnotatable)
 
         adapted = interfaces.IPossibleDescriptors(SimpleFolder())
-        self.failUnless(u'collective.lineage.childsite' in \
-                            dict(adapted.possible).keys())
+        self.failUnless(
+            u'collective.lineage.childsite' in dict(adapted.possible).keys())
 
     def test_component_registry(self):
         portal = self.layer['portal']
@@ -81,8 +73,9 @@ class IntegrationTests(unittest.TestCase):
                                        zai.IAttributeAnnotatable)
 
         adapted = interfaces.IPossibleDescriptors(SimpleFolder())
-        self.failUnless(u'collective.lineage.childsite' not in \
-                            dict(adapted.possible).keys())
+        self.failUnless(
+            u'collective.lineage.childsite' not in
+            dict(adapted.possible).keys())
 
 
 class MigrationTests(unittest.TestCase):
@@ -181,7 +174,7 @@ class MigrationTests(unittest.TestCase):
             cf1_item = portal.restrictedTraverse("cf1")
         except Unauthorized:
             cf1_item = None
-        self.failUnless(cf1_item != None)
+        self.failUnless(cf1_item is not None)
 
     def test_migration_preserves_default_view(self):
         portal = self.layer['portal']

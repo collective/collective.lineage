@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
-
-import unittest2 as unittest
-
-from collective.lineage.testing import LINEAGE_INTEGRATION_TESTING
+from Products.CMFCore.utils import getToolByName
 from collective.lineage.interfaces import IChildSite
-
+from collective.lineage.testing import LINEAGE_INTEGRATION_TESTING
+from plone.testing import z2
+import p4a.subtyper
+import unittest2 as unittest
 import zope.component
 import zope.interface
 
@@ -15,10 +14,6 @@ except ImportError:
     # Plone >= 4.3
     from zope.component.interfaces import ISite
 
-from plone.testing import z2
-
-import p4a.subtyper
-from Products.CMFCore.utils import getToolByName
 
 PROJECTNAME = 'collective.lineage'
 
@@ -33,7 +28,7 @@ class ChildSiteSubscriberTest(unittest.TestCase):
         self.portal.invokeFactory('Folder', 'site1')
         zope.component.provideUtility(p4a.subtyper.engine.Subtyper())
         self.subtyper = zope.component.getUtility(
-                                        p4a.subtyper.interfaces.ISubtyper)
+            p4a.subtyper.interfaces.ISubtyper)
         self.catalog = getToolByName(self.portal, 'portal_catalog')
 
     def test_enabling_child_site(self):
