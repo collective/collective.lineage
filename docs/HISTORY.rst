@@ -1,10 +1,11 @@
 Changelog
 =========
 
-1.1.2 - (unreleased)
---------------------
+2.0 - (unreleased)
+------------------
 
-
+- Remove deprecated ChildFolder content type.
+  [thet]
 
 1.1.1 - (2014-06-26)
 --------------------
