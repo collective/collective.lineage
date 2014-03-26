@@ -23,37 +23,6 @@
       provides="plone.app.imaging.interfaces.IImagingSchema"
       factory=".adapters.get_image_traverser" />
 
-
-  <!-- Old Child Folder stuff, to be removed after next release -->
-  <permission
-      id="collective.lineage.AddChildFolder"
-      title="collective.lineage: Add Child Folder"
-      />
-
-  <five:registerClass
-      class=".content.ChildFolder"
-      meta_type="Child Folder"
-      permission="collective.lineage.AddChildFolder"
-      addview="collective.lineage.AddChildFolder"
-      />
-
-  <utility
-      component=".content.factory"
-      name="collective.lineage.ChildFolder"
-      />
-
-  <class class=".content.ChildFolder">
-    <require
-        permission="zope2.View"
-        interface=".interfaces.IChildSite"
-        />
-    <require
-        permission="cmf.ModifyPortalContent"
-        set_schema=".interfaces.IChildSite"
-        />
-  </class>
-  <!-- end old Child Folder -->
-
   <!-- Control panel -->
   <browser:page
       name="lineage-settings"
