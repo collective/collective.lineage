@@ -7,7 +7,14 @@ from collective.lineage.interfaces import IChildSite
 
 import zope.component
 import zope.interface
-from zope.app.component.interfaces import ISite
+
+try:
+    # Plone < 4.3
+    from zope.app.component.interfaces import ISite
+except ImportError:
+    # Plone >= 4.3
+    from zope.component.interfaces import ISite
+
 from plone.testing import z2
 
 import p4a.subtyper
