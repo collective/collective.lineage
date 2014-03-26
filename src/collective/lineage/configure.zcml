@@ -18,6 +18,11 @@
   <subscriber handler=".subscribers.enableChildSite" />
   <subscriber handler=".subscribers.disableChildSite" />
 
+  <adapter 
+      for=".interfaces.IChildSite"
+      provides="plone.app.imaging.interfaces.IImagingSchema"
+      factory=".adapters.get_image_traverser" />
+
 
   <!-- Old Child Folder stuff, to be removed after next release -->
   <permission
