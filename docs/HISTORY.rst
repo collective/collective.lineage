@@ -4,6 +4,10 @@ Changelog
 2.0 - (unreleased)
 ------------------
 
+- Remove upgrade steps and migration for 1.x based versions. Please migrate
+  your site to the latest 1.x version before using 2.0.
+  [thet]
+
 - Remove deprecated ChildFolder content type.
   [thet]
 

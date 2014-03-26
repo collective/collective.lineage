@@ -26,6 +26,14 @@ Lineage works with Plone 3 and Plone 4.
 
 NOTE: Lineage 1.1 will require Plone >= 4.1
 
+
+Upgrade from 1.x
+================
+
+Please upgrade first to the latest version within the 1.x branch of
+collective.lineage. The old upgrade steps are removed in 2.0.
+
+
 Useful links
 ============
 

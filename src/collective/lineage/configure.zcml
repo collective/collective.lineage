@@ -73,23 +73,4 @@
     <depends name="content"/>
   </genericsetup:importStep>
 
-  <!-- UPGRADES -->
-  <genericsetup:upgradeStep
-      source="0.2"
-      destination="100"
-      profile="collective.lineage:default"
-      title="Migrate the Child Folder objects"
-      description=""
-      handler="collective.lineage.upgrades.migrateChildFolders"
-      />
-
-  <genericsetup:upgradeStep
-      source="100"
-      destination="201"
-      profile="collective.lineage:default"
-      title="Migrate the control panel to p.a.registry based one"
-      description=""
-      handler="collective.lineage.upgrades.migrateControlPanel"
-      />
-
 </configure>

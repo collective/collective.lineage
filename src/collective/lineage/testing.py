@@ -29,20 +29,3 @@ LINEAGE_INTEGRATION_TESTING = (
         bases=(LINEAGE_FIXTURE, ),
         name="collective.lineage:Integration")
 )
-
-
-class CollectiveLineageMigration(PloneSandboxLayer):
-
-    defaultBases = (LINEAGE_FIXTURE, )
-
-    def setUpPloneSite(self, portal):
-        portal.portal_membership.addMember('testuser', 'secret', (), [])
-        # XXX: some stuff was moved from here to setUp() in test_migration.py
-        # as the test were not set up in presence of more modules; why?
-
-LINEAGE_MIGRATION_FIXTURE = CollectiveLineageMigration()
-LINEAGE_MIGRATION_INTEGRATION_TESTING = (
-    IntegrationTesting(
-        bases=(LINEAGE_MIGRATION_FIXTURE, ),
-        name="collective.lineage:Integration")
-)
