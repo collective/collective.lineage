@@ -26,7 +26,8 @@ def _unregisterUtility(portal):
     sm.unregisterUtility(
         util,
         IFolderishContentTypeDescriptor, name=u'collective.lineage.childsite')
-    del sm.utilities._subscribers[0][IFolderishContentTypeDescriptor]
+    if IFolderishContentTypeDescriptor in sm.utilities._subscribers[0]:
+        del sm.utilities._subscribers[0][IFolderishContentTypeDescriptor]
 
 
 def uninstall(portal, reinstall=False):
