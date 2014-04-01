@@ -11,7 +11,7 @@ def read(*rnames):
 
 long_description = '\n\n'.join((read('README.rst'),
                                 read('docs', 'INSTALL.rst'),
-                                read('docs', 'HISTORY.rst')))
+                                read('CHANGES.rst')))
 
 setup(
     name='collective.lineage',

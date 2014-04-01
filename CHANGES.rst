@@ -4,6 +4,12 @@ Changelog
 2.0 - (unreleased)
 ------------------
 
+TODO: - Compatibility with Dexterity (implicit by removing p4a.subtyper and
+using a more generic plone.folder interface to bind views to).
+
+TODO: - Remove dependency on p4a.subtyper and add/remove marker interfaces on
+subsites instead.
+
 - Remove upgrade steps and migration for 1.x based versions. Please migrate
   your site to the latest 1.x version before using 2.0.
   [thet]
