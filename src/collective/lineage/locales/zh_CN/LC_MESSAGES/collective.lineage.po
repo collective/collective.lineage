@@ -41,6 +41,9 @@ msgstr "创建一个新的子站点文件夹"
 msgid "Lineage Configuration Panel"
 msgstr "子站点配置面板"
 
+msgid "Lineage Configuration"
+msgstr "子站系统配置"
+
 #: ../interfaces.py:17
 msgid "Sub-types dropdown display: "
 msgstr "下拉列表显示的子类型"

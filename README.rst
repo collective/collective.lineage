@@ -30,8 +30,13 @@ NOTE: Lineage 1.1 will require Plone >= 4.1
 Upgrade from 1.x
 ================
 
-Please upgrade first to the latest version within the 1.x branch of
-collective.lineage. The old upgrade steps are removed in 2.0.
+.. note::
+
+  Please make a list of all your subsites before, as you have to re-enable them
+  manually. There is no upgrade step for this yet.
+
+Please upgrade to most recent 1.x version in the 1.x branch, deinstall
+collective.lineage and use the 2.x branch then and reinstall.
 
 
 Useful links
@@ -42,6 +47,7 @@ Useful links
 - Plone: http://plone.org/products/collective-lineage
 - issue tracker: https://github.com/collective/collective.lineage/issues/
 - code repository: http://github.com/collective/collective.lineage/
+
 
 Detailed Documentation
 ======================
