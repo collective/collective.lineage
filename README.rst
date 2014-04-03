@@ -35,8 +35,9 @@ Upgrade from 1.x
   Please make a list of all your subsites before, as you have to re-enable them
   manually. There is no upgrade step for this yet.
 
-Please upgrade to most recent 1.x version in the 1.x branch, deinstall
-collective.lineage and use the 2.x branch then and reinstall.
+Please upgrade to most recent 1.x version in the 1.x branch.
+Then deinstall `collective.lineage` and `p4a.subtyper` via the quick installer.
+Then upgrade the lineage software to the 2.x branch and reinstall.
 
 
 Useful links
