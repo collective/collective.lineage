@@ -42,7 +42,6 @@ collective.lineage and use the 2.x branch then and reinstall.
 Useful links
 ============
 
-- irc room: #plone-lineage
 - pypi: http://pypi.python.org/pypi/collective.lineage
 - Plone: http://plone.org/products/collective-lineage
 - issue tracker: https://github.com/collective/collective.lineage/issues/
