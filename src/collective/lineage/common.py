@@ -43,7 +43,8 @@ class LineageTool(BrowserView):
         """
         return IChildSite.providedBy(self.context)
 
-    @property
+    # these methods are called like views
+
     def enable(self):
         """Enable a lineage subsite on this context.
         """
@@ -63,7 +64,6 @@ class LineageTool(BrowserView):
         # redirect
         self.request.response.redirect(ctx.absolute_url())
 
-    @property
     def disable(self):
         """Disable a lineage subsite on this context.
         """
