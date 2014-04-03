@@ -22,7 +22,7 @@
                           disabled
                           enable
                           disable"
-      permission="zope2.View"
+      permission="cmf.ManagePortal"
       layer=".interfaces.ILineageBrowserLayer"
       />
 
