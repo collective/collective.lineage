@@ -8,7 +8,7 @@
       <property name="available_expr">object/@@lineage_tool/disabled|nothing</property>
       <property name="visible">True</property>
       <property name="permissions">
-        <element value="Manage properties" />
+        <element value="Manage portal" />
       </property>
     </object>
     <object name="disable_subsite" meta_type="CMF Action" i18n:domain="plone">
@@ -18,7 +18,7 @@
       <property name="available_expr">object/@@lineage_tool/enabled|nothing</property>
       <property name="visible">True</property>
       <property name="permissions">
-        <element value="Manage properties" />
+        <element value="Manage portal" />
       </property>
     </object>
   </object>
