@@ -30,14 +30,10 @@ NOTE: Lineage 1.1 will require Plone >= 4.1
 Upgrade from 1.x
 ================
 
-.. note::
-
-  Please make a list of all your subsites before, as you have to re-enable them
-  manually. There is no upgrade step for this yet.
-
-Please upgrade to most recent 1.x version in the 1.x branch.
-Then deinstall `collective.lineage` and `p4a.subtyper` via the quick installer.
-Then upgrade the lineage software to the 2.x branch and reinstall.
+Please upgrade to most recent 1.x version in the 1.x branch.  Then deinstall
+`collective.lineage` and `p4a.subtyper` via the quick installer.  After that
+include lineage 2.x in buildout, rerun to install it and install
+collective.lineage in your Plone site using the control panel.
 
 
 Useful links
