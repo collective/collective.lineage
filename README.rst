@@ -26,14 +26,24 @@ Lineage works with Plone 3 and Plone 4.
 
 NOTE: Lineage 1.1 will require Plone >= 4.1
 
+
+Upgrade from 1.x
+================
+
+Please upgrade to most recent 1.x version in the 1.x branch.  Then deinstall
+`collective.lineage` and `p4a.subtyper` via the quick installer.  After that
+include lineage 2.x in buildout, rerun to install it and install
+collective.lineage in your Plone site using the control panel.
+
+
 Useful links
 ============
 
-- irc room: #plone-lineage
 - pypi: http://pypi.python.org/pypi/collective.lineage
 - Plone: http://plone.org/products/collective-lineage
 - issue tracker: https://github.com/collective/collective.lineage/issues/
 - code repository: http://github.com/collective/collective.lineage/
+
 
 Detailed Documentation
 ======================

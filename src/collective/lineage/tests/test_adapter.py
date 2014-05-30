@@ -1,19 +1,11 @@
-# -*- coding: utf-8 -*-
-
-import unittest2 as unittest
-
-from plone.testing import z2
-
-import zope.component
-from zope.component import getGlobalSiteManager
-from zope.component import getUtility
-
+from collective.lineage.testing import LINEAGE_INTEGRATION_TESTING
 from plone.app.imaging.interfaces import IImagingSchema
 from plone.app.imaging.traverse import ImageTraverser
-
+from plone.testing import z2
+from zope.component import getGlobalSiteManager
 import p4a.subtyper
-from collective.lineage.interfaces import IChildSite
-from collective.lineage.testing import LINEAGE_INTEGRATION_TESTING
+import unittest2 as unittest
+import zope.component
 
 PROJECTNAME = 'collective.lineage'
 

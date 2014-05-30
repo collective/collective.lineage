@@ -1,5 +1,4 @@
 from plone.app.layout.navigation.interfaces import INavigationRoot
-from zope import schema
 from zope.component.interfaces import IPossibleSite
 from zope.i18nmessageid import MessageFactory
 from zope.interface import Interface
@@ -42,23 +41,3 @@ class IChildSiteWillBeRemovedEvent(Interface):
 class IChildSiteRemovedEvent(Interface):
     """An event that is fired after a child site is removed
     """
-
-
-class ILineageConfiguration(Interface):
-    """This interface defines the lineage configlet."""
-
-
-class ILineageSettings(Interface):
-    """Global Lineage Settings
-    """
-    menu_text = schema.TextLine(
-        title=_(u"Sub-type menu text"),
-        description=_(
-            u"help_subtype_text",
-            default=(
-                u"You can define the text that will appear under the "
-                "'Sub-types' tab. Default is 'Child Site'"),
-        ),
-        required=False,
-        default=u'',
-    )

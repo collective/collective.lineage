@@ -6,60 +6,21 @@
     xmlns:i18n="http://namespaces.zope.org/i18n"
     i18n_domain="collective.lineage">
 
-  <five:registerPackage package="." initialize=".initialize"/>
+  <includePlugins package="." />
   <i18n:registerTranslations directory="locales" />
 
-  <includePlugins package="." />
+  <adapter factory=".browser.get_image_traverser" />
 
-  <include package="Products.CMFCore" />
-  <include package="plone.app.registry" />
-  <include package="p4a.subtyper" />
-
-  <subscriber handler=".subscribers.enableChildSite" />
-  <subscriber handler=".subscribers.disableChildSite" />
-
-  <adapter 
-      for=".interfaces.IChildSite"
-      provides="plone.app.imaging.interfaces.IImagingSchema"
-      factory=".adapters.get_image_traverser" />
-
-
-  <!-- Old Child Folder stuff, to be removed after next release -->
-  <permission
-      id="collective.lineage.AddChildFolder"
-      title="collective.lineage: Add Child Folder"
-      />
-
-  <five:registerClass
-      class=".content.ChildFolder"
-      meta_type="Child Folder"
-      permission="collective.lineage.AddChildFolder"
-      addview="collective.lineage.AddChildFolder"
-      />
-
-  <utility
-      component=".content.factory"
-      name="collective.lineage.ChildFolder"
-      />
-
-  <class class=".content.ChildFolder">
-    <require
-        permission="zope2.View"
-        interface=".interfaces.IChildSite"
-        />
-    <require
-        permission="cmf.ModifyPortalContent"
-        set_schema=".interfaces.IChildSite"
-        />
-  </class>
-  <!-- end old Child Folder -->
-
-  <!-- Control panel -->
   <browser:page
-      name="lineage-settings"
-      for="Products.CMFPlone.interfaces.IPloneSiteRoot"
-      class=".controlpanel.LineageSettingsControlPanel"
+      for="*"
+      name="lineage_tool"
+      class=".browser.LineageTool"
+      allowed_attributes="enabled
+                          disabled
+                          enable
+                          disable"
       permission="cmf.ManagePortal"
+      layer=".interfaces.ILineageBrowserLayer"
       />
 
   <browser:viewlet
@@ -70,15 +31,6 @@
       layer=".interfaces.ILineageBrowserLayer"
       />
 
-  <browser:page
-      name="lineageutils"
-      for="*"
-      class="collective.lineage.browser.LineageUtils"
-      permission="zope.Public"
-      />
-
-
-  <!-- GenericSetup profile -->
   <genericsetup:registerProfile
       name="default"
       title="Lineage"
@@ -86,41 +38,12 @@
       description="The microsite creation package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
-
-  <!-- GenericSetup profile -->
   <genericsetup:registerProfile
       name="uninstall"
       title="Lineage (uninstall)"
       directory="profiles/uninstall"
       description="Uninstall Lineage"
       provides="Products.GenericSetup.interfaces.EXTENSION"
-      />
-
-  <genericsetup:importStep
-      name="collective.lineage: default"
-      title="collective.lineage: Various steps"
-      description="Setup handlers for collective.lineage"
-      handler="collective.lineage.setuphandlers.importVarious">
-    <depends name="content"/>
-  </genericsetup:importStep>
-
-  <!-- UPGRADES -->
-  <genericsetup:upgradeStep
-      source="0.2"
-      destination="100"
-      profile="collective.lineage:default"
-      title="Migrate the Child Folder objects"
-      description=""
-      handler="collective.lineage.upgrades.migrateChildFolders"
-      />
-
-  <genericsetup:upgradeStep
-      source="100"
-      destination="201"
-      profile="collective.lineage:default"
-      title="Migrate the control panel to p.a.registry based one"
-      description=""
-      handler="collective.lineage.upgrades.migrateControlPanel"
       />
 
 </configure>

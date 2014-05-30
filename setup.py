@@ -1,7 +1,7 @@
 import os
 from setuptools import setup, find_packages
 
-version = '1.1.1'
+version = '2.0dev'
 
 
 def read(*rnames):
@@ -11,7 +11,7 @@ def read(*rnames):
 
 long_description = '\n\n'.join((read('README.rst'),
                                 read('docs', 'INSTALL.rst'),
-                                read('docs', 'HISTORY.rst')))
+                                read('CHANGES.rst')))
 
 setup(
     name='collective.lineage',
@@ -47,16 +47,21 @@ setup(
     install_requires=[
         'setuptools',
         'Plone',
-        'p4a.z2utils',
-        'p4a.common',
-        'p4a.subtyper>=1.2.0',
-        'plone.app.registry',
+        'Products.CMFCore',
+        'five.localsitemanager',
         'plone.app.imaging',
+        'plone.app.layout',
+        'plone.folder',
+        'zope.component',
+        'zope.event',
+        'zope.i18nmessageid',
+        'zope.interface',
     ],
     extras_require={
         'test': [
             'interlude',
             'plone.app.testing',
+            'zope.configuration',
         ],
     },
     entry_points="""
