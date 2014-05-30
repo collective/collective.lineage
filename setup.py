@@ -47,15 +47,21 @@ setup(
     install_requires=[
         'setuptools',
         'Plone',
-        'p4a.z2utils',
-        'p4a.common',
-        'p4a.subtyper>=1.2.0',
+        'Products.CMFCore',
+        'five.localsitemanager',
         'plone.app.imaging',
+        'plone.app.layout',
+        'plone.folder',
+        'zope.component',
+        'zope.event',
+        'zope.i18nmessageid',
+        'zope.interface',
     ],
     extras_require={
         'test': [
             'interlude',
             'plone.app.testing',
+            'zope.configuration',
         ],
     },
     entry_points="""
