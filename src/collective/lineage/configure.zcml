@@ -9,12 +9,12 @@
   <includePlugins package="." />
   <i18n:registerTranslations directory="locales" />
 
-  <adapter factory=".common.get_image_traverser" />
+  <adapter factory=".browser.get_image_traverser" />
 
   <browser:page
       for="*"
       name="lineage_tool"
-      class=".common.LineageTool"
+      class=".browser.LineageTool"
       allowed_attributes="enabled
                           disabled
                           enable
@@ -26,7 +26,7 @@
   <browser:viewlet
       name="collective.lineage.switcher"
       manager="plone.app.layout.viewlets.interfaces.IPortalHeader"
-      class=".common.LineageSwitcherViewlet"
+      class=".browser.LineageSwitcherViewlet"
       permission="zope2.View"
       layer=".interfaces.ILineageBrowserLayer"
       />
