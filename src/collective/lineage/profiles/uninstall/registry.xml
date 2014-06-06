@@ -2,5 +2,5 @@
 <registry>
   <record interface="collective.lineage.interfaces.ILineageSettings"
           field="menu_text"
-          delete="True"/>
+          remove="True"/>
 </registry>
