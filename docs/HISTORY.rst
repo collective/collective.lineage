@@ -1,11 +1,20 @@
 Changelog
 =========
 
-1.1.1 - (2013-10-10)
-------------------
+1.1.1 - (unreleased)
+--------------------
+
 - Add an adapter to allow the child site to use the portal image
   scales. Fixes https://github.com/collective/collective.lineage/issues/18
   [ableeb]
+
+- Remove componentregistry ``collective.lineage.childsite`` utility from the
+  component registry.
+  [thet]
+
+- Add Chinese translations.
+  [adam139]
+
 
 1.1 - (2013-06-02)
 ---------------------
