@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.1.1 - (unreleased)
+1.1.1 - (2014-06-26)
 --------------------
 
 - Add an adapter to allow the child site to use the portal image
@@ -14,7 +14,6 @@ Changelog
 
 - Add Chinese translations.
   [adam139]
-
 
 1.1 - (2013-06-02)
 ---------------------
