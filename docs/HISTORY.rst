@@ -13,8 +13,8 @@ Changelog
   scales. Fixes https://github.com/collective/collective.lineage/issues/18
   [ableeb]
 
-- Remove componentregistry ``collective.lineage.childsite`` utility from the
-  component registry.
+- In the uninstall profile, remove componentregistry
+  ``collective.lineage.childsite`` utility from the component registry.
   [thet]
 
 - Add Chinese translations.
