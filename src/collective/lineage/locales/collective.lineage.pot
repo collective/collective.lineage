@@ -4,7 +4,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2013-01-03 16:45+0000\n"
+"POT-Creation-Date: 2014-09-29 11:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,41 +17,15 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.lineage\n"
 
-#: ../controlpanel.py:10
-msgid ""
+#: ../profiles/default/actions.xml
+msgid "Disable Subsite"
 msgstr ""
 
-#: ../descriptors.py:13
-msgid "A child site"
+#: ../profiles/default/actions.xml
+msgid "Enable Subsite"
 msgstr ""
 
-#: ../profiles/default/types/Child_Folder.xml
-msgid "A folder that can be published as a separate site"
-msgstr ""
-
-#: ../profiles/default/types/Child_Folder.xml
-msgid "Child Folder"
-msgstr ""
-
-#: ../descriptors.py:12
-msgid "Child Site"
-msgstr ""
-
-#: ../content.py:46
-msgid "Create a new lineage folder"
-msgstr ""
-
-#: ../controlpanel.py:9
-#: ../profiles/default/controlpanel.xml
-msgid "Lineage settings"
-msgstr ""
-
-#: ../interfaces.py:55
-msgid "Sub-type menu text"
-msgstr ""
-
-#. Default: "You can define the text that will appear under the 'Sub-types' tab. Default is 'Child Site'"
-#: ../interfaces.py:56
-msgid "help_subtype_text"
+#: ../switcher.pt:5
+msgid "Jump to child site"
 msgstr ""
 

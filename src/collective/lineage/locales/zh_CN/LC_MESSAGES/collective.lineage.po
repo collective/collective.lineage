@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.lineage\n"
-"POT-Creation-Date: 2011-03-03 15:24+0000\n"
+"POT-Creation-Date: 2014-09-29 11:56+0000\n"
 "PO-Revision-Date: 2013-06-23 08:52+0800\n"
 "Last-Translator: adam <yuejun.tang@gmail.com>\n"
 "Language-Team: Spanish <plone-conosur@lists.plone.org>\n"
@@ -45,11 +45,15 @@ msgstr "子站点配置面板"
 msgid "Sub-types dropdown display: "
 msgstr "下拉列表显示的子类型"
 
-#: ../browser.py:34
-msgid "You can define the text that will appear                    under the 'Sub-types' tab. Default is 'Child Site'"
-msgstr "你可以定义文本名称，该名称将出现在'Sub-types'Tab中，缺省为'Child Site'。"
+#: ../profiles/default/actions.xml
+msgid "Disable Subsite"
+msgstr ""
 
-#: ../browser.py:36
-msgid "settings"
-msgstr "设置"
+#: ../profiles/default/actions.xml
+msgid "Enable Subsite"
+msgstr ""
+
+#: ../switcher.pt:5
+msgid "Jump to child site"
+msgstr ""
 

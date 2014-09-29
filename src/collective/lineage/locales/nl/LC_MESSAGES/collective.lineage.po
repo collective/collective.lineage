@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.lineage\n"
-"POT-Creation-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"POT-Creation-Date: 2014-09-29 11:56+0000\n"
 "PO-Revision-Date: 2011-08-24 11:11-0400\n"
 "Last-Translator: Kees Hink <hink@gw20e.com>\n"
 "Language-Team: Nederlands <plone-i18n@lists.sourceforge.net>\n"
@@ -14,39 +14,15 @@ msgstr ""
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.lineage\n"
 
-#: ../descriptors.py:13
-msgid "A child site"
-msgstr "Een Subsite"
-
-#. Default: "A folder that can be published as a separate site"
-#: ../profiles/default/types/Child_Folder.xml
-msgid "A folder that can be published as a separate site"
-msgstr "Een map die als aparte site getoond kan worden"
-
-#. Default: "Child Folder"
-#: ../profiles/default/types/Child_Folder.xml
-msgid "Child Folder"
-msgstr "Subsite"
-
-#: ../descriptors.py:12
-msgid "Child Site"
-msgstr "Subsite"
-
-#: ../content.py:46
-msgid "Create a new lineage folder"
-msgstr "Een nieuwe Lineage-map maken"
-
-#: ../controlpanel.py:9
-#: ../profiles/default/controlpanel.xml
-msgid "Lineage settings"
+#: ../profiles/default/actions.xml
+msgid "Disable Subsite"
 msgstr ""
 
-#: ../interfaces.py:55
-msgid "Sub-type menu text"
+#: ../profiles/default/actions.xml
+msgid "Enable Subsite"
 msgstr ""
 
-#. Default: "You can define the text that will appear under the 'Sub-types' tab. Default is 'Child Site'"
-#: ../interfaces.py:56
-msgid "help_subtype_text"
+#: ../switcher.pt:5
+msgid "Jump to child site"
 msgstr ""
 

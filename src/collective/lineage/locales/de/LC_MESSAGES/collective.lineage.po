@@ -1,52 +1,32 @@
+# Harald Friessnegger <harald@webmeisterei.com>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: collective.lineage\n"
-"POT-Creation-Date: YEAR-MO-DA HO:MI +ZONE\n"
-"PO-Revision-Date: 2011-03-03 11:11-0400\n"
-"Last-Translator: Timo Stollenwerk <contact@timostollenwerk.net>\n"
-"Language-Team: Deutsch <plone-i18n@lists.sourceforge.net>\n"
+"POT-Creation-Date: 2014-09-29 11:56+0000\n"
+"PO-Revision-Date: 2014-09-29 13:57+0200\n"
+"Last-Translator: Harald Friessnegger <harald@webmeisterei.com>\n"
+"Language-Team: German <kde-i18n-de@kde.org>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
 "Language-Code: de\n"
 "Language-Name: Deutsch\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: collective.lineage\n"
+"Language: de\n"
+"X-Generator: Lokalize 1.5\n"
 
-#: ../descriptors.py:13
-msgid "A child site"
-msgstr "Eine Unterseite"
+#: ../profiles/default/actions.xml
+msgid "Disable Subsite"
+msgstr "Unterseite deaktivieren"
 
-#. Default: "A folder that can be published as a separate site"
-#: ../profiles/default/types/Child_Folder.xml
-msgid "A folder that can be published as a separate site"
-msgstr "Ein Ordner der als separate Seite veröffentlicht werden kann"
+#: ../profiles/default/actions.xml
+msgid "Enable Subsite"
+msgstr "Unterseite aktivieren"
 
-#. Default: "Child Folder"
-#: ../profiles/default/types/Child_Folder.xml
-msgid "Child Folder"
-msgstr "Unterordner"
+#: ../switcher.pt:5
+msgid "Jump to child site"
+msgstr "Gehe zu Unterseite"
 
-#: ../descriptors.py:12
-msgid "Child Site"
-msgstr "Unterseite"
-
-#: ../content.py:46
-msgid "Create a new lineage folder"
-msgstr "Neuen Lineage Ordner erstellen"
-
-#: ../controlpanel.py:9
-#: ../profiles/default/controlpanel.xml
-msgid "Lineage settings"
-msgstr ""
-
-#: ../interfaces.py:55
-msgid "Sub-type menu text"
-msgstr ""
-
-#. Default: "You can define the text that will appear under the 'Sub-types' tab. Default is 'Child Site'"
-#: ../interfaces.py:56
-msgid "help_subtype_text"
-msgstr ""
 

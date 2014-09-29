@@ -25,6 +25,8 @@ Changelog
   re-enable them manually. There is no upgrade step for this yet.
   [thet]
 
+- Make objectactions and site-switchter translateable and add German
+  translations [fRiSi]
 
 1.1.1 - (unreleased)
 ------------------
@@ -41,7 +43,7 @@ Changelog
   [adam139]
 
 1.1 - (2013-06-02)
----------------------
+------------------
 
 - Fixed imports to allow lineage to be compatible with
   Plone >= 4.1
