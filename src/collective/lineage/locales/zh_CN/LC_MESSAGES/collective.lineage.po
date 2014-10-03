@@ -37,7 +37,7 @@ msgstr "子站点"
 msgid "Create a new lineage folder"
 msgstr "创建一个新的子站点文件夹"
 
-#: ../browser.py:33
+#: ../browser.pj
 msgid "Lineage Configuration Panel"
 msgstr "子站点配置面板"
 

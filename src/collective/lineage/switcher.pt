@@ -1,9 +1,8 @@
-<tal:block define="sites view/sites; message view/@@lineageutils;"
-    i18n:domain="collective.lineage">
-  <form action="." tal:condition="sites" id="lineageSelectionForm" style="float: right; margin-top: 1px; padding: 2px 1em 3px 0">
+<tal:block define="sites view/sites" i18n:domain="collective.lineage">
+  <form action="." tal:condition="sites" id="lineageSelectionForm">
     <select id="lineageSelection" name="lineageSelection"
         onchange="javascript:window.location=form.lineageSelection.options[form.lineageSelection.selectedIndex].value">
-      <option value="" tal:content="message/getSwitcherDefault">Jump to child site</option>
+      <option value="" i18n:translate="">Jump to child site</option>
       <option tal:repeat="site sites" tal:attributes="value site/url" tal:content="site/title" />
     </select>
   </form>

@@ -1,16 +1,84 @@
 from Products.CMFCore.utils import getToolByName
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
+from Products.Five.component import disableSite
+from collective.lineage.events import ChildSiteCreatedEvent
+from collective.lineage.events import ChildSiteRemovedEvent
+from collective.lineage.events import ChildSiteWillBeCreatedEvent
+from collective.lineage.events import ChildSiteWillBeRemovedEvent
 from collective.lineage.interfaces import IChildSite
-from collective.lineage.interfaces import ILineageSettings
-from plone.registry.interfaces import IRegistry
-from zope.component import getUtility
+from five.localsitemanager import make_objectmanager_site
+from plone.folder.interfaces import IFolder
+from zope.component.interfaces import ISite
+from zope.event import notify
 from zope.i18nmessageid import MessageFactory
+from zope.interface import alsoProvides
+from zope.interface import noLongerProvides
+
 
 _ = MessageFactory('collective.lineage')
 
 
+class LineageTool(BrowserView):
+
+    @property
+    def available(self):
+        """True, if the context can become a lineage subsite.
+        """
+        return IFolder.providedBy(self.context)
+
+    @property
+    def disabled(self):
+        """True, if context is not a lineage subsite but could possibly be one.
+        """
+        return self.available and not self.enabled
+
+    @property
+    def enabled(self):
+        """True, if context is a lineage subsite.
+        """
+        return IChildSite.providedBy(self.context)
+
+    def enable(self):
+        """Enable a lineage subsite on this context.
+        """
+        ctx = self.context
+        notify(ChildSiteWillBeCreatedEvent(ctx))
+
+        # enable site
+        if not ISite.providedBy(ctx):
+            make_objectmanager_site(ctx)
+
+        # provide IChildSite
+        alsoProvides(ctx, IChildSite)
+
+        ctx.reindexObject(idxs=('object_provides'))
+        notify(ChildSiteCreatedEvent(ctx))
+
+        # redirect
+        self.request.response.redirect(ctx.absolute_url())
+
+    def disable(self):
+        """Disable a lineage subsite on this context.
+        """
+        ctx = self.context
+        notify(ChildSiteWillBeRemovedEvent(ctx))
+
+        # remove local site components
+        disableSite(ctx)
+
+        # remove IChildSite
+        noLongerProvides(ctx, IChildSite)
+
+        ctx.reindexObject(idxs=('object_provides'))
+        notify(ChildSiteRemovedEvent(ctx))
+
+        # redirect
+        self.request.response.redirect(ctx.absolute_url())
+
+
 class LineageSwitcherViewlet(BrowserView):
+    render = ViewPageTemplateFile('switcher.pt')
 
     def __init__(self, context, request, view, manager):
         self.__parent__ = view
@@ -21,8 +89,6 @@ class LineageSwitcherViewlet(BrowserView):
 
     def update(self):
         pass
-
-    render = ViewPageTemplateFile('switcher.pt')
 
     def sites(self):
         catalog = getToolByName(self.context, 'portal_catalog')
@@ -43,19 +109,3 @@ class LineageSwitcherViewlet(BrowserView):
         if len(sites) <= 1:
             return []
         return sites
-
-
-class LineageUtils(BrowserView):
-
-    def getSwitcherDefault(self):
-        registry = getUtility(IRegistry)
-        settings = registry.forInterface(ILineageSettings)
-        if settings.menu_text:
-            return settings.menu_text
-        return "Jump to Child Site"
-
-    def isChildSite(self):
-        portal_state = self.context.restrictedTraverse('plone_portal_state')
-        root_path = portal_state.navigation_root_path()
-        nav_root = self.context.restrictedTraverse(root_path)
-        return IChildSite.providedBy(nav_root)

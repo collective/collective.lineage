@@ -4,11 +4,30 @@ Changelog
 2.0 - (unreleased)
 ------------------
 
+- Content type framework agnostic: Compatible with Dexterity and Archetypes by
+  allowing definitions of Subsites on plone.folder.interfaces.IFolder objects.
+
+- Remove dependency on p4a.subtyper. Enable and disable subsite menus are now
+  in the object_buttons action menu.
+
+- Remove controlpanel. Use language translations for translating interface
+  elements instead.
+
+- Remove upgrade steps and migration for 1.x based versions. Please migrate
+  your site to the latest 1.x version before using 2.0.
+
 - Remove deprecated ChildFolder content type.
   [thet]
 
-1.1.1 - (2014-06-26)
---------------------
+- Remove upgrade steps. Please upgrade to most recent 1.x version in the 1.x
+  branch, deinstall collective.lineage and use the 2.x branch then nad
+  reinstall. Please make a list of all your subsites before, as you have to
+  re-enable them manually. There is no upgrade step for this yet.
+  [thet]
+
+
+1.1.1 - (2013-10-10)
+------------------
 
 - Add an adapter to allow the child site to use the portal image
   scales. Fixes https://github.com/collective/collective.lineage/issues/18
