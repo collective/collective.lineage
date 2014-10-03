@@ -23,9 +23,6 @@ class InstallTestCase(unittest.TestCase):
     def test_installed(self):
         self.assertTrue(self.qi.isProductInstalled(PROJECTNAME))
 
-    def test_dependencies_installed(self):
-        self.assertTrue(self.qi.isProductInstalled('p4a.subtyper'))
-
     def test_addon_layer(self):
         layers = [l.getName() for l in registered_layers()]
         self.assertTrue('ILineageBrowserLayer' in layers,
