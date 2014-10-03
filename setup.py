@@ -1,7 +1,7 @@
 import os
 from setuptools import setup, find_packages
 
-version = '2.0'
+version = '2.0dev'
 
 
 def read(*rnames):
@@ -47,10 +47,6 @@ setup(
     install_requires=[
         'setuptools',
         'Plone',
-        'p4a.z2utils',
-        'p4a.common',
-        'p4a.subtyper>=1.2.0',
-        'plone.app.registry',
         'plone.app.imaging',
     ],
     extras_require={
