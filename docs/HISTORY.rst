@@ -26,7 +26,7 @@ Changelog
   [thet]
 
 
-1.1.1 - (2013-10-10)
+1.1.1 - (unreleased)
 ------------------
 
 - Add an adapter to allow the child site to use the portal image
