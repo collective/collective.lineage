@@ -3,10 +3,13 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import base_hasattr
 from collective.lineage.interfaces import ILineageConfiguration
 from collective.lineage.interfaces import ILineageSettings
+from collective.lineage.Extensions.Install import _unregisterUtility
 from logging import getLogger
 from p4a.subtyper import engine
 from p4a.subtyper import interfaces
+from p4a.subtyper.sitesetup import unsetup_portal
 from plone.app.layout.navigation.defaultpage import getDefaultPage
+from plone.app.contentmenu.interfaces import IContentMenuItem
 from plone.portlets.constants import CONTENT_TYPE_CATEGORY
 from plone.portlets.constants import CONTEXT_CATEGORY
 from plone.portlets.constants import GROUP_CATEGORY
@@ -235,3 +238,34 @@ def remove_interface(context):
             logger.error(
                 "Could not remove ILineageConfiguration from %s" % obj.id)
             continue
+
+
+def removeP4A(context):
+    """ remove p4a based descriptors and move to using actions and events
+    """
+    portal = getSite()
+    context.portal_setup.runAllImportStepsFromProfile(
+        'profile-collective.lineage:removep4a')
+    _unregisterUtility(portal)
+    unsetup_portal(portal)
+
+    # really, I mean it p4a, go away
+    sm = portal.getSiteManager()
+
+    ########################################################################
+    # Get rid of p4a.subtyper utils
+    util = sm.queryUtility(interfaces.ISubtyper)
+    if util is not None:
+        sm.unregisterUtility(provided=interfaces.ISubtyper)
+        del util
+        sm.utilities.unsubscribe((), interfaces.ISubtyper)
+        logger.warn('Force removed interfaces.ISubtyper')
+
+    # Taken from:
+    # http://plone.org/documentation/kb/manually-removing-local-persistent-utilities
+    provided = sm.utilities._provided
+    for x in provided.keys():
+        if x.__module__.find("p4a.subtyper") != -1:
+            print "deleting %s from utilities" % x
+            del provided[x]
+    sm.utilities._provided = provided

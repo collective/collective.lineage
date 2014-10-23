@@ -96,6 +96,14 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
+  <genericsetup:registerProfile
+      name="removep4a"
+      title="Lineage (remove p4a)"
+      directory="profiles/removep4a"
+      description="Remove p4a bits in Lineage"
+      provides="Products.GenericSetup.interfaces.EXTENSION"
+      />
+
   <genericsetup:importStep
       name="collective.lineage: default"
       title="collective.lineage: Various steps"
@@ -121,6 +129,15 @@
       title="Migrate the control panel to p.a.registry based one"
       description=""
       handler="collective.lineage.upgrades.migrateControlPanel"
+      />
+
+  <genericsetup:upgradeStep
+      source="201"
+      destination="210"
+      profile="collective.lineage:default"
+      title="Remove p4a crud so we can upgrade to 2.X"
+      description=""
+      handler="collective.lineage.upgrades.removeP4A"
       />
 
 </configure>
