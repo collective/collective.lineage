@@ -53,4 +53,13 @@
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
 
+  <genericsetup:upgradeStep
+      source="210"
+      destination="220"
+      profile="collective.lineage:default"
+      title="Re-run default profile to upgrade to 2.0"
+      description=""
+      handler="collective.lineage.upgrades.upgradeToTwoZero"
+      />
+
 </configure>
