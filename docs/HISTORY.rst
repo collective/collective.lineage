@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.0 - (unreleased)
+2.0 - (2014-10-29)
 ------------------
 
 - Content type framework agnostic: Compatible with Dexterity and Archetypes by
@@ -14,7 +14,8 @@ Changelog
   elements instead.
 
 - Remove upgrade steps and migration for 1.x based versions. Please migrate
-  your site to the latest 1.x version before using 2.0.
+  your site to the latest 1.1.2 version before using 2.0.
+  [calvinhp]
 
 - Remove deprecated ChildFolder content type.
   [thet]
@@ -28,8 +29,22 @@ Changelog
 - Make objectactions and site-switchter translateable and add German
   translations [fRiSi]
 
-1.1.1 - (unreleased)
-------------------
+
+1.1.2 - (2014-10-29)
+--------------------
+
+- This is a migration step to `2.0` release **only**. Once installed,
+  run the upgrade from the Plone Add-Ons control panel and then upgrade
+  to `2.0` to re-enable management of child sites.
+  [calvinhp]
+
+- Add upgrade step to remove `p4a.subtyper` interfaces and created a 
+  GenericSetup profile to remove the component from the component registry
+  [calvinhp]
+
+
+1.1.1 - (2014-06-26)
+--------------------
 
 - Add an adapter to allow the child site to use the portal image
   scales. Fixes https://github.com/collective/collective.lineage/issues/18

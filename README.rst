@@ -22,18 +22,29 @@ microsites, such as school district sites, university departments,
 corporate product sites, public library satellites,  professional
 association events, and more.
 
-Lineage works with Plone 3 and Plone 4.
-
-NOTE: Lineage 1.1 will require Plone >= 4.1
+Lineage works with Plone 4.1+ and the upcoming Plone 5.
 
 
-Upgrade from 1.x
+Upgrading to 2.X
 ================
 
-Please upgrade to most recent 1.x version in the 1.x branch.  Then deinstall
-`collective.lineage` and `p4a.subtyper` via the quick installer.  After that
-include lineage 2.x in buildout, rerun to install it and install
-collective.lineage in your Plone site using the control panel.
+Lineage `2.0` is a major upgrade to the software and will require you to have
+updated to the `1.1.2` version before you migrate any existing Lineage child
+sites to the new version. Lineage `2.0` removes all dependancies on
+`p4a.subtyper` and makes the product Plone 5 ready. The `1.1.2` release of
+Lineage is only used to migrate your existing Lineage `1.1` sites up to the
+needed state for the new `2.0` release.
+
+Steps for upgrading:
+--------------------
+
+1. Install version `1.1.2` into your existing Lineage powered site
+2. Go to the Plone Site Setup and from the Add-Ons panel click the button to
+   upgrade the Lineage product
+3. Install version `2.0` into your existing Lineage powered site
+4. Go to the Plone Site Setup and from the Add-Ons panel click the button to
+   upgrade the Lineage product
+5. Enjoy Lineage `2.0`
 
 
 Useful links
@@ -58,7 +69,7 @@ Add a Child Site
 2. Click Add New, and add a `Folder`.
 3. Enter the title and description for the Child site.
 4. Click Save.
-5. Click the `actions` drop down and select `Child Site`. This
+5. Click the `Actions` drop down and select `Enable Subsite`. This
    "activates" the child site behavior.
 6. The Plone site now has a child site. A drop down will appear at the
    top of the Plone to the left of the site actions area. A user can
