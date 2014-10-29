@@ -1,29 +1,37 @@
 Changelog
 =========
 
+2.1 - (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
 2.0 - (2014-10-29)
 ------------------
 
+- Fix upgrade steps and migration for 1.x based versions. Please migrate your
+  site to the latest 1.1.2 version before using 2.0.
+  [calvinhp]
+
 - Content type framework agnostic: Compatible with Dexterity and Archetypes by
   allowing definitions of Subsites on plone.folder.interfaces.IFolder objects.
+  [thet]
 
 - Remove dependency on p4a.subtyper. Enable and disable subsite menus are now
   in the object_buttons action menu.
+  [thet]
 
 - Remove controlpanel. Use language translations for translating interface
   elements instead.
-
-- Remove upgrade steps and migration for 1.x based versions. Please migrate
-  your site to the latest 1.1.2 version before using 2.0.
-  [calvinhp]
+  [thet]
 
 - Remove deprecated ChildFolder content type.
   [thet]
 
 - Remove upgrade steps. Please upgrade to most recent 1.x version in the 1.x
-  branch, deinstall collective.lineage and use the 2.x branch then nad
-  reinstall. Please make a list of all your subsites before, as you have to
-  re-enable them manually. There is no upgrade step for this yet.
+  branch, deinstall collective.lineage and use the 2.x branch then and
+  reinstall.
   [thet]
 
 - Make objectactions and site-switchter translateable and add German
@@ -38,7 +46,7 @@ Changelog
   to `2.0` to re-enable management of child sites.
   [calvinhp]
 
-- Add upgrade step to remove `p4a.subtyper` interfaces and created a 
+- Add upgrade step to remove `p4a.subtyper` interfaces and created a
   GenericSetup profile to remove the component from the component registry
   [calvinhp]
 
@@ -103,11 +111,11 @@ Changelog
 - modernized tests, using layers now.
   [jensens]
 
-- fixed failing test with subscribers, subtype added event is not an object 
+- fixed failing test with subscribers, subtype added event is not an object
   event!
   [jensens]
 
-- moved code to github and increased Plone version used in integrated buildout 
+- moved code to github and increased Plone version used in integrated buildout
   to 4.1-latest.
   [jensens]
 
@@ -155,39 +163,39 @@ Changelog
 - Updated the ignores
   [lucielejard]
 
-- Fixed the upgrade so that when we grab the layout of a folder, it does not 
+- Fixed the upgrade so that when we grab the layout of a folder, it does not
   get it using acquisition if it doesn't have one, fixes #18
   [lucielejard]
 
 - Copy over sharing settings from child folder to new folder, fixes #38
   [anthonygerrard]
 
-- Fix by not renaming the child folder, instead create new folder with temp 
+- Fix by not renaming the child folder, instead create new folder with temp
   id and rename that to the child folder id after the child folder has been
   deleted, fixes #37
   [anthonygerrard]
 
-- Adding a failing test case for #37 here as it is a serious bug but I have 
+- Adding a failing test case for #37 here as it is a serious bug but I have
   no idea how to fix it
   [anthonygerrard]
 
-- In lineage 0.1 child folders never inherited their parent's portlets so 
+- In lineage 0.1 child folders never inherited their parent's portlets so
   always block parent portlets when migrating, fixes #34
   [anthonygerrard]
 
-- Added a warning if portlet manager is not available on the new folder, 
+- Added a warning if portlet manager is not available on the new folder,
   fixes #35
   [anthonygerrard]
 
-- Copy portlet assignments from and blocking settings across on migration, 
+- Copy portlet assignments from and blocking settings across on migration,
   fixes #34
   [anthonygerrard]
 
-- Refactor tests so that migration tests are in their own class and so can 
+- Refactor tests so that migration tests are in their own class and so can
   have common setup logic
   [anthonygerrard]
- 
-- Read the default page of the child folder before conversion and then set 
+
+- Read the default page of the child folder before conversion and then set
   it afterwards, fixes #18
   [anthonygerrard]
 
@@ -236,7 +244,7 @@ Changelog
 0.3 - (2010-04-30)
 ------------------
 
-- getting the unit testing to work with plone4 and allowing 
+- getting the unit testing to work with plone4 and allowing
   childsite editing with plone4, refs #16 [tbesluau]
 
 - updated README.txt with useful links [lucielejard]
@@ -247,7 +255,7 @@ Changelog
   we don't use it anymore, updated the history with the recent
   changes [lucielejard]
 
-- moved the registration of the utility in component registry so 
+- moved the registration of the utility in component registry so
   it gets registered locally, this fixes #5 [lucielejard]
 
 - added a deprecation warning on the Child Folder type
@@ -268,7 +276,7 @@ Changelog
 - added an upgrade step that will migrate the old Child Folder objects
   [lucielejard]
 
-- added an import various step so that the upgrade step gets run 
+- added an import various step so that the upgrade step gets run
   automatically on reinstall
   [lucielejard]
 
