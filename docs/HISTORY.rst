@@ -1,6 +1,19 @@
 Changelog
 =========
 
+1.1.2 - (2014-10-29)
+--------------------
+
+- This is a migration step to `2.0` release **only**. Once installed,
+  run the upgrade from the Plone Add-Ons control panel and then upgrade
+  to `2.0` to re-enable management of child sites.
+  [calvinhp]
+
+- Add upgrade step to remove `p4a.subtyper` interfaces and created a 
+  GenericSetup profile to remove the component from the component registry
+  [calvinhp]
+
+
 1.1.1 - (2014-06-26)
 --------------------
 

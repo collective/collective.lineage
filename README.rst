@@ -24,7 +24,21 @@ association events, and more.
 
 Lineage works with Plone 3 and Plone 4.
 
-NOTE: Lineage 1.1 will require Plone >= 4.1
+**Note:** Lineage 1.1 will require Plone >= 4.1
+
+Upgrading to 2.X
+================
+
+The `1.1.2` release of Lineage is only used to migrate your existing Lineage
+`1.1` sites up to the needed state for the new `2.0` release. Please make sure
+you upgrade any exisiting Lineage instances to `1.1.2` prior to going all the
+way to `2.0`.
+
+**Note:** This `1.1.2` release will make it impossible to activate or 
+deactivate your child sites. This release only exists as a transition
+point to remove the need for `p4a.subtyper` in the next release. Existing
+child sites will continute to work, but an upgrade to `2.0` will be required
+to manage existing and new child sites.
 
 Useful links
 ============
