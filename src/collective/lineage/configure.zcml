@@ -30,6 +30,14 @@
       layer=".interfaces.ILineageBrowserLayer"
       />
 
+  <browser:page
+      name="lineageutils"
+      for="*"
+      class=".browser.LineageUtils"
+      permission="zope.Public"
+      layer=".interfaces.ILineageBrowserLayer"
+      />
+
   <browser:viewlet
       name="collective.lineage.switcher"
       manager="plone.app.layout.viewlets.interfaces.IPortalHeader"

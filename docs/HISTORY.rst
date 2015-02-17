@@ -4,7 +4,9 @@ Changelog
 2.1 - (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Re-add the ``@@lineageutils`` browser page with it's useful ``isChildSite``
+  method.
+  [thet]
 
 
 2.0 - (2014-10-29)

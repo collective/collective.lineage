@@ -109,3 +109,12 @@ class LineageSwitcherViewlet(BrowserView):
         if len(sites) <= 1:
             return []
         return sites
+
+
+class LineageUtils(BrowserView):
+
+    def isChildSite(self):
+        portal_state = self.context.restrictedTraverse('plone_portal_state')
+        root_path = portal_state.navigation_root_path()
+        nav_root = self.context.restrictedTraverse(root_path)
+        return IChildSite.providedBy(nav_root)
