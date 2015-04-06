@@ -7,6 +7,7 @@ Changelog
 - Re-add the ``@@lineageutils`` browser page with it's useful ``isChildSite``
   method.
   [thet]
+- Added portuguese pt-br translation [lccruz]
 
 
 2.0 - (2014-10-29)
