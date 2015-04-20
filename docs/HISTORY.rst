@@ -4,6 +4,11 @@ Changelog
 2.1 - (unreleased)
 ------------------
 
+- Add ``current_childsite`` method to ``@@lineageutils`` view, which returns
+  the current lineage subsite object or ``None``, if no lineage subsite is
+  active.
+  [thet]
+
 - Re-add the ``@@lineageutils`` browser page with it's useful ``isChildSite``
   method.
   [thet]
