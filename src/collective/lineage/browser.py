@@ -9,6 +9,7 @@ from collective.lineage.events import ChildSiteWillBeRemovedEvent
 from collective.lineage.interfaces import IChildSite
 from five.localsitemanager import make_objectmanager_site
 from plone.folder.interfaces import IFolder
+from zope.component import getMultiAdapter
 from zope.component.interfaces import ISite
 from zope.event import notify
 from zope.i18nmessageid import MessageFactory
@@ -114,7 +115,21 @@ class LineageSwitcherViewlet(BrowserView):
 class LineageUtils(BrowserView):
 
     def isChildSite(self):
-        portal_state = self.context.restrictedTraverse('plone_portal_state')
+        context = self.context
+        request = self.request
+        portal_state = getMultiAdapter((context, request), name="plone_portal_state")  # noqa
         root_path = portal_state.navigation_root_path()
         nav_root = self.context.restrictedTraverse(root_path)
         return IChildSite.providedBy(nav_root)
+
+    @property
+    def current_childsite(self):
+        childsite = None
+        context = self.context
+        request = self.request
+        portal_state = getMultiAdapter((context, request), name="plone_portal_state")  # noqa
+        root_path = portal_state.navigation_root_path()
+        nav_root = self.context.restrictedTraverse(root_path)
+        if IChildSite.providedBy(nav_root):
+            childsite = nav_root
+        return childsite
