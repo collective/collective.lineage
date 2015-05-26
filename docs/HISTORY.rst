@@ -4,6 +4,10 @@ Changelog
 2.1 - (unreleased)
 ------------------
 
+- We don't want to enable or disable a childsite on a default page. Traverse up,
+  until a non-default page is found.
+  [thet]
+
 - Add ``current_childsite`` method to ``@@lineageutils`` view, which returns
   the current lineage subsite object or ``None``, if no lineage subsite is
   active.
