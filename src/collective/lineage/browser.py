@@ -36,6 +36,7 @@ class LineageTool(BrowserView):
         # we don't want to enable/disable a childsite on a default page.
         # bend context to suitable parent.
         self.context = _get_context(context, request)
+        self.request = request
 
     @property
     def available(self):
