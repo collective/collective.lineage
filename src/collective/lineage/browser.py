@@ -1,4 +1,6 @@
+from Acquisition import aq_parent
 from Products.CMFCore.utils import getToolByName
+from Products.CMFPlone.utils import isDefaultPage
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from Products.Five.component import disableSite
@@ -21,6 +23,20 @@ _ = MessageFactory('collective.lineage')
 
 
 class LineageTool(BrowserView):
+
+    def __init__(self, context, request):
+
+        def _get_context(ctx, req):
+            if not ctx:
+                return None
+            if isDefaultPage(ctx, req):
+                return _get_context(aq_parent(ctx), req)
+            return ctx
+
+        # we don't want to enable/disable a childsite on a default page.
+        # bend context to suitable parent.
+        self.context = _get_context(context, request)
+        self.request = request
 
     @property
     def available(self):
