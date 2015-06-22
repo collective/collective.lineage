@@ -1,0 +1,29 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: collective.lineage\n"
+"POT-Creation-Date: 2015-04-06 11:56+0000\n"
+"PO-Revision-Date: 2011-03-03 11:11-0400\n"
+"Last-Translator: Luciano Camargo Cruz [lccruz] <luciano@lccruz.net>\n"
+"Language-Team: Portuguese pt_BR <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: pt-br\n"
+"Language-Name: Português do Brasil\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: collective.lineage\n"
+"X-Poedit-Language: Português do Brasil\n"
+
+#: ../profiles/default/actions.xml
+msgid "Disable Subsite"
+msgstr "Desabilitar Subsite"
+
+#: ../profiles/default/actions.xml
+msgid "Enable Subsite"
+msgstr "Habilitar Subsite"
+
+#: ../switcher.pt:5
+msgid "Jump to child site"
+msgstr "Ir para o site filho"
+
