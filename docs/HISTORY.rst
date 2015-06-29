@@ -4,6 +4,10 @@ Changelog
 2.1 - (unreleased)
 ------------------
 
+- Peel out ``enable_childsite`` and ``disable_childsite`` from the
+  ``lineage_tool`` view, so that it can be easily used programmatically.
+  [thet]
+
 - We don't want to enable or disable a childsite on a default page. Traverse up,
   until a non-default page is found.
   [thet]
