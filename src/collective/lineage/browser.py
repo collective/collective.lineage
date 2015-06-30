@@ -3,20 +3,12 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import isDefaultPage
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
-from Products.Five.component import disableSite
-from collective.lineage.events import ChildSiteCreatedEvent
-from collective.lineage.events import ChildSiteRemovedEvent
-from collective.lineage.events import ChildSiteWillBeCreatedEvent
-from collective.lineage.events import ChildSiteWillBeRemovedEvent
 from collective.lineage.interfaces import IChildSite
-from five.localsitemanager import make_objectmanager_site
+from collective.lineage.utils import disable_childsite
+from collective.lineage.utils import enable_childsite
 from plone.folder.interfaces import IFolder
 from zope.component import getMultiAdapter
-from zope.component.interfaces import ISite
-from zope.event import notify
 from zope.i18nmessageid import MessageFactory
-from zope.interface import alsoProvides
-from zope.interface import noLongerProvides
 
 
 _ = MessageFactory('collective.lineage')
@@ -59,39 +51,18 @@ class LineageTool(BrowserView):
     def enable(self):
         """Enable a lineage subsite on this context.
         """
-        ctx = self.context
-        notify(ChildSiteWillBeCreatedEvent(ctx))
-
-        # enable site
-        if not ISite.providedBy(ctx):
-            make_objectmanager_site(ctx)
-
-        # provide IChildSite
-        alsoProvides(ctx, IChildSite)
-
-        ctx.reindexObject(idxs=('object_provides'))
-        notify(ChildSiteCreatedEvent(ctx))
+        enable_childsite(self.context)
 
         # redirect
-        self.request.response.redirect(ctx.absolute_url())
+        self.request.response.redirect(self.context.absolute_url())
 
     def disable(self):
         """Disable a lineage subsite on this context.
         """
-        ctx = self.context
-        notify(ChildSiteWillBeRemovedEvent(ctx))
-
-        # remove local site components
-        disableSite(ctx)
-
-        # remove IChildSite
-        noLongerProvides(ctx, IChildSite)
-
-        ctx.reindexObject(idxs=('object_provides'))
-        notify(ChildSiteRemovedEvent(ctx))
+        disable_childsite(self.context)
 
         # redirect
-        self.request.response.redirect(ctx.absolute_url())
+        self.request.response.redirect(self.context.absolute_url())
 
 
 class LineageSwitcherViewlet(BrowserView):
