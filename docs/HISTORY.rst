@@ -4,6 +4,11 @@ Changelog
 2.1 - (unreleased)
 ------------------
 
+- Include ``get_image_traverser`` only when
+  ``plone.app.imaging.interfaces.IImagingSchema`` is available, which is not
+  the case in Plone 5.
+  [thet]
+
 - Peel out ``enable_childsite`` and ``disable_childsite`` from the
   ``lineage_tool`` view, so that it can be easily used programmatically.
   [thet]
