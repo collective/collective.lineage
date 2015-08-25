@@ -1,8 +1,8 @@
 <configure
-    xmlns="http://namespaces.zope.org/zope"
-    xmlns:five="http://namespaces.zope.org/five"
-    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
     xmlns:browser="http://namespaces.zope.org/browser"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    xmlns="http://namespaces.zope.org/zope"
     xmlns:i18n="http://namespaces.zope.org/i18n"
     i18n_domain="collective.lineage">
 
@@ -10,13 +10,13 @@
   <i18n:registerTranslations directory="locales" />
 
   <include package="Products.CMFCore" file="permissions.zcml"
-      xmlns:zcml="http://namespaces.zope.org/zcml"
       zcml:condition="have plone-41" />
 
   <adapter 
       for=".interfaces.IChildSite"
       provides="plone.app.imaging.interfaces.IImagingSchema"
-      factory=".adapters.get_image_traverser" />
+      factory=".adapters.get_image_traverser"
+      zcml:condition="installed plone.app.imaging.interfaces.IImagingSchema" />
 
   <browser:page
       for="*"
