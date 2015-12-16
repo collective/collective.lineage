@@ -1,0 +1,6 @@
+[report]
+include =
+    Products/*
+omit =
+    */test*
+
