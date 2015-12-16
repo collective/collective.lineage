@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from plone.app.layout.navigation.interfaces import INavigationRoot
 from zope.component.interfaces import IPossibleSite
 from zope.i18nmessageid import MessageFactory

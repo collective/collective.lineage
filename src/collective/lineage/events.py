@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from collective.lineage.interfaces import IChildSiteCreatedEvent
 from collective.lineage.interfaces import IChildSiteRemovedEvent
 from collective.lineage.interfaces import IChildSiteWillBeCreatedEvent

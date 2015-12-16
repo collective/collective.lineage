@@ -1,1 +1,1 @@
-# look at my package
+# -*- coding: utf-8 -*-
