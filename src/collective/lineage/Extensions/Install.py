@@ -1,9 +1,10 @@
-from Products.CMFCore.utils import getToolByName
-from cStringIO import StringIO
+# -*- coding: utf-8 -*-
 from collective.lineage.interfaces import IChildSite
+from cStringIO import StringIO
 from p4a.subtyper.interfaces import IFolderishContentTypeDescriptor
 from p4a.subtyper.interfaces import ISubtyped
 from p4a.z2utils.utils import remove_marker_ifaces
+from Products.CMFCore.utils import getToolByName
 
 
 def runProfile(portal, profileName):
