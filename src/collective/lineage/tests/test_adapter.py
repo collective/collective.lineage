@@ -42,5 +42,5 @@ class AdapterTestCase(unittest.TestCase):
         from plone.app.imaging.configlet import ImagingControlPanelAdapter
         from collective.lineage.utils import enable_childsite
         enable_childsite(self.portal.site1)
-        child_site = IImagingSchema(self.portal.site1)
-        self.assertIsInstance(child_site, ImagingControlPanelAdapter)
+        configuration = IImagingSchema(self.portal.site1)
+        self.assertIsInstance(configuration, ImagingControlPanelAdapter)
