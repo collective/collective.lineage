@@ -39,8 +39,8 @@ class AdapterTestCase(unittest.TestCase):
         if self.layer['has_pact']:
             return
         from plone.app.imaging.interfaces import IImagingSchema
-        from plone.app.imaging.traverse import ImageTraverser
+        from plone.app.imaging.configlet import ImagingControlPanelAdapter
         from collective.lineage.utils import enable_childsite
         enable_childsite(self.portal.site1)
         child_site = IImagingSchema(self.portal.site1)
-        self.assertIs(child_site, ImageTraverser)
+        self.assertIsInstance(child_site, ImagingControlPanelAdapter)

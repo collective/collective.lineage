@@ -4,6 +4,9 @@ Changelog
 2.1 - (unreleased)
 ------------------
 
+- fix ``IImagingSchema`` traverser for Plone 4, disable in Plone 5
+  [jensens]
+
 - basic tests for enable/disable childsite
   [jensens]
 
