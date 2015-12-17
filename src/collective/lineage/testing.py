@@ -23,23 +23,16 @@ class LineageLayer(PloneSandboxLayer):
             import plone.app.contenttypes
             self.has_pact = True
         except ImportError:
-            import Products.ATContentTypes
             self.has_pact = False
         self.loadZCML(package=collective.lineage)
         if self.has_pact:
             self.loadZCML(package=plone.app.contenttypes)
-        else:
-            self.loadZCML(package=Products.ATContentTypes)
         if self.has_pact:
             z2.installProduct(app, 'plone.app.contenttypes')
-        else:
-            z2.installProduct(app, 'Products.ATContentTypes')
 
     def setUpPloneSite(self, portal):
         if self.has_pact:
             applyProfile(portal, 'plone.app.contenttypes:default')
-        else:
-            applyProfile(portal, 'Products.ATContentTypes:default')
         applyProfile(portal, 'collective.lineage:default')
 
 
