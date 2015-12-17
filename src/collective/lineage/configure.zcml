@@ -16,7 +16,7 @@
       for="collective.lineage.interfaces.IChildSite"
       provides="plone.app.imaging.interfaces.IImagingSchema"
       factory="collective.lineage.adapters.get_image_traverser"
-      zcml:condition="installed plone.app.imaging.interfaces.IImagingSchema" />
+      zcml:condition="not-have plone-5" />
 
   <browser:page
       for="*"

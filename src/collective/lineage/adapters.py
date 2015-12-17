@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
-from plone.app.imaging.traverse import ImageTraverser
+from Products.CMFPlone.interfaces import IPloneSiteRoot
+from zope.component import queryUtility
+from plone.app.imaging.interfaces import IImagingSchema
 
 
 def get_image_traverser(context):
-    return ImageTraverser
+    siteroot = queryUtility(IPloneSiteRoot)
+    return IImagingSchema(siteroot)
