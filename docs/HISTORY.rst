@@ -4,6 +4,9 @@ Changelog
 2.1 - (unreleased)
 ------------------
 
+- basic tests for enable/disable childsite
+  [jensens]
+
 - household chores: make flake-8 happy (utf8-headers), some other minor pep8,
   add travis configuration and let tests run against 4.1 to 5.0 (and fixed
   them).
@@ -30,7 +33,9 @@ Changelog
 - Re-add the ``@@lineageutils`` browser page with it's useful ``isChildSite``
   method.
   [thet]
-- Added portuguese pt-br translation [lccruz]
+
+- Added portuguese pt-br translation
+  [lccruz]
 
 
 2.0 - (2014-10-29)
