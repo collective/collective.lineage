@@ -24,6 +24,9 @@ class AdapterTestCase(unittest.TestCase):
         self.portal.invokeFactory('Folder', 'site1')
 
     def test_adapter_registered_correctly(self):
+        """this test is ATCT only"""
+        if self.layer['has_pact']:
+            return
         from plone.app.imaging.interfaces import IImagingSchema
 
         sm = getGlobalSiteManager()
@@ -32,6 +35,9 @@ class AdapterTestCase(unittest.TestCase):
         self.assertEqual(len(registrations), 1)
 
     def test_childsite_is_image_traverser(self):
+        """this test is ATCT only"""
+        if self.layer['has_pact']:
+            return
         from plone.app.imaging.interfaces import IImagingSchema
         from plone.app.imaging.traverse import ImageTraverser
         from collective.lineage.utils import enable_childsite
