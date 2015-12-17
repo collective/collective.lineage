@@ -1,6 +1,6 @@
 [report]
 include =
-    Products/*
+    src/collective/*
 omit =
     */test*
 
