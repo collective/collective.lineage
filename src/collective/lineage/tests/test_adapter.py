@@ -25,6 +25,7 @@ class AdapterTestCase(unittest.TestCase):
 
     def test_adapter_registered_correctly(self):
         from plone.app.imaging.interfaces import IImagingSchema
+
         sm = getGlobalSiteManager()
         registrations = [a for a in sm.registeredAdapters()
                          if a.provided == IImagingSchema]
@@ -33,5 +34,7 @@ class AdapterTestCase(unittest.TestCase):
     def test_childsite_is_image_traverser(self):
         from plone.app.imaging.interfaces import IImagingSchema
         from plone.app.imaging.traverse import ImageTraverser
+        from collective.lineage.utils import enable_childsite
+        enable_childsite(self.portal.site1)
         child_site = IImagingSchema(self.portal.site1)
         self.assertIs(child_site, ImageTraverser)
