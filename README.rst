@@ -32,6 +32,9 @@ Useful links
 .. image:: https://travis-ci.org/collective/collective.lineage.svg?branch=master
     :target: https://travis-ci.org/collective/collective.lineage
 
+.. image:: https://coveralls.io/repos/collective/collective.lineage/badge.svg?branch=master&service=github
+    :target: https://coveralls.io/github/collective/collective.lineage?branch=master
+
 - pypi: http://pypi.python.org/pypi/collective.lineage
 - Plone: http://plone.org/products/collective-lineage
 - issue tracker: https://github.com/collective/collective.lineage/issues/
