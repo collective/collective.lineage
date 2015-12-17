@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from collective.lineage.testing import LINEAGE_INTEGRATION_TESTING
-from plone.testing import z2
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
 from zope.component import getGlobalSiteManager
 
 try:
@@ -19,7 +20,7 @@ class AdapterTestCase(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer['portal']
         self.request = self.layer['request']
-        z2.login(self.portal['acl_users'], 'contributor')
+        setRoles(self.portal, TEST_USER_ID, ['Site Administrator'])
         self.portal.invokeFactory('Folder', 'site1')
 
     def test_adapter_registered_correctly(self):
