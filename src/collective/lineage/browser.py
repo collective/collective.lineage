@@ -105,7 +105,10 @@ class LineageUtils(BrowserView):
     def isChildSite(self):
         context = self.context
         request = self.request
-        portal_state = getMultiAdapter((context, request), name="plone_portal_state")  # noqa
+        portal_state = getMultiAdapter(
+            (context, request),
+            name="plone_portal_state"
+        )
         root_path = portal_state.navigation_root_path()
         nav_root = self.context.restrictedTraverse(root_path)
         return IChildSite.providedBy(nav_root)
@@ -115,7 +118,10 @@ class LineageUtils(BrowserView):
         childsite = None
         context = self.context
         request = self.request
-        portal_state = getMultiAdapter((context, request), name="plone_portal_state")  # noqa
+        portal_state = getMultiAdapter(
+            (context, request),
+            name="plone_portal_state"
+        )
         root_path = portal_state.navigation_root_path()
         nav_root = self.context.restrictedTraverse(root_path)
         if IChildSite.providedBy(nav_root):
