@@ -1,49 +1,69 @@
 # -*- coding: utf-8 -*-
 from plone.app.testing import applyProfile
+from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
-from zope.configuration import xmlconfig
+from plone.testing import z2
+
+try:
+    from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
+    HAS_ROBOT = True
+except ImportError:
+    HAS_ROBOT = False
 
 
-class CollectiveLineage(PloneSandboxLayer):
+class LineageLayer(PloneSandboxLayer):
 
-    defaultBases = (PLONE_FIXTURE, )
+    defaultBases = (PLONE_FIXTURE,)
 
     def setUpZope(self, app, configurationContext):
-        # Load ZCML
         import collective.lineage
-        xmlconfig.file('configure.zcml', collective.lineage,
-                       context=configurationContext)
+        try:
+            import plone.app.contenttypes
+            self.has_pact = True
+        except ImportError:
+            import Products.ATContentTypes
+            self.has_pact = False
+        self.loadZCML(package=collective.lineage)
+        if self.has_pact:
+            self.loadZCML(package=plone.app.contenttypes)
+        else:
+            self.loadZCML(package=Products.ATContentTypes)
+        if self.has_pact:
+            z2.installProduct(app, 'plone.app.contenttypes')
+        else:
+            z2.installProduct(app, 'Products.ATContentTypes')
 
     def setUpPloneSite(self, portal):
-        self['portal'] = portal
+        if self.has_pact:
+            applyProfile(portal, 'plone.app.contenttypes:default')
+        else:
+            applyProfile(portal, 'Products.ATContentTypes:default')
         applyProfile(portal, 'collective.lineage:default')
-        roles = ('Member', 'Manager')
-        portal.portal_membership.addMember('manager', 'secret', roles, [])
-        roles = ('Member', 'Contributor')
-        portal.portal_membership.addMember('contributor', 'secret', roles, [])
 
-LINEAGE_FIXTURE = CollectiveLineage()
-LINEAGE_INTEGRATION_TESTING = (
-    IntegrationTesting(
-        bases=(LINEAGE_FIXTURE, ),
-        name="collective.lineage:Integration")
+
+LINEAGE_FIXTURE = LineageLayer()
+
+
+LINEAGE_INTEGRATION_TESTING = IntegrationTesting(
+    bases=(LINEAGE_FIXTURE,),
+    name='collective.lineage:IntegrationTesting'
 )
 
 
-class CollectiveLineageMigration(PloneSandboxLayer):
-
-    defaultBases = (LINEAGE_FIXTURE, )
-
-    def setUpPloneSite(self, portal):
-        portal.portal_membership.addMember('testuser', 'secret', (), [])
-        # XXX: some stuff was moved from here to setUp() in test_migration.py
-        # as the test were not set up in presence of more modules; why?
-
-LINEAGE_MIGRATION_FIXTURE = CollectiveLineageMigration()
-LINEAGE_MIGRATION_INTEGRATION_TESTING = (
-    IntegrationTesting(
-        bases=(LINEAGE_MIGRATION_FIXTURE, ),
-        name="collective.lineage:Integration")
+LINEAGE_FUNCTIONAL_TESTING = FunctionalTesting(
+    bases=(LINEAGE_FIXTURE,),
+    name='collective.lineage:FunctionalTesting'
 )
+
+
+if HAS_ROBOT:
+    LINEAGE_ACCEPTANCE_TESTING = FunctionalTesting(
+        bases=(
+            LINEAGE_FIXTURE,
+            REMOTE_LIBRARY_BUNDLE_FIXTURE,
+            z2.ZSERVER_FIXTURE
+        ),
+        name='collective.lineage:AcceptanceTesting'
+    )
