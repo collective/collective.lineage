@@ -47,11 +47,9 @@ setup(
     install_requires=[
         'setuptools',
         'Plone',
-        'plone.app.imaging',
     ],
     extras_require={
         'test': [
-            'interlude',
             'plone.app.testing',
         ],
     },
