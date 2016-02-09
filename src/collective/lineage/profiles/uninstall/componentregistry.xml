@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<componentregistry>
-  <utilities>
-    <utility remove="True"
-        interface="p4a.subtyper.interfaces.IFolderishContentTypeDescriptor"
-        name="collective.lineage.childsite"/>
-  </utilities>
-</componentregistry>
