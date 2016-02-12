@@ -33,6 +33,7 @@
       name="lineageutils"
       for="*"
       class="collective.lineage.browser.LineageUtils"
+      allowed_attributes="isChildSite"
       permission="zope.Public"
       layer="collective.lineage.interfaces.ILineageBrowserLayer"
       />

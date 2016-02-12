@@ -37,7 +37,7 @@ Changelog
   [thet]
 
 - Re-add the ``@@lineageutils`` browser page with it's useful ``isChildSite``
-  method.
+  method. Fix ``isChildSite`` to be called as a method on it's view.
   [thet]
 
 - Added portuguese pt-br translation
