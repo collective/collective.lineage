@@ -103,6 +103,8 @@ class LineageSwitcherViewlet(BrowserView):
 class LineageUtils(BrowserView):
 
     def isChildSite(self):
+        """Return ``True``, if the current context is within a childsite.
+        """
         context = self.context
         request = self.request
         portal_state = getMultiAdapter(
@@ -115,6 +117,8 @@ class LineageUtils(BrowserView):
 
     @property
     def current_childsite(self):
+        """Return the current childsite.
+        """
         childsite = None
         context = self.context
         request = self.request
