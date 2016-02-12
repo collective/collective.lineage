@@ -1,36 +1,32 @@
-import os
-from setuptools import setup, find_packages
+# -*- coding: utf-8 -*-
+from setuptools import find_packages
+from setuptools import setup
+
 
 version = '2.1.dev0'
+short_description = u"The microsite creation product for Plone"
+long_description = u'\n\n'.join([
+    open('README.rst').read(),
+    open('CHANGES.rst').read()
+])
 
-
-def read(*rnames):
-    return open(os.path.join(os.path.dirname(__file__), *rnames)).read()
-
-# line breaks are needed after each block so that reST doesn't get mad
-
-long_description = '\n\n'.join((read('README.rst'),
-                                read('docs', 'INSTALL.rst'),
-                                read('docs', 'HISTORY.rst')))
 
 setup(
     name='collective.lineage',
     version=version,
-    description="The microsite creation product for Plone",
+    description=short_description,
     long_description=long_description,
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
         "Framework :: Plone",
-        "Framework :: Plone :: 4.0",
-        "Framework :: Plone :: 4.1",
-        "Framework :: Plone :: 4.2",
+        "Framework :: Plone :: 4.3",
+        "Framework :: Plone :: 5.0",
         "Intended Audience :: End Users/Desktop",
         "Intended Audience :: System Administrators",
         "License :: OSI Approved :: GNU General Public License (GPL)",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2.6",
         "Programming Language :: Python :: 2.7",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
@@ -47,11 +43,9 @@ setup(
     install_requires=[
         'setuptools',
         'Plone',
-        'plone.app.imaging',
     ],
     extras_require={
         'test': [
-            'interlude',
             'plone.app.testing',
         ],
     },
