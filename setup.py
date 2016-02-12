@@ -4,8 +4,8 @@ from setuptools import setup
 
 
 version = '2.1.dev0'
-short_description = "The microsite creation product for Plone"
-long_description = '\n'.join([
+short_description = u"The microsite creation product for Plone"
+long_description = u'\n\n'.join([
     open('README.rst').read(),
     open('CHANGES.rst').read()
 ])
