@@ -4,6 +4,9 @@ Changelog
 2.1 - (unreleased)
 ------------------
 
+- Implement new utility method ``parent_site``.
+  [thet]
+
 - Setup related cleanups.
   [thet]
 
