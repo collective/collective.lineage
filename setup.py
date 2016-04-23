@@ -43,6 +43,7 @@ setup(
     install_requires=[
         'setuptools',
         'Products.CMFPlone',
+        'five.localsitemanager',
     ],
     extras_require={
         'test': [
