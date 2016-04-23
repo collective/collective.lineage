@@ -43,6 +43,7 @@ setup(
     install_requires=[
         'setuptools',
         'Plone',
+        'five.localsitemanager',
     ],
     extras_require={
         'test': [
