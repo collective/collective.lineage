@@ -2,6 +2,9 @@
 <componentregistry>
   <utilities>
     <utility remove="True"
+        interface="p4a.subtyper.interfaces.IFolderishContentTypeDescriptor"
+        name="collective.lineage.childsite"/>
+    <utility remove="True"
         interface="p4a.subtyper.interfaces.IPortalTypedFolderishDescriptor"
         name="collective.lineage.childsite"/>
   </utilities>

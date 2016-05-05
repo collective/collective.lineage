@@ -5,5 +5,9 @@
         interface="p4a.subtyper.interfaces.IFolderishContentTypeDescriptor"
         name="collective.lineage.childsite"
         factory="collective.lineage.descriptors.ChildSiteDescriptor" />
+    <utility
+        interface="p4a.subtyper.interfaces.IPortalTypedFolderishDescriptor"
+        name="collective.lineage.childsite"
+        factory="collective.lineage.descriptors.ChildSiteDescriptor" />
   </utilities>
 </componentregistry>
