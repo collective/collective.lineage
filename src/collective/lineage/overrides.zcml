@@ -1,0 +1,53 @@
+<configure xmlns="http://namespaces.zope.org/zope"
+           xmlns:browser="http://namespaces.zope.org/browser"
+           xmlns:zcml="http://namespaces.zope.org/zcml"
+           i18n_domain="collective.lineage">
+
+  <configure
+      zcml:condition="installed collective.lineage">
+
+    <subscriber
+        for="zope.processlifetime.IDatabaseOpenedWithRoot"
+        handler=".subscribers.addURLOverrides"
+        />
+
+    <browser:page
+        for="Products.Archetypes.interfaces.IBaseContent"
+        name="absolute_url"
+        class=".absoluteurl.LineageAbsoluteURL"
+        permission="zope.Public"
+        allowed_interface="zope.traversing.browser.interfaces.IAbsoluteURL"
+        />
+
+    <view
+        for="Products.Archetypes.interfaces.IBaseContent"
+        factory=".absoluteurl.LineageAbsoluteURL"
+        type="zope.publisher.interfaces.http.IHTTPRequest"
+        permission="zope.Public"
+        provides="zope.traversing.browser.interfaces.IAbsoluteURL"
+        />
+
+    <configure
+        zcml:condition="installed plone.dexterity">
+
+      <browser:page
+          for="plone.dexterity.interfaces.IDexterityContent"
+          name="absolute_url"
+          class=".absoluteurl.LineageAbsoluteURL"
+          permission="zope.Public"
+          allowed_interface="zope.traversing.browser.interfaces.IAbsoluteURL"
+          />
+
+      <view
+          for="plone.dexterity.interfaces.IDexterityContent"
+          factory=".absoluteurl.LineageAbsoluteURL"
+          type="zope.publisher.interfaces.http.IHTTPRequest"
+          permission="zope.Public"
+          provides="zope.traversing.browser.interfaces.IAbsoluteURL"
+          />
+
+    </configure>
+
+  </configure>
+
+</configure>

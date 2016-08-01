@@ -63,3 +63,25 @@ def disableChildSite(event):
     if subtype is not None and subtype.type_interface == IChildSite:
         folder = event.object
         disableFolder(folder)
+
+def addURLOverrides(event):
+    """When Plone starts up, add our overrides for
+        - ZPublisher.HTTPRequest.HTTPRequest.physicalPathToURL
+    """
+    from ZPublisher.HTTPRequest import HTTPRequest
+    from collective.lineage.absoluteurl import physicalPathToURL
+
+    HTTPRequest._physicalPathToURL = HTTPRequest.physicalPathToURL
+    HTTPRequest.physicalPathToURL = physicalPathToURL
+
+    # Ideally, we could use `useBrains`,
+    # But ZCatalog forces AbstractCatalogBrain first in the MRO.
+    #from zope.app.appsetup.bootstrap import getInformationFromEvent
+    #from Products.CMFPlone.interfaces.siteroot import IPloneSiteRoot
+    #from collective.lineage.brains import VHMAwareBrain
+    #db, connection, root, root_folder = getInformationFromEvent(event)
+
+    #for obj_id, obj in root_folder.items():
+    #    if IPloneSiteRoot.providedBy(obj):
+    #        catalog = getToolByName(obj, 'portal_catalog')
+    #        catalog._catalog.useBrains(VHMAwareBrain)

@@ -11,6 +11,9 @@ class LineageSettingsEditForm(controlpanel.RegistryEditForm):
 
     def updateFields(self):
         super(LineageSettingsEditForm, self).updateFields()
+        # There isn't a widget to nicely edit a Dict schema field yet
+        # see: https://dev.plone.org/ticket/11932
+        self.fields = self.fields.omit('vhm_map')
 
     def updateWidgets(self):
         super(LineageSettingsEditForm, self).updateWidgets()

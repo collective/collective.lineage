@@ -62,3 +62,11 @@ class ILineageSettings(Interface):
         required=False,
         default=u'',
     )
+
+    vhm_map = schema.Dict(title=_(u"VHM Path Map"),
+                          description=_(u"help_vhm_map",
+                            default=u"You can define a mapping of paths in \
+                                    the site hierachy and the hostname \
+                                    used to access that part of the tree."),
+                          required=False,
+                          default={},)
