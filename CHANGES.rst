@@ -1,8 +1,8 @@
 Changelog
 =========
 
-2.1 - (unreleased)
-------------------
+2.1 (2016-10-03)
+----------------
 
 - Setup related cleanups.
   [thet]
