@@ -1,6 +1,14 @@
 Changelog
 =========
 
+2.1.1 - (2017-02-15)
+--------------------
+
+- Add descriptors.py back in with a placeholder so the site
+  doesn't complain about it missing
+  [abosio]
+
+
 2.1 (2016-10-03)
 ----------------
 
