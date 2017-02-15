@@ -4,8 +4,7 @@ Changelog
 2.2 (unreleased)
 ----------------
 
-- Support registering browser layers for child sites for per-child-site
-  theming.
+- Support registering browser layers for child sites for per-child-site theming.
   [rpatterson]
 
 - Simplify travis configuration and fix travis test run.
@@ -13,6 +12,9 @@ Changelog
 
 - Depend on ``Products.CMFPlone`` instead of ``Plone`` to not fetch unnecessary dependencies.
   [thet]
+
+- Add descriptors.py back in with a placeholder so the site doesn't complain about it missing.
+  [abosio]
 
 
 2.1 (2016-10-03)
