@@ -4,6 +4,9 @@ Changelog
 2.2 (unreleased)
 ----------------
 
+- Simplify travis configuration and fix travis test run.
+  [thet]
+
 - Depend on ``Products.CMFPlone`` instead of ``Plone`` to not fetch unnecessary dependencies.
   [thet]
 
