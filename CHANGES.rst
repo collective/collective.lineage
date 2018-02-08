@@ -4,7 +4,8 @@ Changelog
 2.2 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Depend on ``Products.CMFPlone`` instead of ``Plone`` to not fetch unnecessary dependencies.
+  [thet]
 
 
 2.1 (2016-10-03)
