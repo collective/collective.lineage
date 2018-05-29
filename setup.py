@@ -3,7 +3,7 @@ from setuptools import find_packages
 from setuptools import setup
 
 
-version = '2.1.dev0'
+version = '2.2.dev0'
 short_description = u"The microsite creation product for Plone"
 long_description = u'\n\n'.join([
     open('README.rst').read(),
@@ -44,6 +44,7 @@ setup(
         'setuptools',
         'Plone',
         'five.localsitemanager',
+        'Products.CMFPlone',
     ],
     extras_require={
         'test': [

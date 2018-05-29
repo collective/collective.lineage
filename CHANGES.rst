@@ -1,8 +1,18 @@
 Changelog
 =========
 
-2.1 - (unreleased)
-------------------
+2.2 (unreleased)
+----------------
+
+- Simplify travis configuration and fix travis test run.
+  [thet]
+
+- Depend on ``Products.CMFPlone`` instead of ``Plone`` to not fetch unnecessary dependencies.
+  [thet]
+
+
+2.1 (2016-10-03)
+----------------
 
 - Implement new utility method ``parent_site``.
   [thet]

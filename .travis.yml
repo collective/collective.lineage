@@ -14,10 +14,11 @@ before_install:
   - virtualenv .
   - bin/pip install --upgrade pip setuptools zc.buildout coveralls
 env:
-  - PLONE_VERSION=4.3.x
-  - PLONE_VERSION=5.0.x
+  - PLONE_VERSION=4.3
+  - PLONE_VERSION=5.0
+  - PLONE_VERSION=5.1
 install:
-  - sed -ie "s#plone-4.3.x.cfg#plone-$PLONE_VERSION.cfg#" travis.cfg
+  - sed -ie "s#x.x-latest#$PLONE_VERSION-latest#" travis.cfg
   - bin/buildout -N -t 3 -c travis.cfg
 before_script:
   - export DISPLAY=:99.0
