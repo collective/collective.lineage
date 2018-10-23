@@ -1,7 +1,14 @@
 # -*- coding: utf-8 -*-
-from collective.lineage.testing import LINEAGE_INTEGRATION_TESTING
+from zope import interface
+from zope import component
+
+from plone.browserlayer import utils as layer_utils
+
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
+
+from collective.lineage import utils
+from collective.lineage.testing import LINEAGE_INTEGRATION_TESTING
 
 try:
     # BBB
@@ -10,6 +17,12 @@ except ImportError:
     import unittest
 
 PROJECTNAME = 'collective.lineage'
+
+
+class IChildSiteLayer(interface.Interface):
+    """
+    An example browser layer for a child site.
+    """
 
 
 class UtilsTestCase(unittest.TestCase):
@@ -26,17 +39,33 @@ class UtilsTestCase(unittest.TestCase):
 
     def test_enable(self):
         from collective.lineage.interfaces import IChildSite
-        from collective.lineage.utils import enable_childsite
         self.assertFalse(IChildSite.providedBy(self.childsite))
-        enable_childsite(self.childsite)
+        utils.enable_childsite(self.childsite)
         self.assertTrue(IChildSite.providedBy(self.childsite))
 
     def test_disable(self):
         from collective.lineage.interfaces import IChildSite
-        from collective.lineage.utils import disable_childsite
-        from collective.lineage.utils import enable_childsite
 
-        enable_childsite(self.childsite)
+        utils.enable_childsite(self.childsite)
         self.assertTrue(IChildSite.providedBy(self.childsite))
-        disable_childsite(self.childsite)
+        utils.disable_childsite(self.childsite)
         self.assertFalse(IChildSite.providedBy(self.childsite))
+
+    def test_childsite_browserlayer(self):
+        """
+        Child sites can have their own browser layer.
+        """
+        utils.enable_childsite(self.childsite)
+        layer_utils.register_layer(
+            IChildSiteLayer,
+            'collective.lineage.childsite.layer',
+            site_manager=component.getSiteManager((self.childsite)))
+
+        self.assertFalse(
+            IChildSiteLayer.providedBy(self.portal.REQUEST),
+            'Child site browser layer applied prior to traversing')
+        self.portal.REQUEST.traverse(
+            '/'.join(self.childsite.getPhysicalPath()))
+        self.assertTrue(
+            IChildSiteLayer.providedBy(self.portal.REQUEST),
+            'Child site browser layer not applied to the request')

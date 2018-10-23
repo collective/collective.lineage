@@ -4,6 +4,10 @@ Changelog
 2.2 (unreleased)
 ----------------
 
+- Support registering browser layers for child sites for per-child-site
+  theming.
+  [rpatterson]
+
 - Simplify travis configuration and fix travis test run.
   [thet]
 

@@ -6,6 +6,21 @@
     xmlns:i18n="http://namespaces.zope.org/i18n"
     i18n_domain="collective.lineage">
 
+  <!-- Support layers per-child-site -->
+  <!-- Have to duplicate the site manager subscriber because the more-specific
+       mark_layer subscriber will be run before the child site site manager is
+       set up otherwise -->
+  <subscriber
+      for="plone.app.layout.navigation.interfaces.INavigationRoot
+           zope.traversing.interfaces.IBeforeTraverseEvent"
+      handler="zope.site.site.threadSiteSubscriber"
+      />
+  <subscriber
+      for="plone.app.layout.navigation.interfaces.INavigationRoot
+           zope.traversing.interfaces.IBeforeTraverseEvent"
+           handler=".adapters.mark_layer"
+           />
+
   <i18n:registerTranslations directory="locales" />
 
   <include package="Products.CMFCore" file="permissions.zcml"
@@ -13,7 +28,7 @@
 
   <adapter
       for="collective.lineage.interfaces.IChildSite"
-      provides="plone.app.imaging.interfaces.IImagingSchema"
+      provides="plone.app.imaging.scaling.IImagingSchema"
       factory="collective.lineage.adapters.get_image_traverser"
       zcml:condition="not-have plone-5" />
 
