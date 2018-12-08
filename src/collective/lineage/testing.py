@@ -6,6 +6,7 @@ from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
 from plone.testing import z2
 
+
 try:
     from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
     HAS_ROBOT = True
