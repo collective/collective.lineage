@@ -1,14 +1,12 @@
 # -*- coding: utf-8 -*-
-from zope import interface
-from zope import component
-
-from plone.browserlayer import utils as layer_utils
-
-from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
-
 from collective.lineage import utils
 from collective.lineage.testing import LINEAGE_INTEGRATION_TESTING
+from plone.app.testing import setRoles
+from plone.app.testing import TEST_USER_ID
+from plone.browserlayer import utils as layer_utils
+from zope import component
+from zope import interface
+
 
 try:
     # BBB

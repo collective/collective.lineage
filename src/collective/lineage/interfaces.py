@@ -4,6 +4,7 @@ from zope.component.interfaces import IPossibleSite
 from zope.i18nmessageid import MessageFactory
 from zope.interface import Interface
 
+
 _ = MessageFactory('collective.lineage')
 
 
