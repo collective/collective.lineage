@@ -18,8 +18,8 @@
   <subscriber
       for="plone.app.layout.navigation.interfaces.INavigationRoot
            zope.traversing.interfaces.IBeforeTraverseEvent"
-           handler=".adapters.mark_layer"
-           />
+      handler=".adapters.mark_layer"
+      />
 
   <i18n:registerTranslations directory="locales" />
 
@@ -30,7 +30,7 @@
       for="collective.lineage.interfaces.IChildSite"
       provides="plone.app.imaging.scaling.IImagingSchema"
       factory="collective.lineage.adapters.get_image_traverser"
-      zcml:condition="not-have plone-5" />
+      zcml:condition="installed plone.app.imaging" />
 
   <browser:page
       for="*"
