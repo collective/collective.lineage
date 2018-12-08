@@ -4,6 +4,9 @@ Changelog
 2.2 (unreleased)
 ----------------
 
+- Load the image traverser only if plone.app.imaging is installed.
+  [thet]
+
 - Support registering browser layers for child sites for per-child-site theming.
   [rpatterson]
 

@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
+from plone.browserlayer import layer
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from zope.component import queryUtility
-from plone.app.imaging import scaling
 
-from plone.browserlayer import layer
+
+try:
+    from plone.app.imaging import scaling
+except ImportError:
+    scaling = None
 
 
 def mark_layer(site, event):
@@ -15,6 +19,7 @@ def mark_layer(site, event):
     return layer.mark_layer(site, event)
 
 
-def get_image_traverser(context):
-    siteroot = queryUtility(IPloneSiteRoot)
-    return scaling.IImagingSchema(siteroot)
+if scaling:
+    def get_image_traverser(context):
+        siteroot = queryUtility(IPloneSiteRoot)
+        return scaling.IImagingSchema(siteroot)
