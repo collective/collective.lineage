@@ -29,6 +29,9 @@ Changelog
 2.1 (2016-10-03)
 ----------------
 
+- Implement new utility method ``parent_site``.
+  [thet]
+
 - Setup related cleanups.
   [thet]
 
