@@ -1,7 +1,7 @@
 Changelog
 =========
 
-2.2 (unreleased)
+2.2 (2019-01-02)
 ----------------
 
 - Load the image traverser only if plone.app.imaging is installed.
