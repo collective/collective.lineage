@@ -11,6 +11,13 @@ try:
 except ImportError:
     import unittest
 
+try:
+    from Products.CMFPlone.utils import get_installer
+except ImportError:
+    # BBB for Plone 5.0 and lower.
+    get_installer = None
+
+
 PROJECTNAME = 'collective.lineage'
 
 
@@ -20,7 +27,10 @@ class InstallTestCase(unittest.TestCase):
 
     def setUp(self):
         self.portal = self.layer['portal']
-        self.qi = self.portal.portal_quickinstaller
+        if get_installer is None:
+            self.qi = self.portal.portal_quickinstaller
+        else:
+            self.qi = get_installer(self.portal)
 
     def test_installed(self):
         self.assertTrue(self.qi.isProductInstalled(PROJECTNAME))
@@ -40,7 +50,10 @@ class UninstallTest(unittest.TestCase):
     def setUp(self):
         self.portal = self.layer['portal']
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
-        self.qi = self.portal.portal_quickinstaller
+        if get_installer is None:
+            self.qi = self.portal.portal_quickinstaller
+        else:
+            self.qi = get_installer(self.portal)
         self.qi.uninstallProducts(products=[PROJECTNAME])
 
     def test_uninstalled(self):
