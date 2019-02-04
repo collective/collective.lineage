@@ -33,7 +33,10 @@ class InstallTestCase(unittest.TestCase):
             self.qi = get_installer(self.portal)
 
     def test_installed(self):
-        self.assertTrue(self.qi.isProductInstalled(PROJECTNAME))
+        if get_installer is None:
+            self.assertTrue(self.qi.isProductInstalled(PROJECTNAME))
+        else:
+            self.assertTrue(self.qi.is_product_installed(PROJECTNAME))
 
     def test_addon_layer(self):
         layers = [l.getName() for l in registered_layers()]
@@ -52,9 +55,10 @@ class UninstallTest(unittest.TestCase):
         setRoles(self.portal, TEST_USER_ID, ['Manager'])
         if get_installer is None:
             self.qi = self.portal.portal_quickinstaller
+            self.qi.uninstallProducts(products=[PROJECTNAME])
         else:
             self.qi = get_installer(self.portal)
-        self.qi.uninstallProducts(products=[PROJECTNAME])
+            self.qi.uninstall_product(PROJECTNAME)
 
     def test_uninstalled(self):
         self.assertFalse(self.qi.isProductInstalled(PROJECTNAME))
