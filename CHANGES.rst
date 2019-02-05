@@ -4,7 +4,8 @@ Changelog
 2.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Add support for python 3
+  [cillianderoiste]
 
 
 2.2 (2019-01-02)
