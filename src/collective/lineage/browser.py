@@ -37,13 +37,11 @@ class LineageTool(BrowserView):
         """
         return IFolder.providedBy(self.context)
 
-    @property
     def disabled(self):
         """True, if context is not a lineage subsite but could possibly be one.
         """
-        return self.available and not self.enabled
+        return self.available and not self.enabled()
 
-    @property
     def enabled(self):
         """True, if context is a lineage subsite.
         """
