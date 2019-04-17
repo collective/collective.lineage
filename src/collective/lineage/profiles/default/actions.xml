@@ -4,8 +4,8 @@
     <object name="enable_subsite" meta_type="CMF Action" i18n:domain="collective.lineage">
       <property name="title" i18n:translate="">Enable Subsite</property>
       <property name="description" i18n:translate=""></property>
-      <property name="url_expr">string:$object_url/@@lineage_tool/enable</property>
-      <property name="available_expr">object/@@lineage_tool/disabled|nothing</property>
+      <property name="url_expr">string:$object_url/@@lineage_tool-enable</property>
+      <property name="available_expr">object/@@lineage_tool-disabled|nothing</property>
       <property name="visible">True</property>
       <property name="permissions">
         <element value="Manage portal" />
@@ -14,8 +14,8 @@
     <object name="disable_subsite" meta_type="CMF Action" i18n:domain="collective.lineage">
       <property name="title" i18n:translate="">Disable Subsite</property>
       <property name="description" i18n:translate=""></property>
-      <property name="url_expr">string:$object_url/@@lineage_tool/disable</property>
-      <property name="available_expr">object/@@lineage_tool/enabled|nothing</property>
+      <property name="url_expr">string:$object_url/@@lineage_tool-disable</property>
+      <property name="available_expr">object/@@lineage_tool-enabled|nothing</property>
       <property name="visible">True</property>
       <property name="permissions">
         <element value="Manage portal" />
