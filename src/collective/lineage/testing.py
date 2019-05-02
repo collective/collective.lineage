@@ -4,14 +4,7 @@ from plone.app.testing import FunctionalTesting
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
-from plone.testing import zserver
-from plone.testing import zope
-
-try:
-    from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
-    HAS_ROBOT = True
-except ImportError:
-    HAS_ROBOT = False
+from plone.testing import z2
 
 try:
     from Products.CMFPlone.utils import get_installer
@@ -35,7 +28,7 @@ class LineageLayer(PloneSandboxLayer):
         if self['has_pact']:
             self.loadZCML(package=plone.app.contenttypes)
         if self['has_pact']:
-            zope.installProduct(app, 'plone.app.contenttypes')
+            z2.installProduct(app, 'plone.app.contenttypes')
 
     def setUpPloneSite(self, portal):
         if self['has_pact']:
@@ -56,14 +49,3 @@ LINEAGE_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(LINEAGE_FIXTURE,),
     name='collective.lineage:FunctionalTesting'
 )
-
-
-if HAS_ROBOT:
-    LINEAGE_ACCEPTANCE_TESTING = FunctionalTesting(
-        bases=(
-            LINEAGE_FIXTURE,
-            REMOTE_LIBRARY_BUNDLE_FIXTURE,
-            zserver.ZSERVER_FIXTURE
-        ),
-        name='collective.lineage:AcceptanceTesting'
-    )
