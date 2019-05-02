@@ -52,6 +52,7 @@ setup(
     extras_require={
         'test': [
             'plone.app.testing',
+            'plone.testing>=5.0.0'
         ],
     },
     entry_points="""
