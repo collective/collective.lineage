@@ -4,7 +4,11 @@ Changelog
 2.3 (unreleased)
 ----------------
 
-- Nothing changed yet.
+- Add support for python 3
+  [cillianderoiste]
+
+- Fixed for Plone 5.2
+  [ajung]
 
 
 2.2 (2019-01-02)

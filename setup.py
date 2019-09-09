@@ -22,12 +22,16 @@ setup(
         "Framework :: Plone",
         "Framework :: Plone :: 4.3",
         "Framework :: Plone :: 5.0",
+        "Framework :: Plone :: 5.1",
+        "Framework :: Plone :: 5.2",
         "Intended Audience :: End Users/Desktop",
         "Intended Audience :: System Administrators",
         "License :: OSI Approved :: GNU General Public License (GPL)",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
         "Programming Language :: Python :: 2.7",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     keywords='plone lineage',
@@ -48,6 +52,7 @@ setup(
     extras_require={
         'test': [
             'plone.app.testing',
+            'plone.testing>=5.0.0'
         ],
     },
     entry_points="""

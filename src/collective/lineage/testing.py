@@ -6,12 +6,11 @@ from plone.app.testing import PLONE_FIXTURE
 from plone.app.testing import PloneSandboxLayer
 from plone.testing import z2
 
-
 try:
-    from plone.app.robotframework.testing import REMOTE_LIBRARY_BUNDLE_FIXTURE
-    HAS_ROBOT = True
+    from Products.CMFPlone.utils import get_installer
 except ImportError:
-    HAS_ROBOT = False
+    # BBB for Plone 5.0 and lower.
+    get_installer = None
 
 
 class LineageLayer(PloneSandboxLayer):
@@ -50,14 +49,3 @@ LINEAGE_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(LINEAGE_FIXTURE,),
     name='collective.lineage:FunctionalTesting'
 )
-
-
-if HAS_ROBOT:
-    LINEAGE_ACCEPTANCE_TESTING = FunctionalTesting(
-        bases=(
-            LINEAGE_FIXTURE,
-            REMOTE_LIBRARY_BUNDLE_FIXTURE,
-            z2.ZSERVER_FIXTURE
-        ),
-        name='collective.lineage:AcceptanceTesting'
-    )

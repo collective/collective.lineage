@@ -34,12 +34,36 @@
 
   <browser:page
       for="*"
-      name="lineage_tool"
+      name="lineage_tool-enable"
       class="collective.lineage.browser.LineageTool"
-      allowed_attributes="enabled
-                          disabled
-                          enable
-                          disable"
+      attribute="enable"
+      permission="cmf.ManagePortal"
+      layer=".interfaces.ILineageBrowserLayer"
+      />
+
+  <browser:page
+      for="*"
+      name="lineage_tool-enabled"
+      class="collective.lineage.browser.LineageTool"
+      attribute="enabled"
+      permission="cmf.ManagePortal"
+      layer=".interfaces.ILineageBrowserLayer"
+      />
+
+  <browser:page
+      for="*"
+      name="lineage_tool-disable"
+      class="collective.lineage.browser.LineageTool"
+      attribute="disable"
+      permission="cmf.ManagePortal"
+      layer=".interfaces.ILineageBrowserLayer"
+      />
+
+  <browser:page
+      for="*"
+      name="lineage_tool-disabled"
+      class="collective.lineage.browser.LineageTool"
+      attribute="disabled"
       permission="cmf.ManagePortal"
       layer=".interfaces.ILineageBrowserLayer"
       />
