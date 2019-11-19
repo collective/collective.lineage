@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 from collective.lineage.testing import LINEAGE_INTEGRATION_TESTING
-from collective.lineage.utils import enable_childsite
+
+from plone.dexterity.interfaces import IDexterityFTI
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
-from plone.dexterity.interfaces import IDexterityFTI
+
 from zope.component import getGlobalSiteManager
 from zope.component import queryUtility
 from zope.component.hooks import setSite
@@ -51,6 +52,7 @@ class AdapterTestCase(unittest.TestCase):
         self.assertIsInstance(configuration, ImagingControlPanelAdapter)
 
     def test_childsite_query_utility(self):
+        from collective.lineage.utils import enable_childsite
         enable_childsite(self.portal.site1)
         setSite(self.portal.site1)
         queryUtility(IDexterityFTI, name="File")

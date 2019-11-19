@@ -4,8 +4,8 @@ from collective.lineage.interfaces import IChildSiteRemovedEvent
 from collective.lineage.interfaces import IChildSiteWillBeCreatedEvent
 from collective.lineage.interfaces import IChildSiteWillBeRemovedEvent
 
-from zope.interface.interfaces import ObjectEvent
 from zope.interface import implementer
+from zope.interface.interfaces import ObjectEvent
 
 
 class ChildSiteWillBeCreatedEvent(ObjectEvent):
