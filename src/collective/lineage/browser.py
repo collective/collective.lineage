@@ -5,7 +5,13 @@ from collective.lineage.utils import disable_childsite
 from collective.lineage.utils import enable_childsite
 from plone.folder.interfaces import IFolder
 from Products.CMFCore.utils import getToolByName
-from Products.CMFPlone.utils import isDefaultPage
+
+try:
+    from Products.CMFPlone.utils import defaultpage
+except ImportError:
+    # BBB
+    from Products.CMFPlone.utils import isDefaultPage as defaultpage
+
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.component import getMultiAdapter
@@ -22,7 +28,7 @@ class LineageTool(BrowserView):
         def _get_context(ctx, req):
             if not ctx:
                 return None
-            if isDefaultPage(ctx, req):
+            if defaultpage(ctx, req):
                 return _get_context(aq_parent(ctx), req)
             return ctx
 
