@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+# Run buildout in the tox virtualenv as a part of the install
+
+set -e -o pipefail
+PS4='${LINENO}+'
+set -x
+
+main() {
+    envdir=$1
+    shift
+
+    python -m pip install "$@"
+    mkdir -p "$envdir/buildout"
+    cd "$envdir/buildout"
+    echo '[buildout]' > buildout.cfg
+    echo "extends = ../../../test_${envdir#*/py*-}.cfg" >> buildout.cfg
+    echo "develop = ../../.." >> buildout.cfg
+    buildout
+}
+
+
+main "$@"

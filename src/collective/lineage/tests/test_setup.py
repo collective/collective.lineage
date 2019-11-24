@@ -61,7 +61,14 @@ class UninstallTest(unittest.TestCase):
             self.qi.uninstall_product(PROJECTNAME)
 
     def test_uninstalled(self):
-        self.assertFalse(self.qi.isProductInstalled(PROJECTNAME))
+        """
+        The Lineage Add-on is uninstalled by default.
+        """
+        if get_installer is None:
+            is_installed = self.qi.isProductInstalled(PROJECTNAME)
+        else:
+            is_installed = self.qi.is_product_installed(PROJECTNAME)
+        self.assertFalse(is_installed, 'Lineage installed by default')
 
     def test_addon_layer_removed(self):
         layers = [l.getName() for l in registered_layers()]

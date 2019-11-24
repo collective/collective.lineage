@@ -1,33 +1,20 @@
 # -*- coding: utf-8 -*-
-from collective.lineage.testing import LINEAGE_INTEGRATION_TESTING
-
-from plone.dexterity.interfaces import IDexterityFTI
-from plone.app.testing import setRoles
-from plone.app.testing import TEST_USER_ID
 
 from zope.component import getGlobalSiteManager
 from zope.component import queryUtility
 from zope.component.hooks import setSite
 
+from plone.dexterity.interfaces import IDexterityFTI
 
-try:
-    # BBB
-    import unittest2 as unittest
-except ImportError:
-    import unittest
+from .. import testing
 
 PROJECTNAME = 'collective.lineage'
 
 
-class AdapterTestCase(unittest.TestCase):
-
-    layer = LINEAGE_INTEGRATION_TESTING
-
-    def setUp(self):
-        self.portal = self.layer['portal']
-        self.request = self.layer['request']
-        setRoles(self.portal, TEST_USER_ID, ['Site Administrator'])
-        self.portal.invokeFactory('Folder', 'site1')
+class AdapterTestCase(testing.LineageTestCase):
+    """
+    Test adapter lookup in a child site.
+    """
 
     def test_adapter_registered_correctly(self):
         """this test is ATCT only"""
