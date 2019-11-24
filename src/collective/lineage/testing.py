@@ -14,6 +14,11 @@ try:
 except ImportError:
     # BBB Plone 4.3
     from plone.testing import z2 as zope
+try:
+    from plone.testing.zope import WSGI_SERVER_FIXTURE as SERVER_FIXTURE
+except ImportError:
+    # BBB Plone 4.3
+    from plone.testing.z2 import ZSERVER_FIXTURE as SERVER_FIXTURE
 from plone.app import testing as pa_testing
 from plone.app.testing import applyProfile
 from plone.app.testing import FunctionalTesting
@@ -63,6 +68,12 @@ LINEAGE_INTEGRATION_TESTING = IntegrationTesting(
 LINEAGE_FUNCTIONAL_TESTING = FunctionalTesting(
     bases=(LINEAGE_FIXTURE,),
     name='collective.lineage:FunctionalTesting'
+)
+
+
+LINEAGE_SERVER_TESTING = FunctionalTesting(
+    bases=(LINEAGE_FIXTURE, SERVER_FIXTURE),
+    name='collective.lineage:ServerTesting'
 )
 
 
