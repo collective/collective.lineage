@@ -99,8 +99,6 @@ class LineageSwitcherViewlet(BrowserView):
             sites.insert(0, dict(title=portal_object.Title(),
                                  description=portal_object.Description(),
                                  url=root_url))
-        if len(sites) <= 1:
-            return []
         return sites
 
 
