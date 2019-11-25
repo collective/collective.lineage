@@ -4,11 +4,17 @@ Changelog
 2.3 (unreleased)
 ----------------
 
-- Add support for python 3
+- Add support for Python 3
   [cillianderoiste]
 
 - Fixed for Plone 5.2
   [ajung]
+
+- Fix broken image link in README, fix project URL in setup.py
+  [tkimnguyen]
+
+- Remove extraneous code that was causing a len() deprecation warning, #58
+  [tkimnguyen]
 
 
 2.2 (2019-01-02)

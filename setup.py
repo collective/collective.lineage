@@ -37,7 +37,7 @@ setup(
     keywords='plone lineage',
     author='Six Feet Up, Inc.',
     author_email='info@sixfeetup.com',
-    url='http://plone.org/products/collective-lineage',
+    url='https://pypi.org/project/collective-lineage',
     license='GPL',
     packages=find_packages('src'),
     package_dir={'': 'src'},

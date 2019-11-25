@@ -2,7 +2,7 @@ Introduction
 ============
 
 
-.. image:: http://www.sixfeetup.com/logos/lineage.gif
+.. image:: https://sixfeetup.com/files/Lineage_Logo_400px.png/@@images/bf2b16c6-0c95-4b6a-97ab-b306edb3d63b.png
    :height: 144
    :width: 220
    :alt: Lineage
