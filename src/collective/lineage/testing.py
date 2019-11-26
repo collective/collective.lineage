@@ -12,12 +12,12 @@ except ImportError:
 try:
     from plone.testing import zope
 except ImportError:
-    # BBB Plone 4.3
+    # BBB Plone 5.1
     from plone.testing import z2 as zope
 try:
     from plone.testing.zope import WSGI_SERVER_FIXTURE as SERVER_FIXTURE
 except ImportError:
-    # BBB Plone 4.3
+    # BBB Plone 5.1
     from plone.testing.z2 import ZSERVER_FIXTURE as SERVER_FIXTURE
 from plone.app import testing as pa_testing
 from plone.app.testing import applyProfile

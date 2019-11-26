@@ -7,7 +7,7 @@ import transaction
 try:
     from plone.testing import zope
 except ImportError:
-    # BBB Plone 4.3
+    # BBB Plone 5.1
     from plone.testing import z2 as zope
 from plone.app import testing as pa_testing
 
