@@ -19,7 +19,7 @@ Changelog
 - require plone.dexterity >= 2.9.3 for Python 3 (#55)
   [petri,tkimnguyen]
   
-- use pyflakes 2.10 to fix tests
+- use pyflakes 2.1.0 to fix tests
   [tkimnguyen]
 
 2.2 (2019-01-02)
