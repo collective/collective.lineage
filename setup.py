@@ -48,6 +48,7 @@ setup(
         'setuptools',
         'Products.CMFPlone',
         'five.localsitemanager',
+        'plone.dexterity>=2.9.3;python_version>="3.0"',
     ],
     extras_require={
         'test': [
