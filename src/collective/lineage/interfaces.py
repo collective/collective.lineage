@@ -2,6 +2,7 @@ from zope.component.interfaces import IPossibleSite
 from zope.i18nmessageid import MessageFactory
 from zope.interface import Interface
 
+
 try:
     from plone.base.interfaces import INavigationRoot
 except ImportError:
