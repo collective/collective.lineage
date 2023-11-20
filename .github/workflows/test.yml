@@ -18,7 +18,7 @@ jobs:
         - ["2.7",   "plone52"]
         - ["3.8",   "plone52"]
     runs-on: ubuntu-20.04
-    name: ${{ matrix.config[1] }}
+    name: ${{ matrix.config[1] }}-py${{ matrix.config[0] }}
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python
