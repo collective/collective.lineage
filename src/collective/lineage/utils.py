@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from Acquisition import aq_parent
 from collective.lineage.events import ChildSiteCreatedEvent
 from collective.lineage.events import ChildSiteRemovedEvent
@@ -25,7 +24,7 @@ def enable_childsite(context):
     # provide IChildSite
     alsoProvides(context, IChildSite)
 
-    context.reindexObject(idxs=('object_provides'))
+    context.reindexObject(idxs=("object_provides"))
     notify(ChildSiteCreatedEvent(context))
 
 
@@ -38,12 +37,11 @@ def disable_childsite(context):
     # remove IChildSite
     noLongerProvides(context, IChildSite)
 
-    context.reindexObject(idxs=('object_provides'))
+    context.reindexObject(idxs=("object_provides"))
     notify(ChildSiteRemovedEvent(context))
 
 
 def parent_site():
-
     def _find_site(ctx):
         # First, stop at IPloneSiteRoot
         if IPloneSiteRoot.providedBy(ctx):

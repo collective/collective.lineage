@@ -83,7 +83,7 @@ Upgrading to 2.X
 
 Lineage `2.0` is a major upgrade to the software and will require you to have
 updated to the `1.1.2` version before you migrate any existing Lineage child
-sites to the new version. Lineage `2.0` removes all dependancies on
+sites to the new version. Lineage `2.0` removes all dependencies on
 `p4a.subtyper` and makes the product Plone 5 ready. The `1.1.2` release of
 Lineage is only used to migrate your existing Lineage `1.1` sites up to the
 needed state for the new `2.0` release.

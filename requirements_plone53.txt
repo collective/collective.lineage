@@ -1,0 +1,2 @@
+-c constraints.txt
+-r https://dist.plone.org/release/5.2-latest/requirements.txt

@@ -1,16 +1,14 @@
-# -*- coding: utf-8 -*-
 from plone.app.layout.navigation.interfaces import INavigationRoot
 from zope.component.interfaces import IPossibleSite
 from zope.i18nmessageid import MessageFactory
 from zope.interface import Interface
 
 
-_ = MessageFactory('collective.lineage')
+_ = MessageFactory("collective.lineage")
 
 
 class ILineageBrowserLayer(Interface):
-    """Browser layer marker interface
-    """
+    """Browser layer marker interface"""
 
 
 class IChildSite(INavigationRoot, IPossibleSite):
@@ -26,20 +24,16 @@ class IChildSite(INavigationRoot, IPossibleSite):
 
 
 class IChildSiteWillBeCreatedEvent(Interface):
-    """An event that is fired before a child site is created
-    """
+    """An event that is fired before a child site is created"""
 
 
 class IChildSiteCreatedEvent(Interface):
-    """An event that is fired after a child site is created
-    """
+    """An event that is fired after a child site is created"""
 
 
 class IChildSiteWillBeRemovedEvent(Interface):
-    """An event that is fired before the child site is removed
-    """
+    """An event that is fired before the child site is removed"""
 
 
 class IChildSiteRemovedEvent(Interface):
-    """An event that is fired after a child site is removed
-    """
+    """An event that is fired after a child site is removed"""
