@@ -1,13 +1,6 @@
 Introduction
 ============
 
-
-.. image:: https://sixfeetup.com/files/Lineage_Logo_400px.png/@@images/bf2b16c6-0c95-4b6a-97ab-b306edb3d63b.png
-   :height: 144
-   :width: 220
-   :alt: Lineage
-   :align: left
-
 Lineage is a Plone extension.
 It allows subfolders of a Plone site to appear as autonomous Plone sites to the everyday user.
 This hub and spoke structure allows site administrators to easily manage multiple, seemingly independent, sub-entity websites in one Plone. Furthermore, the "parent" site can access and view the content in all the "child" sites while the child sites only view their own content.
@@ -16,7 +9,13 @@ Lineage is less complex and easier to manage than a cluster of nested Plone site
 
 Lineage can be used within a large organization to manage multiple microsites, such as school district sites, university departments, corporate product sites, public library satellites, professional association events, and more.
 
-Lineage works with Plone 5.2 and Plone 6.
+
+Version information
+===================
+
+- 3.x: Plone 5.2, 6.0 - Python 3.8+
+- 2.x: Plone 5.0, 5.1, 5.2 - Python 2.7
+- 1.x: Plone 4.3
 
 
 Useful links

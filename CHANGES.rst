@@ -1,10 +1,11 @@
 Changelog
 =========
 
-2.3.2 (unreleased)
+3.0.0 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Drop Python 2.7 support and code cleanup.
+  [petschki, thet]
 
 
 2.3.1 (2023-11-20)
