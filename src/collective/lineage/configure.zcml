@@ -27,14 +27,6 @@
   <include
       package="Products.CMFCore"
       file="permissions.zcml"
-      zcml:condition="have plone-41"
-      />
-
-  <adapter
-      factory="collective.lineage.adapters.get_image_traverser"
-      provides="plone.app.imaging.scaling.IImagingSchema"
-      for="collective.lineage.interfaces.IChildSite"
-      zcml:condition="installed plone.app.imaging"
       />
 
   <browser:page

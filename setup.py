@@ -49,7 +49,6 @@ setup(
         "Products.CMFCore",
         "Products.CMFPlone",
         "five.localsitemanager",
-        "plone.app.imaging",
         "plone.browserlayer",
         "plone.dexterity",
         "plone.folder",
