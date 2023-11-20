@@ -4,7 +4,8 @@ Changelog
 2.3.1 (unreleased)
 ------------------
 
-- nothing chnaged yet
+- Add support for Plone 6 while keeping Plone 5 compatibility.
+  [petschki, thet]
 
 
 2.3 (2020-02-16)

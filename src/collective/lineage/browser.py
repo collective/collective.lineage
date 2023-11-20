@@ -5,17 +5,21 @@ from collective.lineage.utils import disable_childsite
 from collective.lineage.utils import enable_childsite
 from plone.folder.interfaces import IFolder
 from Products.CMFCore.utils import getToolByName
-
-try:
-    from Products.CMFPlone.utils import defaultpage
-except ImportError:
-    # BBB
-    from Products.CMFPlone.utils import isDefaultPage as defaultpage
-
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.component import getMultiAdapter
 from zope.i18nmessageid import MessageFactory
+
+
+try:
+    from plone.base.defaultpage import is_default_page
+except ImportError:
+    try:
+        # BBB
+        from Products.CMFPlone.utils import defaultpage as is_default_page
+    except ImportError:
+        # BBB BBB
+        from Products.CMFPlone.utils import isDefaultPage as is_default_page
 
 
 _ = MessageFactory('collective.lineage')
@@ -28,7 +32,7 @@ class LineageTool(BrowserView):
         def _get_context(ctx, req):
             if not ctx:
                 return None
-            if defaultpage(ctx, req):
+            if is_default_page(ctx, req):
                 return _get_context(aq_parent(ctx), req)
             return ctx
 
