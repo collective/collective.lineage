@@ -1,7 +1,13 @@
 Changelog
 =========
 
-2.3.1 (unreleased)
+2.3.2 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+2.3.1 (2023-11-20)
 ------------------
 
 - Add support for Plone 6 while keeping Plone 5 compatibility.
