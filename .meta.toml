@@ -8,6 +8,7 @@ commit-id = "8c30aa23"
 [tox]
 extra_lines = """
 [testenv:plone52]
+min_version = 3.28.0
 description = Plone 5.2 tests with buildout
 skip_install = true
 deps =
