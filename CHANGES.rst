@@ -1,7 +1,7 @@
 Changelog
 =========
 
-3.0.0 (unreleased)
+3.0.0 (2023-11-20)
 ------------------
 
 - Drop Python 2.7 support and code cleanup.

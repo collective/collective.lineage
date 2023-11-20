@@ -3,7 +3,7 @@ from setuptools import find_packages
 from setuptools import setup
 
 
-version = "3.0.0.dev0"
+version = "3.0.0"
 short_description = "The microsite creation product for Plone"
 long_description = "\n\n".join(
     [Path("README.rst").read_text(), Path("CHANGES.rst").read_text()]
