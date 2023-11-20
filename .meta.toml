@@ -1,0 +1,31 @@
+# Generated from:
+# https://github.com/plone/meta/tree/master/config/default
+# See the inline comments on how to expand/tweak this configuration file
+[meta]
+template = "default"
+commit-id = "8c30aa23"
+
+[tox]
+extra_lines = """
+[testenv:plone52]
+min_version = 3.28.0
+description = Plone 5.2 tests with buildout
+skip_install = true
+deps =
+    -rrequirements_plone52.txt
+commands_pre =
+    {envbindir}/buildout -nc {toxinidir}/test_plone52.cfg buildout:directory={envdir} buildout:develop={toxinidir}
+commands =
+    {envbindir}/code-analysis
+    {envbindir}/test {posargs}
+"""
+
+[github]
+jobs = [
+    "qa",
+    "test",
+    "release_ready",
+    ]
+
+[pyproject]
+dependencies_ignores = "['plone.base', 'plone.app.layout']"

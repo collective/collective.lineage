@@ -1,9 +1,21 @@
-<?xml version="1.0"?>
-<object name="portal_actions" meta_type="Plone Actions Tool" xmlns:i18n="http://xml.zope.org/namespaces/i18n">
-  <object name="object_buttons" meta_type="CMF Action Category">
-    <object name="enable_subsite" meta_type="CMF Action" i18n:domain="collective.lineage">
-      <property name="title" i18n:translate="">Enable Subsite</property>
-      <property name="description" i18n:translate=""></property>
+<?xml version="1.0" encoding="utf-8"?>
+<object xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+        meta_type="Plone Actions Tool"
+        name="portal_actions"
+>
+  <object meta_type="CMF Action Category"
+          name="object_buttons"
+  >
+    <object meta_type="CMF Action"
+            name="enable_subsite"
+            i18n:domain="collective.lineage"
+    >
+      <property name="title"
+                i18n:translate=""
+      >Enable Subsite</property>
+      <property name="description"
+                i18n:translate=""
+      />
       <property name="url_expr">string:$object_url/@@lineage_tool-enable</property>
       <property name="available_expr">object/@@lineage_tool-disabled|nothing</property>
       <property name="visible">True</property>
@@ -11,9 +23,16 @@
         <element value="Manage portal" />
       </property>
     </object>
-    <object name="disable_subsite" meta_type="CMF Action" i18n:domain="collective.lineage">
-      <property name="title" i18n:translate="">Disable Subsite</property>
-      <property name="description" i18n:translate=""></property>
+    <object meta_type="CMF Action"
+            name="disable_subsite"
+            i18n:domain="collective.lineage"
+    >
+      <property name="title"
+                i18n:translate=""
+      >Disable Subsite</property>
+      <property name="description"
+                i18n:translate=""
+      />
       <property name="url_expr">string:$object_url/@@lineage_tool-disable</property>
       <property name="available_expr">object/@@lineage_tool-enabled|nothing</property>
       <property name="visible">True</property>

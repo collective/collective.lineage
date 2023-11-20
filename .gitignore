@@ -1,36 +1,55 @@
-.*
+# Generated from:
+# https://github.com/plone/meta/tree/master/config/default
+# See the inline comments on how to expand/tweak this configuration file
+# python related
 *.egg-info
-*.log
-*.mo
 *.pyc
-*.swp
+*.pyo
+
+# translation related
+*.mo
+
+# tools related
+build/
+.coverage
+.*project
+coverage.xml
+dist/
+docs/_build
+__pycache__/
+.tox
+.vscode/
+node_modules/
+
+# venv / buildout related
 bin/
-buildout-cache/
 develop-eggs/
-devsrc/*
-dist
-docs/Makefile
-docs/doctrees/
-docs/html/
-docs/make.bat
-downloads
-eggs
-htmlcov/
+eggs/
+.eggs/
+etc/
+.installed.cfg
 include/
 lib/
 lib64
-local/
-log.html
-node_modules/
-output.xml
-package.json
+.mr.developer.cfg
 parts/
-pip-selfcheck.json
-report.html
-selenium-screenshot-*.png
-temp_resources
+pyvenv.cfg
 var/
-!.travis
-!.gitignore
-!.coveragerc
-!src/pas
+
+# mxdev
+/instance/
+/.make-sentinels/
+/*-mxdev.txt
+/reports/
+/sources/
+/venv/
+.installed.txt
+
+
+##
+# Add extra configuration options in .meta.toml:
+#  [gitignore]
+#  extra_lines = """
+#  _your own configuration lines_
+#  """
+##

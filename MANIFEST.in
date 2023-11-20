@@ -5,12 +5,8 @@ recursive-include src *
 recursive-include docs *
 
 global-exclude *.pyc
-
 exclude .coveragerc
 exclude base.cfg
 exclude buildout.cfg
-exclude test_plone43.cfg
-exclude test_plone51.cfg
 exclude test_plone52.cfg
 exclude tox.ini
-prune scripts

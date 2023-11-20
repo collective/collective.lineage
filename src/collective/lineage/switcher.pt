@@ -1,9 +1,25 @@
-<tal:block define="sites view/sites" i18n:domain="collective.lineage">
-  <form action="." tal:condition="sites" id="lineageSelectionForm">
-    <select id="lineageSelection" name="lineageSelection"
-        onchange="javascript:window.location=form.lineageSelection.options[form.lineageSelection.selectedIndex].value">
-      <option value="" i18n:translate="">Jump to child site</option>
-      <option tal:repeat="site sites" tal:attributes="value site/url" tal:content="site/title" />
+<tal:block define="
+             sites view/sites;
+           "
+           i18n:domain="collective.lineage"
+>
+  <form id="lineageSelectionForm"
+        action="."
+        tal:condition="sites"
+  >
+    <select id="lineageSelection"
+            name="lineageSelection"
+            onchange="javascript:window.location=form.lineageSelection.options[form.lineageSelection.selectedIndex].value"
+    >
+      <option value=""
+              i18n:translate=""
+      >Jump to child site</option>
+      <option tal:repeat="site sites"
+              tal:content="site/title"
+              tal:attributes="
+                value site/url;
+              "
+      ></option>
     </select>
   </form>
 </tal:block>

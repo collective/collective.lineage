@@ -2,9 +2,10 @@
     xmlns="http://namespaces.zope.org/zope"
     xmlns:browser="http://namespaces.zope.org/browser"
     xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
-    xmlns:zcml="http://namespaces.zope.org/zcml"
     xmlns:i18n="http://namespaces.zope.org/i18n"
-    i18n_domain="collective.lineage">
+    xmlns:zcml="http://namespaces.zope.org/zcml"
+    i18n_domain="collective.lineage"
+    >
 
   <!-- Support layers per-child-site -->
   <!-- Have to duplicate the site manager subscriber because the more-specific
@@ -23,18 +24,14 @@
 
   <i18n:registerTranslations directory="locales" />
 
-  <include package="Products.CMFCore" file="permissions.zcml"
-      zcml:condition="have plone-41" />
-
-  <adapter
-      for="collective.lineage.interfaces.IChildSite"
-      provides="plone.app.imaging.scaling.IImagingSchema"
-      factory="collective.lineage.adapters.get_image_traverser"
-      zcml:condition="installed plone.app.imaging" />
+  <include
+      package="Products.CMFCore"
+      file="permissions.zcml"
+      />
 
   <browser:page
-      for="*"
       name="lineage_tool-enable"
+      for="*"
       class="collective.lineage.browser.LineageTool"
       attribute="enable"
       permission="cmf.ManagePortal"
@@ -42,8 +39,8 @@
       />
 
   <browser:page
-      for="*"
       name="lineage_tool-enabled"
+      for="*"
       class="collective.lineage.browser.LineageTool"
       attribute="enabled"
       permission="cmf.ManagePortal"
@@ -51,8 +48,8 @@
       />
 
   <browser:page
-      for="*"
       name="lineage_tool-disable"
+      for="*"
       class="collective.lineage.browser.LineageTool"
       attribute="disable"
       permission="cmf.ManagePortal"
@@ -60,8 +57,8 @@
       />
 
   <browser:page
-      for="*"
       name="lineage_tool-disabled"
+      for="*"
       class="collective.lineage.browser.LineageTool"
       attribute="disabled"
       permission="cmf.ManagePortal"
@@ -88,24 +85,24 @@
   <genericsetup:registerProfile
       name="default"
       title="Lineage"
-      directory="profiles/default"
       description="The microsite creation package"
       provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/default"
       />
   <genericsetup:registerProfile
       name="uninstall"
       title="Lineage (uninstall)"
-      directory="profiles/uninstall"
       description="Uninstall Lineage"
       provides="Products.GenericSetup.interfaces.EXTENSION"
+      directory="profiles/uninstall"
       />
 
   <genericsetup:upgradeStep
-      source="210"
-      destination="220"
-      profile="collective.lineage:default"
       title="Re-run default profile to upgrade to 2.0"
       description=""
+      profile="collective.lineage:default"
+      source="210"
+      destination="220"
       handler="collective.lineage.upgrades.upgradeToTwoZero"
       />
 

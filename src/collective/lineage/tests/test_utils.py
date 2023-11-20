@@ -1,12 +1,11 @@
-# -*- coding: utf-8 -*-
-from collective.lineage import utils
 from .. import testing
-
+from collective.lineage import utils
 from plone.browserlayer import utils as layer_utils
 from zope import component
 from zope import interface
 
-PROJECTNAME = 'collective.lineage'
+
+PROJECTNAME = "collective.lineage"
 
 
 class IChildSiteLayer(interface.Interface):
@@ -22,6 +21,7 @@ class UtilsTestCase(testing.LineageTestCase):
 
     def test_enable(self):
         from collective.lineage.interfaces import IChildSite
+
         self.assertFalse(IChildSite.providedBy(self.childsite))
         utils.enable_childsite(self.childsite)
         self.assertTrue(IChildSite.providedBy(self.childsite))
@@ -41,14 +41,16 @@ class UtilsTestCase(testing.LineageTestCase):
         utils.enable_childsite(self.childsite)
         layer_utils.register_layer(
             IChildSiteLayer,
-            'collective.lineage.childsite.layer',
-            site_manager=component.getSiteManager((self.childsite)))
+            "collective.lineage.childsite.layer",
+            site_manager=component.getSiteManager(self.childsite),
+        )
 
         self.assertFalse(
             IChildSiteLayer.providedBy(self.portal.REQUEST),
-            'Child site browser layer applied prior to traversing')
-        self.portal.REQUEST.traverse(
-            '/'.join(self.childsite.getPhysicalPath()))
+            "Child site browser layer applied prior to traversing",
+        )
+        self.portal.REQUEST.traverse("/".join(self.childsite.getPhysicalPath()))
         self.assertTrue(
             IChildSiteLayer.providedBy(self.portal.REQUEST),
-            'Child site browser layer not applied to the request')
+            "Child site browser layer not applied to the request",
+        )
