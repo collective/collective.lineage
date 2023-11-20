@@ -16,7 +16,7 @@ Lineage is less complex and easier to manage than a cluster of nested Plone site
 
 Lineage can be used within a large organization to manage multiple microsites, such as school district sites, university departments, corporate product sites, public library satellites, professional association events, and more.
 
-Lineage works with Plone 4.3 up to Plone 5.2.
+Lineage works with Plone 5.2 and Plone 6.
 
 
 Useful links
