@@ -1,13 +1,13 @@
+from pathlib import Path
 from setuptools import find_packages
 from setuptools import setup
 
 
-version = '2.3.2.dev0'
-short_description = u"The microsite creation product for Plone"
-long_description = u'\n\n'.join([
-    open('README.rst').read(),
-    open('CHANGES.rst').read()
-])
+version = "3.0.0.dev0"
+short_description = "The microsite creation product for Plone"
+long_description = "\n\n".join(
+    [Path("README.rst").read_text(), Path("CHANGES.rst").read_text()]
+)
 
 
 setup(
@@ -19,19 +19,18 @@ setup(
         "Development Status :: 5 - Production/Stable",
         "Environment :: Web Environment",
         "Framework :: Plone",
-        "Framework :: Plone :: 4.3",
-        "Framework :: Plone :: 5.0",
-        "Framework :: Plone :: 5.1",
         "Framework :: Plone :: 5.2",
+        "Framework :: Plone :: 6.0",
         "Framework :: Plone :: Addon",
         "Intended Audience :: End Users/Desktop",
         "Intended Audience :: System Administrators",
         "License :: OSI Approved :: GNU General Public License (GPL)",
         "Operating System :: OS Independent",
         "Programming Language :: Python",
-        "Programming Language :: Python :: 2.7",
-        "Programming Language :: Python :: 3.6",
-        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     keywords="plone lineage",
@@ -44,15 +43,22 @@ setup(
     namespace_packages=["collective"],
     include_package_data=True,
     zip_safe=False,
-    python_requires=">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*",
+    python_requires=">=3.8",
     install_requires=[
         "setuptools",
+        "Products.CMFCore",
         "Products.CMFPlone",
         "five.localsitemanager",
-        'plone.dexterity>=2.9.3;python_version>="3.0"',
+        "plone.app.imaging",
+        "plone.browserlayer",
+        "plone.dexterity",
+        "plone.folder",
     ],
     extras_require={
-        "test": ["plone.app.testing", "plone.testing>=5.0.0"],
+        "test": [
+            "plone.app.testing",
+            "plone.testing>=5.0.0",
+        ],
     },
     entry_points="""
     [z3c.autoinclude.plugin]

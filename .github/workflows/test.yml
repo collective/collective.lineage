@@ -15,19 +15,15 @@ jobs:
       matrix:
         config:
         # [Python version, tox env]
-        - ["2.7",   "plone52"]
         - ["3.8",   "plone52"]
     runs-on: ubuntu-20.04
     name: ${{ matrix.config[1] }}-py${{ matrix.config[0] }}
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python
-      # setup-python stopped supporting Python 2.7, use https://github.com/MatteoH2O1999/setup-python
-      # This action tries to build all Python versions that actions/setup-python does not support.
-      # It caches built versions, so that after the first run, installation time is really low.
-      uses: MatteoH2O1999/setup-python@v1
+      uses: actions/setup-python@v4
       with:
-        python-version: ${{ matrix.config[0] }}
+          python-version: ${{ matrix.config[0] }}
     - name: Pip cache
       uses: actions/cache@v2
       with:
