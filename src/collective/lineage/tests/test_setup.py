@@ -1,8 +1,8 @@
 from collective.lineage.testing import LINEAGE_INTEGRATION_TESTING
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
+from plone.base.utils import get_installer
 from plone.browserlayer.utils import registered_layers
-from Products.CMFPlone.utils import get_installer
 
 import unittest
 
