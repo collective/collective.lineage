@@ -1,5 +1,4 @@
 from pathlib import Path
-from setuptools import find_packages
 from setuptools import setup
 
 version = "3.0.1.dev0"
@@ -37,14 +36,10 @@ setup(
     author_email="info@sixfeetup.com",
     url="https://pypi.org/project/collective-lineage",
     license="GPL",
-    packages=find_packages("src"),
-    package_dir={"": "src"},
-    namespace_packages=["collective"],
     include_package_data=True,
     zip_safe=False,
     python_requires=">=3.10",
     install_requires=[
-        "setuptools",
         "Products.CMFCore",
         "Products.CMFPlone",
         "five.localsitemanager",
