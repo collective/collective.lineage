@@ -1,6 +1,5 @@
 from logging import getLogger
 
-
 logger = getLogger("collective.lineage.upgrades")
 
 

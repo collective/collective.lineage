@@ -3,7 +3,6 @@ from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.browserlayer.utils import registered_layers
 
-
 try:
     # BBB
     import unittest2 as unittest

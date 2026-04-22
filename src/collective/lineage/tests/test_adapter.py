@@ -4,7 +4,6 @@ from zope.component import getGlobalSiteManager
 from zope.component import queryUtility
 from zope.component.hooks import setSite
 
-
 PROJECTNAME = "collective.lineage"
 
 

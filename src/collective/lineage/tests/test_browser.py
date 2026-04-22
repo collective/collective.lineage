@@ -4,7 +4,6 @@ Test Lineage in the test browser.
 
 import transaction
 
-
 try:
     from plone.testing import zope
 except ImportError:

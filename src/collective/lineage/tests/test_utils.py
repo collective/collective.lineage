@@ -4,7 +4,6 @@ from plone.browserlayer import utils as layer_utils
 from zope import component
 from zope import interface
 
-
 PROJECTNAME = "collective.lineage"
 
 

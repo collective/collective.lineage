@@ -9,7 +9,6 @@ from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from zope.component import getMultiAdapter
 from zope.i18nmessageid import MessageFactory
 
-
 try:
     from plone.base.defaultpage import is_default_page
 except ImportError:
