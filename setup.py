@@ -43,9 +43,6 @@ setup(
         "Products.CMFCore",
         "Products.CMFPlone",
         "five.localsitemanager",
-        "plone.browserlayer",
-        "plone.dexterity",
-        "plone.folder",
     ],
     extras_require={
         "test": [
