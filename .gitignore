@@ -38,6 +38,7 @@ parts/
 pyvenv.cfg
 var/
 local.cfg
+share/
 
 # mxdev
 /instance/

@@ -2,16 +2,11 @@
 Test Lineage in the test browser.
 """
 
-import transaction
-
-try:
-    from plone.testing import zope
-except ImportError:
-    # BBB Plone 5.1
-    from plone.testing import z2 as zope
-
 from .. import testing
 from plone.app import testing as pa_testing
+from plone.testing import zope
+
+import transaction
 
 
 class TestLineageInBrowser(testing.LineageTestCase):

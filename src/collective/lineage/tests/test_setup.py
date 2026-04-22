@@ -2,19 +2,9 @@ from collective.lineage.testing import LINEAGE_INTEGRATION_TESTING
 from plone.app.testing import setRoles
 from plone.app.testing import TEST_USER_ID
 from plone.browserlayer.utils import registered_layers
+from Products.CMFPlone.utils import get_installer
 
-try:
-    # BBB
-    import unittest2 as unittest
-except ImportError:
-    import unittest
-
-try:
-    from Products.CMFPlone.utils import get_installer
-except ImportError:
-    # BBB for Plone 5.0 and lower.
-    get_installer = None
-
+import unittest
 
 PROJECTNAME = "collective.lineage"
 
