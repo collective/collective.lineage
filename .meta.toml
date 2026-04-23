@@ -8,8 +8,9 @@ commit-id = "2.8.0"
 [github]
 jobs = [
     "qa",
-    "test",
+    "coverage",
     "release_ready",
+    "circular"
     ]
 
 [tox]
