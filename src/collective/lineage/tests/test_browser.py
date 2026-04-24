@@ -3,6 +3,7 @@ Test Lineage in the test browser.
 """
 
 from .. import testing
+from collective.lineage import utils
 from plone.app import testing as pa_testing
 from plone.testing import zope
 
@@ -74,3 +75,38 @@ class TestLineageInBrowser(testing.LineageTestCase):
             self.childsite.objectIds(),
             "Document not present in child site after submitting add form",
         )
+
+    def test_browser_disable_subsite(self):
+        """
+        Child site can be disabled.
+        """
+        utils.enable_childsite(self.childsite)
+        transaction.commit()
+        browser = self.setUpBrowser()
+        browser.open(self.childsite.absolute_url())
+        browser.getLink("Disable Subsite").click()
+        self.assertIsNotNone(browser.getLink("Enable Subsite"))
+
+
+class TestLinageUtilsView(testing.LineageTestCase):
+
+    def setUp(self):
+        super().setUp()
+        utils.enable_childsite(self.childsite)
+
+    def test_on_siteroot(self):
+        view = self.portal.restrictedTraverse("lineageutils")
+        self.assertFalse(view.isChildSite())
+        self.assertIsNone(view.current_childsite)
+
+    def test_on_childsite(self):
+        view = self.childsite.restrictedTraverse("lineageutils")
+        self.assertTrue(view.isChildSite())
+        self.assertEqual(view.current_childsite, self.childsite)
+
+    def test_on_childsite_content(self):
+        doc_id = self.childsite.invokeFactory("Document", "d1", title="Test")
+        document = self.childsite[doc_id]
+        view = document.restrictedTraverse("lineageutils")
+        self.assertTrue(view.isChildSite())
+        self.assertEqual(view.current_childsite, self.childsite)
