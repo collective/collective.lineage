@@ -12,12 +12,12 @@
        mark_layer subscriber will be run before the child site site manager is
        set up otherwise -->
   <subscriber
-      for="plone.app.layout.navigation.interfaces.INavigationRoot
+      for="plone.base.interfaces.siteroot.INavigationRoot
            zope.traversing.interfaces.IBeforeTraverseEvent"
       handler="zope.site.site.threadSiteSubscriber"
       />
   <subscriber
-      for="plone.app.layout.navigation.interfaces.INavigationRoot
+      for="plone.base.interfaces.siteroot.INavigationRoot
            zope.traversing.interfaces.IBeforeTraverseEvent"
       handler=".adapters.mark_layer"
       />

@@ -5,7 +5,7 @@ from collective.lineage.events import ChildSiteWillBeCreatedEvent
 from collective.lineage.events import ChildSiteWillBeRemovedEvent
 from collective.lineage.interfaces import IChildSite
 from five.localsitemanager import make_objectmanager_site
-from Products.CMFPlone.interfaces import IPloneSiteRoot
+from plone.base.interfaces import IPloneSiteRoot
 from Products.Five.component import disableSite
 from zope.component.hooks import getSite
 from zope.component.interfaces import ISite
