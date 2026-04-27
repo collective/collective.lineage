@@ -43,7 +43,6 @@ setup(
         "Acquisition",
         "Products.CMFCore",
         "Products.CMFPlone",
-        "Products.Five",
         "five.localsitemanager",
         "plone.browserlayer",
         "plone.folder",
