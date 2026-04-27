@@ -40,14 +40,27 @@ setup(
     zip_safe=False,
     python_requires=">=3.10",
     install_requires=[
+        "Acquisition",
         "Products.CMFCore",
         "Products.CMFPlone",
+        "Products.Five",
         "five.localsitemanager",
+        "plone.browserlayer",
+        "plone.folder",
+        "zope.component",
+        "zope.event",
+        "zope.i18nmessageid",
+        "zope.interface",
+        "zope.site",
+        "zope.traversing",
     ],
     extras_require={
         "test": [
             "plone.app.testing",
+            "plone.app.contenttypes",
+            "plone.dexterity",
             "plone.testing>=5.0.0",
+            "transaction",
         ],
     },
     entry_points="""

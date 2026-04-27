@@ -9,6 +9,7 @@ commit-id = "2.8.0"
 jobs = [
     "qa",
     "coverage",
+    "dependencies",
     "release_ready",
     "circular"
     ]
