@@ -4,7 +4,4 @@ include *.rst
 global-exclude *.pyc
 exclude .coveragerc
 exclude tox.ini
-
-include requirements.txt
-include constraints.txt
 prune news
