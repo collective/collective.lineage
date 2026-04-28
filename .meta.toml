@@ -18,4 +18,7 @@ jobs = [
 test_matrix = {"6.2" = ["*"]}
 
 [pyproject]
-dependencies_ignores = "['plone.base', 'plone.app.layout']"
+dependencies_ignores = "['plone.base', 'plone.app.layout', 'Products.CMFPlone']"
+
+[tool.dependencychecker]
+ignore-packages = ['plone.base', 'plone.app.layout', 'Products.CMFPlone']
