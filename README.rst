@@ -13,6 +13,7 @@ Lineage can be used within a large organization to manage multiple microsites, s
 Version information
 ===================
 
+- 4.x: Plone 6.2 - Python 3.10+ - PEP 420 native namespace
 - 3.x: Plone 5.2, 6.0 - Python 3.8+
 - 2.x: Plone 5.0, 5.1, 5.2 - Python 2.7
 - 1.x: Plone 4.3
