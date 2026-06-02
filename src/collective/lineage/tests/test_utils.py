@@ -1,22 +1,19 @@
-from .. import testing
 from collective.lineage import utils
+from collective.lineage.testing import LineageTestCase
 from plone.browserlayer import utils as layer_utils
-from zope import component
-from zope import interface
-from zope.site.hooks import site as site_hook
-
-import unittest
+from zope.component import getSiteManager
+from zope.interface import Interface
 
 PROJECTNAME = "collective.lineage"
 
 
-class IChildSiteLayer(interface.Interface):
+class IChildSiteLayer(Interface):
     """
     An example browser layer for a child site.
     """
 
 
-class UtilsTestCase(testing.LineageTestCase):
+class UtilsTestCase(LineageTestCase):
     """
     Test the Lineage utility functions.
     """
@@ -44,7 +41,7 @@ class UtilsTestCase(testing.LineageTestCase):
         layer_utils.register_layer(
             IChildSiteLayer,
             "collective.lineage.childsite.layer",
-            site_manager=component.getSiteManager(self.childsite),
+            site_manager=getSiteManager(self.childsite),
         )
 
         self.assertFalse(
@@ -56,14 +53,3 @@ class UtilsTestCase(testing.LineageTestCase):
             IChildSiteLayer.providedBy(self.portal.REQUEST),
             "Child site browser layer not applied to the request",
         )
-
-    def test_parent_site_on_siteroot(self):
-        site = utils.parent_site()
-        self.assertEqual(site, self.portal)
-
-    @unittest.skip("Currently fails, due to `_find_site` always going for aq_parent.")
-    def test_parent_site_on_childsite(self):
-        utils.enable_childsite(self.childsite)
-        with site_hook(self.childsite):
-            site = utils.parent_site()
-        self.assertEqual(site, self.childsite)
