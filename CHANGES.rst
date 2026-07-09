@@ -1,3 +1,13 @@
+Changelog
+=========
+
+.. You should *NOT* be adding new change log entries to this file.
+   You should create a file in the news directory instead.
+   For helpful instructions, please see:
+   https://github.com/plone/plone.releaser/blob/master/ADD-A-NEWS-ITEM.rst
+
+.. towncrier release notes start
+
 4.0.0 (2026-07-09)
 ------------------
 
@@ -8,20 +18,11 @@ Breaking changes:
   Support only Plone 6.2 and Python 3.10+.
   When you use ``collective.lineage`` with other packages in the ``collective`` namespace, and you get a ``ModuleNotFoundError``, you may need to install ``horse-with-no-namespace``, or use ``zc.buildout`` 5.
   [szakitibi] (#3928)
-- Remove unused utility method parent_site.
 
+- Remove unused utility method parent_site.
   This could break other people's code, but this method is not used anywhere in
   collective.lineage.
   [thet]
-
-
-Changelog
-=========
-
-3.0.1 (unreleased)
-------------------
-
-- Nothing changed yet.
 
 
 3.0.0 (2023-11-20)
