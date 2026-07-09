@@ -1,3 +1,20 @@
+4.0.0 (2026-07-09)
+------------------
+
+Breaking changes:
+
+
+- Replace ``pkg_resources`` namespace with PEP 420 native namespace.
+  Support only Plone 6.2 and Python 3.10+.
+  When you use ``collective.lineage`` with other packages in the ``collective`` namespace, and you get a ``ModuleNotFoundError``, you may need to install ``horse-with-no-namespace``, or use ``zc.buildout`` 5.
+  [szakitibi] (#3928)
+- Remove unused utility method parent_site.
+
+  This could break other people's code, but this method is not used anywhere in
+  collective.lineage.
+  [thet]
+
+
 Changelog
 =========
 

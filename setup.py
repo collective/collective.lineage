@@ -1,7 +1,7 @@
 from pathlib import Path
 from setuptools import setup
 
-version = "3.0.1.dev0"
+version = "4.0.0"
 short_description = "The microsite creation product for Plone"
 long_description = "\n\n".join(
     [Path("README.rst").read_text(), Path("CHANGES.rst").read_text()]
